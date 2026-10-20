@@ -171,7 +171,8 @@ def write_content(src, output, item):
     target = Path("src/content") / collection / (slug + ".md")
     absolute = output / target
     if absolute.exists():
-        raise RuntimeError("Refusing to overwrite CMS content: " + str(target))
+        # Safe re-runs never replace already imported or subsequently edited CMS entries.
+        return {**item, "title": title, "status": "imported", "target": str(target), "cover": image}
     fields = {
         "title": title, "navigationTitle": item["navigationTitle"],
         "description": description, "category": item["category"],
