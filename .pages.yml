@@ -38,6 +38,7 @@ content:
             - My Feelings
             - Very Good Lists I’ve Made
             - Upper Middle Class Bragging
+            - Uncategorized
       - name: navigationTitle
         label: Optional footer label (when different from title)
         type: string
