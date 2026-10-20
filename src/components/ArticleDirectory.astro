@@ -1,8 +1,77 @@
 ---
-import {writingGroups, knownPostRoutes} from '../data/writing';
+import { getCollection } from 'astro:content';
+import { writingGroups, knownPostRoutes } from '../data/writing';
+
 interface Props { activeTitle?: string }
-const {activeTitle}=Astro.props;
+const { activeTitle } = Astro.props;
+
+type DirectoryPost = { title: string; href?: string };
+type CmsPost = { title: string; category: string; href: string };
+
+// Resolve CMS entries at build time, so new published writing appears in the
+// same footer on the homepage, articles, recipes, and the 404 page.
+const [articles, recipes] = await Promise.all([
+  getCollection('articles', ({ data }) => data.published),
+  getCollection('recipes', ({ data }) => data.published),
+]);
+
+const cmsPosts: CmsPost[] = [
+  ...articles.map(({ id, data }) => ({
+    title: data.title,
+    category: data.category,
+    href: `/articles/${encodeURIComponent(id)}/`,
+  })),
+  ...recipes.map(({ id, data }) => ({
+    title: data.title,
+    category: data.category,
+    href: `/recipes/${encodeURIComponent(id)}/`,
+  })),
+];
+
+// Keep the original category and title order. A CMS item with the same title
+// replaces a placeholder chip with a real link, rather than appearing twice.
+const cmsRouteByCategoryAndTitle = new Map(
+  cmsPosts.map(({ category, title, href }) => [`${category}\u0000${title}`, href] as const),
+);
+
+const directoryGroups: { heading: string; posts: DirectoryPost[] }[] = writingGroups.map((group) => {
+  const originalTitles = new Set(group.posts);
+  const posts: DirectoryPost[] = group.posts.map((title) => ({
+    title,
+    href: cmsRouteByCategoryAndTitle.get(`${group.heading}\u0000${title}`) ?? knownPostRoutes[title],
+  }));
+  const newPosts = cmsPosts
+    .filter(({ category, title }) => category === group.heading && !originalTitles.has(title))
+    .sort((a, b) => a.title.localeCompare(b.title))
+    .map(({ title, href }) => ({ title, href }));
+
+  return { heading: group.heading, posts: [...posts, ...newPosts] };
+});
+
+// Make sure a published item is never orphaned if a category is added later.
+const originalCategories = new Set(writingGroups.map(({ heading }) => heading));
+const extraCategories = [...new Set(cmsPosts.map(({ category }) => category))]
+  .filter((category) => !originalCategories.has(category))
+  .sort((a, b) => a.localeCompare(b));
+for (const heading of extraCategories) {
+  directoryGroups.push({
+    heading,
+    posts: cmsPosts
+      .filter(({ category }) => category === heading)
+      .sort((a, b) => a.title.localeCompare(b.title))
+      .map(({ title, href }) => ({ title, href })),
+  });
+}
 ---
 <nav class="writing-directory" aria-label="All writings">
-  {writingGroups.map(group => <span class="directory-group"><span class="group-name">-:~ {group.heading} ~:-</span>{group.posts.map(title => knownPostRoutes[title] ? <a href={knownPostRoutes[title]} class:list={['post-chip',{active:title===activeTitle}]} aria-current={title===activeTitle?'page':undefined}>{title}</a> : <span class="post-chip inactive">{title}</span>)}</span>)}
+  {directoryGroups.map((group) =>
+    <span class="directory-group">
+      <span class="group-name">-:~ {group.heading} ~:-</span>
+      {group.posts.map(({ title, href }) =>
+        href
+          ? <a href={href} class:list={['post-chip', { active: title === activeTitle }]} aria-current={title === activeTitle ? 'page' : undefined}>{title}</a>
+          : <span class="post-chip inactive">{title}</span>
+      )}
+    </span>
+  )}
 </nav>
