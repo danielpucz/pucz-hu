@@ -210,7 +210,7 @@ def main():
         else:
             entry = write_content(source, out, item)
             records.append(entry)
-            if entry["status"] == "imported" and kind != "list":
+            if entry["status"] == "imported" and kind != "list" and not item.get("unlisted"):
                 redirects.append(f"/{kind}/{slug}.html /{kind}/{slug}/ 301")
     location = out / "src/data/webflow-archive-manifest.json"
     location.parent.mkdir(parents=True, exist_ok=True)
