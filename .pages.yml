@@ -1,0 +1,117 @@
+# Pucz.hu — Git-backed content editing. Site design lives in Astro components.
+media:
+  input: public/images
+  output: /images
+  rename: safe
+
+content:
+  - name: articles
+    label: Articles
+    type: collection
+    path: src/content/articles
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    exclude: [".gitkeep"]
+    operations:
+      rename: false
+    view:
+      fields: [title, category, published, publishedAt]
+      primary: title
+      sort: [title, publishedAt]
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: Short description
+        type: text
+        required: true
+      - name: category
+        label: Writing category
+        type: select
+        required: true
+        options:
+          values:
+            - A Better Internet
+            - Stuff About Working
+            - My Feelings
+            - Very Good Lists I’ve Made
+            - Upper Middle Class Bragging
+      - name: image
+        label: Cover image
+        type: image
+        required: true
+      - name: imageAlt
+        label: Cover image description
+        type: text
+        required: true
+      - name: publishedAt
+        label: Publication date (optional)
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: published
+        label: Published on website
+        type: boolean
+        default: false
+      - name: body
+        label: Article
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: recipes
+    label: Recipes
+    type: collection
+    path: src/content/recipes
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    exclude: [".gitkeep"]
+    operations:
+      rename: false
+    view:
+      fields: [title, published, publishedAt]
+      primary: title
+      sort: [title, publishedAt]
+    fields:
+      - name: title
+        label: Recipe title
+        type: string
+        required: true
+      - name: description
+        label: Short description
+        type: text
+        required: true
+      - name: category
+        label: Writing category
+        type: select
+        required: true
+        default: Important Food Stuff
+        options:
+          values:
+            - Important Food Stuff
+      - name: image
+        label: Cover image
+        type: image
+        required: true
+      - name: imageAlt
+        label: Cover image description
+        type: text
+        required: true
+      - name: publishedAt
+        label: Publication date (optional)
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: published
+        label: Published on website
+        type: boolean
+        default: false
+      - name: body
+        label: Recipe, ingredients and instructions
+        type: rich-text
+        options:
+          format: markdown
