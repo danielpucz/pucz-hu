@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from 'astro:content';
+import RecipeLayout from '../../layouts/RecipeLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('recipes', ({ data }) => data.published);
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const publishedAt = entry.data.publishedAt instanceof Date
+  ? entry.data.publishedAt.toISOString().slice(0, 10)
+  : entry.data.publishedAt || undefined;
+---
+<RecipeLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  category={entry.data.category}
+  image={entry.data.image}
+  imageAlt={entry.data.imageAlt}
+  publishedAt={publishedAt}
+>
+  <div class="cms-content"><Content /></div>
+</RecipeLayout>
+<style is:global>
+  .story-content .cms-content > p:first-child {
+    font-size: 21px;
+    line-height: 1.55;
+    font-weight: 500;
+    margin-bottom: 1.45em;
+  }
+  .story-content .cms-content > p:first-child::first-letter {
+    font-family: 'Infini Picto', var(--font-display);
+    float: left;
+    font-size: 4.4em;
+    line-height: .74;
+    padding: .095em .12em 0 0;
+  }
+  @media(max-width:700px) {
+    .story-content .cms-content > p:first-child { font-size: 18px; }
+  }
+</style>
