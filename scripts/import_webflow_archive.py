@@ -26,6 +26,7 @@ LABELS = {
     "blog/apparently-not-into-tiny-women-anymore.html": "I’m Not Into Tiny Women Anymore",
     "blog/jump-in-the-car-no-time-to-explain.html": "Jump in the Car There’s No Time to Explain!",
     "blog/i-didnt-do-the-work.html": "I didn’t do the Work",
+    "blog/what-if-youre-the-one.html": "What If You’re the One?",
     "blog/where-is-the-fucking-money.html": "Where’s the Fucking Money?",
     "blog/fuck-you-to-apple-tv.html": "A Very Personal Fuck You To Apple TV+",
     "list/things-that-sparks-joy.html": "Things That Spark Joy",
