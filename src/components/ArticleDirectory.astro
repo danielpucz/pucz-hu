@@ -1,54 +1,43 @@
 ---
 import { getCollection } from 'astro:content';
 import { writingGroups, knownPostRoutes } from '../data/writing';
-
 interface Props { activeTitle?: string }
 const { activeTitle } = Astro.props;
-
-type DirectoryPost = { title: string; href?: string };
-type CmsPost = { title: string; category: string; href: string };
-
-// Resolve CMS entries at build time, so new published writing appears in the
-// same footer on the homepage, articles, recipes, and the 404 page.
+type DirectoryPost = { title: string; href?: string; actualTitle?: string };
+type CmsPost = { title: string; actualTitle: string; category: string; href: string };
 const [articles, recipes] = await Promise.all([
   getCollection('articles', ({ data }) => data.published),
   getCollection('recipes', ({ data }) => data.published),
 ]);
-
 const cmsPosts: CmsPost[] = [
   ...articles.map(({ id, data }) => ({
-    title: data.title,
+    title: data.navigationTitle || data.title,
+    actualTitle: data.title,
     category: data.category,
-    href: `/articles/${encodeURIComponent(id)}/`,
+    href: `/${data.primaryPath === 'blog' ? 'blog' : 'articles'}/${encodeURIComponent(id)}/`,
   })),
   ...recipes.map(({ id, data }) => ({
-    title: data.title,
+    title: data.navigationTitle || data.title,
+    actualTitle: data.title,
     category: data.category,
-    href: `/recipes/${encodeURIComponent(id)}/`,
+    href: `/${data.primaryPath === 'meals' ? 'meals' : 'recipes'}/${encodeURIComponent(id)}/`,
   })),
 ];
-
-// Keep the original category and title order. A CMS item with the same title
-// replaces a placeholder chip with a real link, rather than appearing twice.
 const cmsRouteByCategoryAndTitle = new Map(
-  cmsPosts.map(({ category, title, href }) => [`${category}\u0000${title}`, href] as const),
+  cmsPosts.map((post) => [`${post.category}\u0000${post.title}`, post] as const),
 );
-
 const directoryGroups: { heading: string; posts: DirectoryPost[] }[] = writingGroups.map((group) => {
   const originalTitles = new Set(group.posts);
-  const posts: DirectoryPost[] = group.posts.map((title) => ({
-    title,
-    href: cmsRouteByCategoryAndTitle.get(`${group.heading}\u0000${title}`) ?? knownPostRoutes[title],
-  }));
+  const posts: DirectoryPost[] = group.posts.map((title) => {
+    const cms = cmsRouteByCategoryAndTitle.get(`${group.heading}\u0000${title}`);
+    return { title, href: cms?.href ?? knownPostRoutes[title], actualTitle: cms?.actualTitle };
+  });
   const newPosts = cmsPosts
     .filter(({ category, title }) => category === group.heading && !originalTitles.has(title))
     .sort((a, b) => a.title.localeCompare(b.title))
-    .map(({ title, href }) => ({ title, href }));
-
+    .map(({ title, actualTitle, href }) => ({ title, href, actualTitle }));
   return { heading: group.heading, posts: [...posts, ...newPosts] };
 });
-
-// Make sure a published item is never orphaned if a category is added later.
 const originalCategories = new Set(writingGroups.map(({ heading }) => heading));
 const extraCategories = [...new Set(cmsPosts.map(({ category }) => category))]
   .filter((category) => !originalCategories.has(category))
@@ -59,7 +48,7 @@ for (const heading of extraCategories) {
     posts: cmsPosts
       .filter(({ category }) => category === heading)
       .sort((a, b) => a.title.localeCompare(b.title))
-      .map(({ title, href }) => ({ title, href })),
+      .map(({ title, actualTitle, href }) => ({ title, href, actualTitle })),
   });
 }
 ---
@@ -67,9 +56,9 @@ for (const heading of extraCategories) {
   {directoryGroups.map((group) =>
     <span class="directory-group">
       <span class="group-name">-:~ {group.heading} ~:-</span>
-      {group.posts.map(({ title, href }) =>
+      {group.posts.map(({ title, href, actualTitle }) =>
         href
-          ? <a href={href} class:list={['post-chip', { active: title === activeTitle }]} aria-current={title === activeTitle ? 'page' : undefined}>{title}</a>
+          ? <a href={href} class:list={['post-chip', { active: title === activeTitle || actualTitle === activeTitle }]} aria-current={title === activeTitle || actualTitle === activeTitle ? 'page' : undefined}>{title}</a>
           : <span class="post-chip inactive">{title}</span>
       )}
     </span>

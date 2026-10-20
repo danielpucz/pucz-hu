@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import RecipeLayout from '../../layouts/RecipeLayout.astro';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('recipes', ({ data }) => data.published);
+  const entries = await getCollection('recipes', ({ data }) => data.published && data.primaryPath !== 'meals');
   return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }
 
