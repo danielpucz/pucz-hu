@@ -1,6 +1,6 @@
 ---
 title: "You're the One"
-navigationTitle: "What If You're the One?"
+navigationTitle: "What If You’re the One?"
 description: "What if you’re the one to decide that life doesn’t have to be a series of achievements, that you don’t have to justify your existence by constantly proving your worth? What if you’re the one to finally, truly believe that being yourself is enough—that you are enough?"
 category: "My Feelings"
 image: "/images/archive/the-one.jpg"
