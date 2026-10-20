@@ -1,0 +1,867 @@
+{
+  "global": {
+    "color": {
+      "ink": {
+        "value": "#381652",
+        "type": "color",
+        "description": "Core primitive. Default text/heading color, the modal backdrop tint, and illustration fills \u2014 anywhere the old near-black needs replacing."
+      },
+      "cyan-dark": {
+        "value": "#008797",
+        "type": "color",
+        "description": "Core primitive. The link color \u2014 resolves text-link."
+      },
+      "cyan-700": {
+        "value": "#008eb3",
+        "type": "color",
+        "description": "Core primitive, retained from the original palette. Interactive emphasis and the primary button fill \u2014 resolves accent-primary and background-button-primary. (Merged with the former 'cyan-button' primitive \u2014 one less near-duplicate cyan.)"
+      },
+      "cyan-500": {
+        "value": "#00aad5",
+        "type": "color",
+        "description": "Core primitive, retained from the original palette. Bright accents and active surfaces \u2014 resolves accent-bright."
+      },
+      "cyan-100": {
+        "value": "#def5ff",
+        "type": "color",
+        "description": "Core primitive, retained from the original palette. Pale interaction background \u2014 resolves background-link-hover."
+      },
+      "border": {
+        "value": "#a69aae",
+        "type": "color",
+        "description": "Core primitive. Greyish-purple border/divider color \u2014 resolves border-default and border-button-secondary."
+      },
+      "white": {
+        "value": "#ffffff",
+        "type": "color",
+        "description": "Core primitive. White and inverse text \u2014 resolves text-inverse and text-button-primary."
+      },
+      "transparent": {
+        "value": "#00000000",
+        "type": "color",
+        "description": "Core primitive. Fully transparent surface \u2014 resolves background-button-secondary."
+      },
+      "background-01": {
+        "value": "#e7cdf6",
+        "type": "color",
+        "description": "Page-background pool (1 of 15, order preserved from the original homepage script). Selected once per page load and held stable for that page \u2014 never tied to a fixed section."
+      },
+      "background-02": {
+        "value": "#ffe6f5",
+        "type": "color",
+        "description": "Page-background pool (2 of 15). See background-01."
+      },
+      "background-03": {
+        "value": "#bbe6f0",
+        "type": "color",
+        "description": "Page-background pool (3 of 15). See background-01."
+      },
+      "background-04": {
+        "value": "#bceacf",
+        "type": "color",
+        "description": "Page-background pool (4 of 15). See background-01."
+      },
+      "background-05": {
+        "value": "#fbfbbc",
+        "type": "color",
+        "description": "Page-background pool (5 of 15). See background-01."
+      },
+      "background-06": {
+        "value": "#fecb7f",
+        "type": "color",
+        "description": "Page-background pool (6 of 15). See background-01."
+      },
+      "background-07": {
+        "value": "#fba1a0",
+        "type": "color",
+        "description": "Page-background pool (7 of 15). See background-01."
+      },
+      "background-08": {
+        "value": "#ffefe0",
+        "type": "color",
+        "description": "Page-background pool (8 of 15). See background-01. Also aliased into the note pool as note-05."
+      },
+      "background-09": {
+        "value": "#fce1e4",
+        "type": "color",
+        "description": "Page-background pool (9 of 15) \u2014 the old fixed 'recipes' surface-pink value, now just one member of the random pool. See background-01."
+      },
+      "background-10": {
+        "value": "#ece5ff",
+        "type": "color",
+        "description": "Page-background pool (10 of 15). See background-01."
+      },
+      "background-11": {
+        "value": "#e5fbf0",
+        "type": "color",
+        "description": "Page-background pool (11 of 15) \u2014 the old fixed 'home' surface-mint value, now just one member of the random pool. Used as this system's representative default wherever a single page background must be shown. Also aliased into the note pool as note-06."
+      },
+      "background-12": {
+        "value": "#f4e5ff",
+        "type": "color",
+        "description": "Page-background pool (12 of 15). See background-01. Also aliased into the note pool as note-07."
+      },
+      "background-13": {
+        "value": "#fff7ef",
+        "type": "color",
+        "description": "Page-background pool (13 of 15) \u2014 the old fixed 'blog' surface-cream value, now just one member of the random pool. Also aliased into the note pool as note-08."
+      },
+      "background-14": {
+        "value": "#ffe3f9",
+        "type": "color",
+        "description": "Page-background pool (14 of 15). See background-01. Also aliased into the note pool as note-09."
+      },
+      "background-15": {
+        "value": "#c7f6fd",
+        "type": "color",
+        "description": "Page-background pool (15 of 15) \u2014 the old fixed 'lists' surface-cyan value, now just one member of the random pool. See background-01."
+      },
+      "surface-love": {
+        "value": "#fdf0f0",
+        "type": "color",
+        "description": "A warmer alternate note surface (the site's '.draggable.love' variant). Note-pool member only."
+      },
+      "surface-note": {
+        "value": "#fffdd7",
+        "type": "color",
+        "description": "The classic pale-yellow sticky-note surface. Note-pool member only, and this system's representative stand-in for the retired 'highlight' mark."
+      },
+      "text-inverse": {
+        "value": "{global.color.white}",
+        "type": "color",
+        "description": "Inverse text on dark or filled surfaces."
+      },
+      "text-button-primary": {
+        "value": "{global.color.white}",
+        "type": "color",
+        "description": "Primary (filled) button label. Always white in both themes \u2014 no separate hover color has been agreed."
+      },
+      "border-default": {
+        "value": "{global.color.border}",
+        "type": "color",
+        "description": "The system's one elevation device: a 1px border on cards, buttons, inputs, and the modal panel, plus the flat hover/focus ring. Replaces the old translucent-ink border everywhere."
+      },
+      "border-button-secondary": {
+        "value": "{global.color.border}",
+        "type": "color",
+        "description": "The default button's border \u2014 same value as border-default in both themes."
+      },
+      "background-button-primary": {
+        "value": "{global.color.cyan-700}",
+        "type": "color",
+        "description": "Primary (filled) button background \u2014 now the same cyan as accent-primary (the dedicated 'cyan-button' shade was merged into cyan-700). Every primary CTA uses this value in both themes."
+      },
+      "background-button-secondary": {
+        "value": "{global.color.transparent}",
+        "type": "color",
+        "description": "Default (secondary) button background."
+      },
+      "accent-primary": {
+        "value": "{global.color.cyan-700}",
+        "type": "color",
+        "description": "Interactive emphasis \u2014 focus accents and the illustration's primary brand block. Same value as background-button-primary now that they share one cyan."
+      },
+      "accent-bright": {
+        "value": "{global.color.cyan-500}",
+        "type": "color",
+        "description": "Bright decorative emphasis and active-state surfaces \u2014 the illustration's secondary accent block."
+      }
+    },
+    "spacing": {
+      "space-0": {
+        "value": "4px",
+        "type": "spacing",
+        "description": "Smallest step \u2014 hairline gaps/padding, tighter than space-2. (source: 0.25rem)"
+      },
+      "space-2": {
+        "value": "16px",
+        "type": "spacing",
+        "description": "Half-step \u2014 tight gaps (e.g. button icon-to-label gap). (source: 1rem)"
+      },
+      "space-4": {
+        "value": "32px",
+        "type": "spacing",
+        "description": "The base vertical rhythm unit \u2014 card padding, gaps between stacked elements. (source: 2rem)"
+      },
+      "space-8": {
+        "value": "64px",
+        "type": "spacing",
+        "description": "Double-step \u2014 modal/panel padding, generous section spacing. (source: 4rem)"
+      },
+      "space-12": {
+        "value": "128px",
+        "type": "spacing",
+        "description": " (source: 8rem)"
+      }
+    },
+    "borderRadius": {
+      "radius-xs": {
+        "value": "0.1em",
+        "type": "borderRadius",
+        "description": "Inline code and the smallest marks. (relative unit in source: 0.1em, ~1.6px at a 16px base \u2014 actual radius scales with the component's own font-size, not a fixed px value)"
+      },
+      "radius-sm": {
+        "value": "0.3em",
+        "type": "borderRadius",
+        "description": "The default control radius \u2014 inputs, plain/icon buttons. Button and Content link chip both moved onto this token at Dani's request ('make the corner radiouses coherent... same feel to it as a button') \u2014 Button down from radius-md, the chip up from its own hardcoded 2px \u2014 so the two now share one radius instead of each owning a different number. (relative unit in source: 0.3em, ~4.8px at a 16px base \u2014 actual radius scales with the component's own font-size, not a fixed px value)"
+      },
+      "radius-md": {
+        "value": "0.5em",
+        "type": "borderRadius",
+        "description": "Cards and the modal panel. Button briefly used this too (see radius-pill below) before moving to radius-sm. (relative unit in source: 0.5em, ~8px at a 16px base \u2014 actual radius scales with the component's own font-size, not a fixed px value)"
+      },
+      "radius-pill": {
+        "value": "2em",
+        "type": "borderRadius",
+        "description": "Fully pill-shaped elements. No longer used by Button \u2014 first moved to radius-md at Dani's request (to read less circular and more like Card's own corner), then to radius-sm (to read coherent with Content link chip) \u2014 kept as a token for anything that does want the pill treatment later. (relative unit in source: 2em, ~32px at a 16px base \u2014 actual radius scales with the component's own font-size, not a fixed px value)"
+      },
+      "radius-circle": {
+        "value": "50%",
+        "type": "borderRadius",
+        "description": "Circular icon buttons and avatars."
+      }
+    },
+    "sizing": {
+      "icon-14": {
+        "value": "14px",
+        "type": "sizing",
+        "description": "Smallest icon size \u2014 dense inline contexts (meta text, small labels). Pairs with icon-14-box."
+      },
+      "icon-14-box": {
+        "value": "20px",
+        "type": "sizing",
+        "description": "Touch/click target for icon-14."
+      },
+      "icon-20": {
+        "value": "20px",
+        "type": "sizing",
+        "description": "Default icon size \u2014 pairs with icon-20-box. Use this unless a size is called out below."
+      },
+      "icon-20-box": {
+        "value": "28px",
+        "type": "sizing",
+        "description": "Default touch/click target, for icon-20."
+      },
+      "icon-26": {
+        "value": "26px",
+        "type": "sizing",
+        "description": "Slightly larger \u2014 section headers, secondary nav. Pairs with icon-26-box."
+      },
+      "icon-26-box": {
+        "value": "32px",
+        "type": "sizing",
+        "description": "Touch/click target for icon-26."
+      },
+      "icon-40": {
+        "value": "40px",
+        "type": "sizing",
+        "description": "Largest \u2014 feature callouts, empty states. Pairs with icon-40-box."
+      },
+      "icon-40-box": {
+        "value": "48px",
+        "type": "sizing",
+        "description": "Touch/click target for icon-40."
+      }
+    },
+    "fontFamilies": {
+      "body": {
+        "value": "Proza Libre",
+        "type": "fontFamilies"
+      },
+      "callout": {
+        "value": "Gloria Hallelujah",
+        "type": "fontFamilies"
+      },
+      "display": {
+        "value": "Infini",
+        "type": "fontFamilies"
+      },
+      "mono": {
+        "value": "Courier New",
+        "type": "fontFamilies"
+      },
+      "initial": {
+        "value": "Infini Picto",
+        "type": "fontFamilies"
+      }
+    },
+    "typography": {
+      "Page-title": {
+        "value": {
+          "fontFamily": "Infini",
+          "fontWeight": "Regular",
+          "fontSize": "82px",
+          "lineHeight": "88px",
+          "letterSpacing": "-0.04em"
+        },
+        "type": "typography",
+        "description": "Page titles"
+      },
+      "h1": {
+        "value": {
+          "fontFamily": "Infini",
+          "fontWeight": "Regular",
+          "fontSize": "58px",
+          "lineHeight": "62px",
+          "letterSpacing": "-0.04em"
+        },
+        "type": "typography",
+        "description": "Page-level H1 \u2014 the per-page headline. Moved here from Display so the full H1\u2013H6 heading ladder lives in one section, but it still renders in the display face (the explicit family override above), not Proza Libre \u2014 Display is now reserved for the standalone Page-title treatment only. This cut only ships at regular weight (no bold), so size and the face's own high-contrast serifs carry the emphasis instead of a heavier weight. The display face itself changed at Dani's request, from Heuristica to Infini (a free CC BY-ND typeface by Sandrine Nugue, graphismeenfrance.fr/infini) \u2014 Heuristica stays installed and in use only for Rich text's bold-italic emphasis mark, which has no Infini equivalent (no bold-italic cut shipped)."
+      },
+      "h2": {
+        "value": {
+          "fontFamily": "Proza Libre",
+          "fontWeight": "Bold",
+          "fontSize": "32px",
+          "lineHeight": "36px",
+          "letterSpacing": "-0.02em"
+        },
+        "type": "typography",
+        "description": "Section headings."
+      },
+      "h3": {
+        "value": {
+          "fontFamily": "Proza Libre",
+          "fontWeight": "SemiBold",
+          "fontSize": "26px",
+          "lineHeight": "30px",
+          "letterSpacing": "-0.015em"
+        },
+        "type": "typography",
+        "description": "Sub-section headings."
+      },
+      "h4": {
+        "value": {
+          "fontFamily": "Proza Libre",
+          "fontWeight": "Medium",
+          "fontSize": "20px",
+          "lineHeight": "24px",
+          "letterSpacing": "0"
+        },
+        "type": "typography",
+        "description": "Minor headings \u2014 same size as body, bold-weight only."
+      },
+      "Lead": {
+        "value": {
+          "fontFamily": "Infini",
+          "fontWeight": "Regular",
+          "fontSize": "20px",
+          "lineHeight": "30px",
+          "letterSpacing": "-0.005em"
+        },
+        "type": "typography",
+        "description": "Rich text's lead paragraph -- the display face, one step up from body size. Upright (not italic): it shipped in Heuristica's own italic cut at first, then Dani asked directly for regular instead (\"make this lead not italic but regular\"). Scoped to .pz-prose-lead only, not applied by any built template on its own. The display face itself moved from Heuristica to Infini at Dani's later request, alongside Page-title/h1 -- same size, weight, line-height and tracking throughout, just a different typeface underneath var(--font-display)."
+      },
+      "body": {
+        "value": {
+          "fontFamily": "Proza Libre",
+          "fontWeight": "Regular",
+          "fontSize": "16px",
+          "lineHeight": "22px",
+          "letterSpacing": "-0.005em"
+        },
+        "type": "typography",
+        "description": "Paragraphs, list items, default links, card body copy, button labels. Proza Libre's regular cut \u2014 this is the system's default font."
+      },
+      "small": {
+        "value": {
+          "fontFamily": "Proza Libre",
+          "fontWeight": "Regular",
+          "fontSize": "13.5px",
+          "lineHeight": "18px",
+          "letterSpacing": "0.005em"
+        },
+        "type": "typography",
+        "description": "Secondary labels \u2014 card role labels, meta text, modal close affordance."
+      },
+      "quote": {
+        "value": {
+          "fontFamily": "Gloria Hallelujah",
+          "fontWeight": "Regular",
+          "fontSize": "19px",
+          "lineHeight": "25px",
+          "letterSpacing": "-0.005em"
+        },
+        "type": "typography",
+        "description": "The one-sentence pull-quote, set in text-callout color, in Gloria Hallelujah -- the system's deliberate handwritten accent. Previously documented as also covering Return-home navigation's label and Fortune cookie's message -- that was stale: Return-home nav's handwritten styling was removed entirely (see components/HomeNav/README.md), and Fortune cookie's message actually matches the separate Handwritten rung below (16px/20px), not this one. Card's dinner-and-movie-night subtitle (.pz-card-subtitle-callout) is its own 14px size, not claimed to match either rung."
+      },
+      "Handwritten": {
+        "value": {
+          "fontFamily": "Gloria Hallelujah",
+          "fontWeight": "Regular",
+          "fontSize": "16px",
+          "lineHeight": "20px",
+          "letterSpacing": "-0.005em"
+        },
+        "type": "typography",
+        "description": "The confirmed real use of this style is Fortune cookie's message (.pz-fortune-message), set in Gloria Hallelujah at this size rather than the quote style's larger 19px/25px. Also what Rich text's inline .pz-prose-hand aside uses, per the spec's \"supported inline handwritten ... treatments\" note, though that class isn't demonstrated in any preview card yet."
+      },
+      "button": {
+        "value": {
+          "fontFamily": "Proza Libre",
+          "fontWeight": "Regular",
+          "fontSize": "16px",
+          "lineHeight": "22px",
+          "letterSpacing": "0"
+        },
+        "type": "typography",
+        "description": "The Button component's label \u2014 Proza Libre SemiBold (a real weight, not synthesized), matching Title/body's current size so buttons scale if body type changes. Pill-shaped, bordered, no shadow (see Button in Components); the primary variant fills with background-button-primary and sets this text to text-button-primary (white)."
+      },
+      "mono": {
+        "value": {
+          "fontFamily": "Courier New",
+          "fontWeight": "Bold",
+          "fontSize": "16px",
+          "lineHeight": "16px",
+          "letterSpacing": "0"
+        },
+        "type": "typography",
+        "description": "New at Dani's request \u2014 a fourth family, web-safe monospace (Courier New), bold, 16px with a tight 1:1 16px line-height. For values that benefit from fixed-width characters rather than Proza Libre's proportional spacing \u2014 first applied to Business information's copyable fields (tax ID, both addresses, bank account, email)."
+      },
+      "drop-cap-initial": {
+        "value": {
+          "fontFamily": "Infini Picto",
+          "fontWeight": "Regular",
+          "fontSize": "56px",
+          "lineHeight": "100%",
+          "letterSpacing": "0"
+        },
+        "type": "typography",
+        "description": "Rich text's drop-cap initial letter (.pz-prose-initial) \u2014 always a single uppercase A-Z character, set in Infini Picto's pictogram alphabet. Rendered in a 72px x 72px box with a radius-sm corner and a wavy underline in the live CSS; those are layout/decoration, not part of this text style itself."
+      }
+    },
+    "boxShadow": {
+      "card-resting": {
+        "value": [
+          {
+            "x": 0,
+            "y": 1,
+            "blur": 3,
+            "spread": 0,
+            "color": "#00000014",
+            "type": "dropShadow"
+          }
+        ],
+        "type": "boxShadow",
+        "description": "Card at rest \u2014 a faint resting shadow, as if sitting flat on a table. Source: 0 1px 3px rgb(0 0 0 / 8%)."
+      },
+      "card-hover": {
+        "value": [
+          {
+            "x": 0,
+            "y": 6,
+            "blur": 16,
+            "spread": 0,
+            "color": "#00000029",
+            "type": "dropShadow"
+          }
+        ],
+        "type": "boxShadow",
+        "description": "Card on hover \u2014 picked up, closer to the light. Source: 0 6px 16px rgb(0 0 0 / 16%)."
+      },
+      "card-active": {
+        "value": [
+          {
+            "x": 0,
+            "y": 8,
+            "blur": 20,
+            "spread": 0,
+            "color": "#00000033",
+            "type": "dropShadow"
+          }
+        ],
+        "type": "boxShadow",
+        "description": "Card on press/active \u2014 held up while being grabbed. Source: 0 8px 20px rgb(0 0 0 / 20%)."
+      },
+      "note": {
+        "value": [
+          {
+            "x": 3,
+            "y": 5,
+            "blur": 10,
+            "spread": 0,
+            "color": "#00000033",
+            "type": "dropShadow"
+          },
+          {
+            "x": 0,
+            "y": -10,
+            "blur": 14,
+            "spread": -10,
+            "color": "#00000047",
+            "type": "innerShadow"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "blur": 0,
+            "spread": 0,
+            "color": "#ffffff59",
+            "type": "innerShadow"
+          }
+        ],
+        "type": "boxShadow",
+        "description": "Sticky Note component \u2014 an outer drop shadow angled as if lit from one side (pinned to a surface), plus an inner paper-depth shadow and a thin top highlight. Source: 3px 5px 10px rgb(0 0 0 / 20%), inset 0 -10px 14px -10px rgb(0 0 0 / 28%), inset 0 1px 0 rgb(255 255 255 / 35%)."
+      },
+      "fortune-message": {
+        "value": [
+          {
+            "x": 0,
+            "y": 1,
+            "blur": 4,
+            "spread": 0,
+            "color": "#0000001f",
+            "type": "innerShadow"
+          }
+        ],
+        "type": "boxShadow",
+        "description": "Fortune cookie message slip \u2014 a slight inset shadow so it reads as a piece of paper, not a lifted card. Source: inset 0 1px 4px rgb(0 0 0 / 12%)."
+      }
+    }
+  },
+  "light": {
+    "color": {
+      "midnight": {
+        "value": "#0e121b",
+        "type": "color",
+        "description": "Core primitive, dark-mode companion to ink (from pucz-hu-dark-mode-design-system.md). A near-black, cool blue-gray \u2014 resolves background-page in dark mode. Does not replace ink; the theme just switches which one background-page points at. Reworked at Dani's request (\"the whole dark mode thing has too much and too direct purple in it... can be blue-ish, but not this direct purple\") \u2014 this used to be #160d1d, a near-black purple; the hue moved toward neutral blue-gray, lightness held the same."
+      },
+      "graphite": {
+        "value": "#252b37",
+        "type": "color",
+        "description": "Core primitive, added at Dani's request to pull dark mode's purple back to neutral (\"the whole dark mode thing has too much and too direct purple in it... I like all the other darkmode stuff that feels neutral, just the use of purple is too much\"). A cool blue-gray slate, lighter than midnight so Card/Lightbox panels still read as a raised surface against the page \u2014 resolves surface-near-white in dark mode, replacing the earlier reuse of ink (too purple) there."
+      },
+      "surface-near-white": {
+        "value": "#fcfcfc",
+        "type": "color",
+        "description": "The one neutral surface in the system \u2014 used by Card, and by the dialog/panel chrome Media lightbox's panel reuses (same value the old 'surface-card' token used). That dialog/panel chrome originally backed a standalone Modal component too; Modal was removed at Dani's request as not needed, but the chrome and this token's use by it stay, since Media lightbox still depends on it. In dark mode this resolves to {graphite} (#252b37), a neutral blue-gray slate \u2014 reworked at Dani's request away from its earlier dark value, {ink} (#381652): the dark-mode doc named ink as \"the base for tinted surfaces\" but didn't address this token directly, and that purple read as too much once seen live, so this is a second pass at the same editorial call, not a reversal of the judgment to need one."
+      },
+      "note-01": {
+        "value": "{global.color.white}",
+        "type": "color",
+        "description": "Note/annotation background pool (1 of 9). Same random-per-page-load rule as the page-background pool. Dark value from pucz-hu-dark-mode-design-system.md \u2014 the same note reference resolves to a tinted purple instead of a bright pastel; keep the picked reference stable across a theme switch. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-02": {
+        "value": "{light.color.surface-near-white}",
+        "type": "color",
+        "description": "Note/annotation background pool (2 of 9). See note-01. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-03": {
+        "value": "{global.color.surface-love}",
+        "type": "color",
+        "description": "Note/annotation background pool (3 of 9). See note-01. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-04": {
+        "value": "{global.color.surface-note}",
+        "type": "color",
+        "description": "Note/annotation background pool (4 of 9). See note-01. This system's representative default for the retired highlight mark (Link's 'highlight' prop) \u2014 in production, draw from this whole pool instead of a fixed yellow. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-05": {
+        "value": "{global.color.background-08}",
+        "type": "color",
+        "description": "Note/annotation background pool (5 of 9). See note-01. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-06": {
+        "value": "{global.color.background-11}",
+        "type": "color",
+        "description": "Note/annotation background pool (6 of 9). See note-01. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-07": {
+        "value": "{global.color.background-12}",
+        "type": "color",
+        "description": "Note/annotation background pool (7 of 9). See note-01. The dark-mode preview defaults to this reference. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-08": {
+        "value": "{global.color.background-13}",
+        "type": "color",
+        "description": "Note/annotation background pool (8 of 9). See note-01. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-09": {
+        "value": "{global.color.background-14}",
+        "type": "color",
+        "description": "Note/annotation background pool (9 of 9). See note-01. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "text-primary": {
+        "value": "{global.color.ink}",
+        "type": "color",
+        "description": "Body text and headings. Dark mode uses the warm near-white background-13 pastel as text color (pucz-hu-dark-mode-design-system.md), not a literal white."
+      },
+      "text-secondary": {
+        "value": "{global.color.ink}",
+        "type": "color",
+        "description": "Secondary text \u2014 card role labels, meta text. Same color as text-primary in both themes; dial it back with opacity at the component level (no numeric opacity value has been agreed yet \u2014 do not invent one)."
+      },
+      "text-link": {
+        "value": "{global.color.cyan-dark}",
+        "type": "color",
+        "description": "Link text (resting and hover \u2014 see text-link-hover)."
+      },
+      "text-link-hover": {
+        "value": "{global.color.cyan-dark}",
+        "type": "color",
+        "description": "Link text on hover \u2014 identical to text-link in light mode. background-link-hover is what changes on hover there, not the text color. In dark mode the hover text itself pales to cyan-100."
+      },
+      "text-callout": {
+        "value": "#3d0396",
+        "type": "color",
+        "description": "Dedicated color for text set in the callout face (Gloria Hallelujah) \u2014 Callout's pull-quote, Return-home navigation's handwritten label, and Fortune cookie's message. Was text-link (light) / text-primary (label only); now its own token so handwritten text no longer borrows a color meant for links or body copy."
+      },
+      "background-quote": {
+        "value": "#3d039614",
+        "type": "color",
+        "description": "Rich text's quote highlight \u2014 a low-alpha tint of text-callout itself, not a separate color, so it stays visually tied to the handwritten face it sits behind. Added at Dani's request, replacing an earlier dotted-separator-above-the-quote treatment he flagged as looking bad (\"I have a different idea now. Make it work like having handwritten text, and make it have a slight purple highlight in the background, therefore it looks more like a quote somehow.\"). Tints blue instead of purple in dark mode since it derives from text-callout's own per-theme value, not a fixed purple. (Briefly replaced with a yellow fill, then restored here at Dani's explicit request to undo that and keep it as it was.)"
+      },
+      "background-highlight": {
+        "value": "{global.color.surface-note}",
+        "type": "color",
+        "description": "Rich text's in-line yellow highlight mark (.pz-prose-highlight) \u2014 split off from surface-note so Note's own frozen-across-themes value isn't disturbed. Light mode is identical to surface-note's pale yellow; dark mode used to be too, until Dani flagged it (\"Highlighted text here isn't readable, use a darker or opacity yellow instead of the current one\") \u2014 against dark mode's near-white text-primary, a near-white yellow highlight is effectively invisible (contrast ~1:1). Dark mode now uses a translucent amber wash over the page instead \u2014 same alpha-blend-over-midnight approach as background-quote's own dark value \u2014 reading as a darker, more saturated gold than light mode's pastel, with solid (~7.5:1) contrast against the light text sitting on it."
+      },
+      "background-initial-invert": {
+        "value": "{global.color.ink}",
+        "type": "color",
+        "description": "Rich text's inverted drop-cap variant \u2014 a literal, always-opposite fill, at Dani's request (\"create an inverted style for it. So put there a body text colored 1:1 block and make the letter white in it. In dark mode invertedly, so white background and bg colored font.\"). Built from the raw ink/white primitives rather than the semantic text-primary/background-page tokens, since dark mode's text-primary resolves to a warm cream, not true white."
+      },
+      "text-initial-invert": {
+        "value": "{global.color.white}",
+        "type": "color",
+        "description": "Letter color for the same inverted drop-cap variant \u2014 white on the ink-filled box in light mode, midnight on the white-filled box in dark mode \u2014 the same two colors, just which one is background and which is text flips."
+      },
+      "text-button-secondary": {
+        "value": "{global.color.ink}",
+        "type": "color",
+        "description": "Default (secondary) button label."
+      },
+      "text-note": {
+        "value": "{global.color.ink}",
+        "type": "color",
+        "description": "Text set on a note/annotation background (the note-pool). Added for pucz-hu-dark-mode-design-system.md; reserved for a future dedicated note/annotation card \u2014 today the note pool is only consumed as the Link highlight mark, which sits under ambient text-primary. Reverted alongside note-01..09 \u2014 Dani asked that sticky notes look absolutely the same in dark mode as in light mode, so this now stays {ink} in both themes instead of paling to background-13."
+      },
+      "border-strong": {
+        "value": "{global.color.ink}",
+        "type": "color",
+        "description": "A stronger border where more contrast than border-default is needed. The dark-mode doc warned that reusing ink here would be nearly invisible on midnight but didn't specify a replacement, so this is an editorial call \u2014 background-13 for maximum contrast; flag if you'd rather something else."
+      },
+      "border-button-primary": {
+        "value": "{global.color.cyan-700}",
+        "type": "color",
+        "description": "The primary button's 1px outline, added for pucz-hu-dark-mode-design-system.md (previously the border just reused background-button-primary inline in bundle.css). Same cyan-700 value in both themes."
+      },
+      "background-link-hover": {
+        "value": "{global.color.cyan-100}",
+        "type": "color",
+        "description": "Hover-state background behind a link. Dark value is the resolved 14% cyan-500 + 86% midnight sRGB blend from pucz-hu-dark-mode-design-system.md (token aliases can't carry color-mix(), so this is the pre-computed hex) \u2014 recomputed after midnight itself moved from purple to blue-gray at Dani's request, so this stays the correct blend of the two."
+      },
+      "background-page": {
+        "value": "{global.color.background-11}",
+        "type": "color",
+        "description": "Theme-aware page background. Light mode's true behavior is still the random background-01..15 pool (background-11 here is just this system's representative stand-in, per background-11's own note); dark mode is fixed to the midnight primitive \u2014 pucz-hu-dark-mode-design-system.md keeps the dark page flat rather than randomized."
+      },
+      "surface-interactive": {
+        "value": "#3816520f",
+        "type": "color",
+        "description": "Default (resting) background for Button, Clickable icon, Clickable icon+text and Clickable chip \u2014 a faint tinted wash (ink at light mode, background-13 at dark mode, both under 8% alpha) rather than fully transparent, so these controls read as clickable at rest, per Dani's October 2026 'atomic clickables' restyle. Pre-computed alpha hex, same pattern as --transparent and background-link-hover's dark blend \u2014 token aliases can't carry alpha onto a referenced value."
+      },
+      "surface-interactive-hover": {
+        "value": "{global.color.white}",
+        "type": "color",
+        "description": "Hover background for the same clickable family, paired with a border-default border \u2014 Dani's own 'white bg... on hover' call for light mode, where a literal white hover on a near-white page is the right amount of lift. The earlier dark-mode value (a flagged editorial call, resolving to the solid background-13 near-white at full opacity) was exactly what Dani then flagged: 'this should not be filled with white on hover... rich lighter background, like 2% of white fill, so not fully white.' Dark now uses the same background-13 color as a translucent wash instead \u2014 pre-computed alpha hex (token aliases can't carry alpha onto a referenced value), sitting between surface-interactive's ~8% resting wash and surface-interactive-active's ~16% wash rather than jumping to an opaque fill."
+      },
+      "surface-interactive-active": {
+        "value": "#38165226",
+        "type": "color",
+        "description": "Pressed/active background for the same clickable family \u2014 a stronger version of surface-interactive's own wash, for 'a darker bg than original on click.' Pre-computed alpha hex, same pattern as surface-interactive."
+      },
+      "glow-interactive": {
+        "value": "#00aad566",
+        "type": "color",
+        "description": "The hover/focus glow for the whole clickable family \u2014 cyan-500 (accent-bright) at ~40% alpha, used as a tight, low-blur box-shadow rather than a soft decorative one ('a slight bluish glow (not too blurred)'). Replaces the old plain grey box-shadow ring Button's hover used to show. Same value in both themes since it's already a bright, saturated accent that reads clearly on either background-page."
+      }
+    }
+  },
+  "dark": {
+    "color": {
+      "midnight": {
+        "value": "#0e121b",
+        "type": "color",
+        "description": "Core primitive, dark-mode companion to ink (from pucz-hu-dark-mode-design-system.md). A near-black, cool blue-gray \u2014 resolves background-page in dark mode. Does not replace ink; the theme just switches which one background-page points at. Reworked at Dani's request (\"the whole dark mode thing has too much and too direct purple in it... can be blue-ish, but not this direct purple\") \u2014 this used to be #160d1d, a near-black purple; the hue moved toward neutral blue-gray, lightness held the same."
+      },
+      "graphite": {
+        "value": "#252b37",
+        "type": "color",
+        "description": "Core primitive, added at Dani's request to pull dark mode's purple back to neutral (\"the whole dark mode thing has too much and too direct purple in it... I like all the other darkmode stuff that feels neutral, just the use of purple is too much\"). A cool blue-gray slate, lighter than midnight so Card/Lightbox panels still read as a raised surface against the page \u2014 resolves surface-near-white in dark mode, replacing the earlier reuse of ink (too purple) there."
+      },
+      "surface-near-white": {
+        "value": "{dark.color.graphite}",
+        "type": "color",
+        "description": "The one neutral surface in the system \u2014 used by Card, and by the dialog/panel chrome Media lightbox's panel reuses (same value the old 'surface-card' token used). That dialog/panel chrome originally backed a standalone Modal component too; Modal was removed at Dani's request as not needed, but the chrome and this token's use by it stay, since Media lightbox still depends on it. In dark mode this resolves to {graphite} (#252b37), a neutral blue-gray slate \u2014 reworked at Dani's request away from its earlier dark value, {ink} (#381652): the dark-mode doc named ink as \"the base for tinted surfaces\" but didn't address this token directly, and that purple read as too much once seen live, so this is a second pass at the same editorial call, not a reversal of the judgment to need one."
+      },
+      "note-01": {
+        "value": "#ffffff",
+        "type": "color",
+        "description": "Note/annotation background pool (1 of 9). Same random-per-page-load rule as the page-background pool. Dark value from pucz-hu-dark-mode-design-system.md \u2014 the same note reference resolves to a tinted purple instead of a bright pastel; keep the picked reference stable across a theme switch. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-02": {
+        "value": "#fcfcfc",
+        "type": "color",
+        "description": "Note/annotation background pool (2 of 9). See note-01. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-03": {
+        "value": "#fdf0f0",
+        "type": "color",
+        "description": "Note/annotation background pool (3 of 9). See note-01. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-04": {
+        "value": "#fffdd7",
+        "type": "color",
+        "description": "Note/annotation background pool (4 of 9). See note-01. This system's representative default for the retired highlight mark (Link's 'highlight' prop) \u2014 in production, draw from this whole pool instead of a fixed yellow. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-05": {
+        "value": "#ffefe0",
+        "type": "color",
+        "description": "Note/annotation background pool (5 of 9). See note-01. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-06": {
+        "value": "#e5fbf0",
+        "type": "color",
+        "description": "Note/annotation background pool (6 of 9). See note-01. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-07": {
+        "value": "#f4e5ff",
+        "type": "color",
+        "description": "Note/annotation background pool (7 of 9). See note-01. The dark-mode preview defaults to this reference. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-08": {
+        "value": "#fff7ef",
+        "type": "color",
+        "description": "Note/annotation background pool (8 of 9). See note-01. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "note-09": {
+        "value": "#ffe3f9",
+        "type": "color",
+        "description": "Note/annotation background pool (9 of 9). See note-01. Reverted to Dani's explicit request (\"These sticky notes should remain absolutely the same in dark mode as how they are in light mode!\") \u2014 the dark value is now a literal copy of the light value rather than a var()-style reference to a primitive that itself changes in dark mode, so Note surfaces (and Link's highlight mark, the pool's other consumer) read identically in both themes."
+      },
+      "text-primary": {
+        "value": "{global.color.background-13}",
+        "type": "color",
+        "description": "Body text and headings. Dark mode uses the warm near-white background-13 pastel as text color (pucz-hu-dark-mode-design-system.md), not a literal white."
+      },
+      "text-secondary": {
+        "value": "{global.color.background-13}",
+        "type": "color",
+        "description": "Secondary text \u2014 card role labels, meta text. Same color as text-primary in both themes; dial it back with opacity at the component level (no numeric opacity value has been agreed yet \u2014 do not invent one)."
+      },
+      "text-link": {
+        "value": "{global.color.cyan-500}",
+        "type": "color",
+        "description": "Link text (resting and hover \u2014 see text-link-hover)."
+      },
+      "text-link-hover": {
+        "value": "{global.color.cyan-100}",
+        "type": "color",
+        "description": "Link text on hover \u2014 identical to text-link in light mode. background-link-hover is what changes on hover there, not the text color. In dark mode the hover text itself pales to cyan-100."
+      },
+      "text-callout": {
+        "value": "#add8e6",
+        "type": "color",
+        "description": "Dedicated color for text set in the callout face (Gloria Hallelujah) \u2014 Callout's pull-quote, Return-home navigation's handwritten label, and Fortune cookie's message. Was text-link (light) / text-primary (label only); now its own token so handwritten text no longer borrows a color meant for links or body copy."
+      },
+      "background-quote": {
+        "value": "#add8e626",
+        "type": "color",
+        "description": "Rich text's quote highlight \u2014 a low-alpha tint of text-callout itself, not a separate color, so it stays visually tied to the handwritten face it sits behind. Added at Dani's request, replacing an earlier dotted-separator-above-the-quote treatment he flagged as looking bad (\"I have a different idea now. Make it work like having handwritten text, and make it have a slight purple highlight in the background, therefore it looks more like a quote somehow.\"). Tints blue instead of purple in dark mode since it derives from text-callout's own per-theme value, not a fixed purple. (Briefly replaced with a yellow fill, then restored here at Dani's explicit request to undo that and keep it as it was.)"
+      },
+      "background-highlight": {
+        "value": "#ffc10759",
+        "type": "color",
+        "description": "Rich text's in-line yellow highlight mark (.pz-prose-highlight) \u2014 split off from surface-note so Note's own frozen-across-themes value isn't disturbed. Light mode is identical to surface-note's pale yellow; dark mode used to be too, until Dani flagged it (\"Highlighted text here isn't readable, use a darker or opacity yellow instead of the current one\") \u2014 against dark mode's near-white text-primary, a near-white yellow highlight is effectively invisible (contrast ~1:1). Dark mode now uses a translucent amber wash over the page instead \u2014 same alpha-blend-over-midnight approach as background-quote's own dark value \u2014 reading as a darker, more saturated gold than light mode's pastel, with solid (~7.5:1) contrast against the light text sitting on it."
+      },
+      "background-initial-invert": {
+        "value": "{global.color.white}",
+        "type": "color",
+        "description": "Rich text's inverted drop-cap variant \u2014 a literal, always-opposite fill, at Dani's request (\"create an inverted style for it. So put there a body text colored 1:1 block and make the letter white in it. In dark mode invertedly, so white background and bg colored font.\"). Built from the raw ink/white primitives rather than the semantic text-primary/background-page tokens, since dark mode's text-primary resolves to a warm cream, not true white."
+      },
+      "text-initial-invert": {
+        "value": "{dark.color.midnight}",
+        "type": "color",
+        "description": "Letter color for the same inverted drop-cap variant \u2014 white on the ink-filled box in light mode, midnight on the white-filled box in dark mode \u2014 the same two colors, just which one is background and which is text flips."
+      },
+      "text-button-secondary": {
+        "value": "{global.color.background-13}",
+        "type": "color",
+        "description": "Default (secondary) button label."
+      },
+      "text-note": {
+        "value": "{global.color.ink}",
+        "type": "color",
+        "description": "Text set on a note/annotation background (the note-pool). Added for pucz-hu-dark-mode-design-system.md; reserved for a future dedicated note/annotation card \u2014 today the note pool is only consumed as the Link highlight mark, which sits under ambient text-primary. Reverted alongside note-01..09 \u2014 Dani asked that sticky notes look absolutely the same in dark mode as in light mode, so this now stays {ink} in both themes instead of paling to background-13."
+      },
+      "border-strong": {
+        "value": "{global.color.background-13}",
+        "type": "color",
+        "description": "A stronger border where more contrast than border-default is needed. The dark-mode doc warned that reusing ink here would be nearly invisible on midnight but didn't specify a replacement, so this is an editorial call \u2014 background-13 for maximum contrast; flag if you'd rather something else."
+      },
+      "border-button-primary": {
+        "value": "{global.color.cyan-700}",
+        "type": "color",
+        "description": "The primary button's 1px outline, added for pucz-hu-dark-mode-design-system.md (previously the border just reused background-button-primary inline in bundle.css). Same cyan-700 value in both themes."
+      },
+      "background-link-hover": {
+        "value": "#0c2735",
+        "type": "color",
+        "description": "Hover-state background behind a link. Dark value is the resolved 14% cyan-500 + 86% midnight sRGB blend from pucz-hu-dark-mode-design-system.md (token aliases can't carry color-mix(), so this is the pre-computed hex) \u2014 recomputed after midnight itself moved from purple to blue-gray at Dani's request, so this stays the correct blend of the two."
+      },
+      "background-page": {
+        "value": "{dark.color.midnight}",
+        "type": "color",
+        "description": "Theme-aware page background. Light mode's true behavior is still the random background-01..15 pool (background-11 here is just this system's representative stand-in, per background-11's own note); dark mode is fixed to the midnight primitive \u2014 pucz-hu-dark-mode-design-system.md keeps the dark page flat rather than randomized."
+      },
+      "surface-interactive": {
+        "value": "#fff7ef14",
+        "type": "color",
+        "description": "Default (resting) background for Button, Clickable icon, Clickable icon+text and Clickable chip \u2014 a faint tinted wash (ink at light mode, background-13 at dark mode, both under 8% alpha) rather than fully transparent, so these controls read as clickable at rest, per Dani's October 2026 'atomic clickables' restyle. Pre-computed alpha hex, same pattern as --transparent and background-link-hover's dark blend \u2014 token aliases can't carry alpha onto a referenced value."
+      },
+      "surface-interactive-hover": {
+        "value": "#fff7ef1f",
+        "type": "color",
+        "description": "Hover background for the same clickable family, paired with a border-default border \u2014 Dani's own 'white bg... on hover' call for light mode, where a literal white hover on a near-white page is the right amount of lift. The earlier dark-mode value (a flagged editorial call, resolving to the solid background-13 near-white at full opacity) was exactly what Dani then flagged: 'this should not be filled with white on hover... rich lighter background, like 2% of white fill, so not fully white.' Dark now uses the same background-13 color as a translucent wash instead \u2014 pre-computed alpha hex (token aliases can't carry alpha onto a referenced value), sitting between surface-interactive's ~8% resting wash and surface-interactive-active's ~16% wash rather than jumping to an opaque fill."
+      },
+      "surface-interactive-active": {
+        "value": "#fff7ef29",
+        "type": "color",
+        "description": "Pressed/active background for the same clickable family \u2014 a stronger version of surface-interactive's own wash, for 'a darker bg than original on click.' Pre-computed alpha hex, same pattern as surface-interactive."
+      },
+      "glow-interactive": {
+        "value": "#00aad566",
+        "type": "color",
+        "description": "The hover/focus glow for the whole clickable family \u2014 cyan-500 (accent-bright) at ~40% alpha, used as a tight, low-blur box-shadow rather than a soft decorative one ('a slight bluish glow (not too blurred)'). Replaces the old plain grey box-shadow ring Button's hover used to show. Same value in both themes since it's already a bright, saturated accent that reads clearly on either background-page."
+      }
+    }
+  },
+  "$themes": [
+    {
+      "id": "light",
+      "name": "Light",
+      "group": "Mode",
+      "selectedTokenSets": {
+        "global": "source",
+        "light": "enabled"
+      }
+    },
+    {
+      "id": "dark",
+      "name": "Dark",
+      "group": "Mode",
+      "selectedTokenSets": {
+        "global": "source",
+        "dark": "enabled"
+      }
+    }
+  ],
+  "$metadata": {
+    "tokenSetOrder": [
+      "global",
+      "light",
+      "dark"
+    ]
+  }
+}

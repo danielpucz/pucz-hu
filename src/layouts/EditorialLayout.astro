@@ -1,0 +1,15 @@
+---
+import BaseLayout from './BaseLayout.astro';
+interface Props { title:string; description:string; category:string; image:string; imageAlt:string; publishedAt?:string; type?:'article'|'recipe'; draft?:boolean }
+const {title,description,category,image,imageAlt,publishedAt,type='article',draft=false}=Astro.props;
+---
+<BaseLayout title={`${title} · Pucz Dani’s Little Corner of the Internet`} description={description} activeTitle={title}>
+  <figure class="cover-frame"><img src={image} alt={imageAlt} class="cover-image" loading="eager" /></figure>
+  <article class="article-body" data-cms-type={type} data-cms-category={category} data-cms-draft={draft}>
+    <p class="category-label">-:~ {category.toUpperCase()} ~:-</p>
+    <h1 class="story-title"><span>{title}</span></h1>
+    {publishedAt && <time datetime={publishedAt} class="published-date">{publishedAt}</time>}
+    <div class="story-content"><slot /></div>
+  </article>
+  <a class="back-home" href="/"><ion-icon name="home" aria-hidden="true"><svg class="ion-fallback" viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M256 36 24 233l20 29 36-31v225c0 13 11 24 24 24h116V320h72v160h116c13 0 24-11 24-24V231l36 31 20-29L256 36Z"/></svg></ion-icon><span>Back to Homepage</span></a>
+</BaseLayout>

@@ -1,0 +1,26 @@
+---
+// Shared, decorative canvas. Its strokes sit above the page background,
+// underneath content. Inspired by the original Pucz.hu Sketch.js cursor drawing.
+---
+<canvas id="cursor-drawing" class="cursor-drawing" aria-hidden="true"></canvas>
+<style is:global>
+  .cursor-drawing {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    touch-action: auto;
+    user-select: none;
+  }
+  body > .page-container, body > .wrap {
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+  }
+  @media (prefers-reduced-motion: reduce), (pointer: coarse) {
+    .cursor-drawing { display: none; }
+  }
+</style>
+<script is:inline src="/cursor-drawing.js"></script>

@@ -1,0 +1,11 @@
+---
+import fortunes from '../data/fortune-messages.json';
+---
+<section class="fortune" aria-label="Fortune cookie" data-fortunes={JSON.stringify(fortunes)}>
+  <p class="fortune-message" role="status" aria-live="polite" aria-atomic="true" hidden></p>
+  <button class="cookie-button" type="button" aria-label="Open a fortune cookie">
+    <img class="cookie-image" src="/images/cookie-full.png" data-full="/images/cookie-full.png" data-broken="/images/cookie-broken.png" width="300" height="300" alt="" draggable="false" />
+  </button>
+  <p class="fortune-label">∘✺∘ HAVE A FORTUNE COOKIE ∘✺∘</p>
+</section>
+<script is:inline src="/fortune-cookie.js"></script>

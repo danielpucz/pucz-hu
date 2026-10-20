@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ascii from '../data/ren-and-stimpy-ascii.txt?raw';
+---
+<BaseLayout title="404 · Pucz Dani’s Little Corner of the Internet" noindex={true}>
+  <section class="not-found" aria-labelledby="not-found-heading">
+    <pre class="ren-stimpy" aria-label="Ren and Stimpy ASCII illustration">{ascii}</pre>
+    <h1 id="not-found-heading">404</h1>
+    <p>This looks like an error. Fail fail fail fail.</p>
+    <div class="error-links">
+      <a href="/"><ion-icon name="home" aria-hidden="true"><svg class="ion-fallback" viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M256 36 24 233l20 29 36-31v225c0 13 11 24 24 24h116V320h72v160h116c13 0 24-11 24-24V231l36 31 20-29L256 36Z"/></svg></ion-icon><span>Back to homepage</span></a>
+      <a href="https://archive.org/details/Renandstimpystyleguide/page/n17/mode/2up" target="_blank" rel="noopener noreferrer"><ion-icon name="information-circle" aria-hidden="true"><svg class="ion-fallback" viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" fill-rule="evenodd" d="M256 32a224 224 0 1 0 0 448 224 224 0 0 0 0-448Zm0 91a29 29 0 1 1 0 58 29 29 0 0 1 0-58Zm-16 101h32v128h16v34h-64v-34h16V224Z"/></svg></ion-icon><span>About Ren &amp; Stimpy</span></a>
+    </div>
+  </section>
+</BaseLayout>

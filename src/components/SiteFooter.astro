@@ -1,0 +1,11 @@
+---
+import ArticleDirectory from './ArticleDirectory.astro';
+import FortuneCookie from './FortuneCookie.astro';
+interface Props {activeTitle?:string}
+const {activeTitle}=Astro.props;
+---
+<footer class="site-footer" id="writing">
+  <div class="ornament" aria-hidden="true">{('-:•:~:•:').repeat(160)}</div>
+  <ArticleDirectory activeTitle={activeTitle} />
+  <FortuneCookie />
+</footer>

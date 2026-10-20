@@ -1,0 +1,6 @@
+---
+import EditorialLayout from './EditorialLayout.astro';
+interface Props { title:string; description:string; category:string; image:string; imageAlt:string; publishedAt?:string; draft?:boolean }
+const props=Astro.props;
+---
+<EditorialLayout type="recipe" {...props}><slot /></EditorialLayout>

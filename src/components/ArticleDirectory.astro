@@ -1,0 +1,8 @@
+---
+import {writingGroups, knownPostRoutes} from '../data/writing';
+interface Props { activeTitle?: string }
+const {activeTitle}=Astro.props;
+---
+<nav class="writing-directory" aria-label="All writings">
+  {writingGroups.map(group => <span class="directory-group"><span class="group-name">-:~ {group.heading} ~:-</span>{group.posts.map(title => knownPostRoutes[title] ? <a href={knownPostRoutes[title]} class:list={['post-chip',{active:title===activeTitle}]} aria-current={title===activeTitle?'page':undefined}>{title}</a> : <span class="post-chip inactive">{title}</span>)}</span>)}
+</nav>

@@ -1,0 +1,204 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"><script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script><style>/* Pucz.hu — V5: shared foundations. Colour exceptions intentionally follow the latest review. */
+@font-face{font-family:Infini;src:url('fonts/Infini-Regular.otf') format('opentype');font-weight:400;font-display:swap}
+@font-face{font-family:Infini;src:url('fonts/Infini-Bold.otf') format('opentype');font-weight:700;font-display:swap}
+@font-face{font-family:'Infini Picto';src:url('fonts/InfiniPicto-Regular.otf') format('opentype');font-display:swap}
+:root{
+  --ink:#381652;--page:var(--random-page,#E5FBF0);--body-text:var(--ink);
+  --ink-ui:#3D0396;--blue:#008EB3;--accent:#008EB3;
+  --muted:#A69AAE;--chip-bg:#38165214;--shadow:#38165230;
+  --paper:#fff;--heading-mark:#3816521B;
+  --font-body:'Proza Libre',sans-serif;--font-display:'Infini',Georgia,serif;
+  --font-hand:'Gloria Hallelujah',cursive;
+  --ease-spring:cubic-bezier(.19,1.24,.42,1);
+  color-scheme:light;
+}
+@media(prefers-color-scheme:dark){:root{
+  --page:#160D1D;--body-text:#FFF7EF;--ink-ui:#ADD8E6;
+  --chip-bg:#FFF7EF15;--shadow:#00000075;--paper:#160D1D;
+  --heading-mark:#FFF7EF20;color-scheme:dark;
+}}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-width:0;background:var(--page);color:var(--body-text);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}button{font:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:5px}
+.page-shell{width:min(calc(100% - 60px),1150px);margin-inline:auto;position:relative;z-index:1;isolation:isolate}
+/* Header: handwritten words are ink; the filled Ionicon is NOT underlined. */
+.site-header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:52px}
+.site-header .brand{font-size:15px;font-weight:500;line-height:1.5;text-decoration:none;color:var(--muted)}
+.site-header .mail{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;text-decoration:none;color:var(--ink-ui);font:400 16px/1.5 var(--font-hand)}
+.site-header .mail ion-icon{font-size:21px;color:var(--ink-ui);flex-shrink:0}
+.site-header .mail span,.back-home span,.error-links a span{
+  text-decoration-line:underline;text-decoration-style:wavy;text-decoration-color:currentColor;
+  text-underline-offset:5px;text-decoration-thickness:1px;
+}
+/* Hover behavior is defined by the highlighted clickable treatment below. */
+/* One homepage paragraph; only the underlined fragments open in place. */
+.hero{margin:100px 0 0;max-width:1070px}
+.intro{font:400 clamp(21px,2.35vw,30px)/1.5 var(--font-body);letter-spacing:-.018em;max-width:1020px;margin:0}
+.expand-link{display:inline;padding:0;margin:0;border:0;background:transparent;cursor:pointer;text-align:left;color:var(--blue);
+  font:inherit;letter-spacing:inherit;overflow-wrap:normal;text-decoration:underline wavy var(--blue);text-decoration-thickness:1.3px;text-underline-offset:4px;text-decoration-skip-ink:none}
+.expand-link:hover{background:color-mix(in srgb,var(--blue) 11%,transparent)}
+.expand-link[aria-expanded="true"]{text-decoration-thickness:2px}
+.new-copy{animation:copy-enter .3s ease-out both}
+@keyframes copy-enter{from{opacity:.35}to{opacity:1}}
+.hint{font:400 13px/1.5 var(--font-hand);color:var(--ink-ui);margin-top:19px}
+/* Photos keep their naturally overlapping collage but are draggable anywhere. */
+.collage{position:relative;height:435px;margin:105px auto 52px;max-width:1100px}
+.polaroid{position:absolute;display:block;width:var(--w);height:var(--h);padding:5px;background:#fff;
+  box-shadow:0 3px 10px var(--shadow);transform:translate3d(var(--dx,0px),var(--dy,0px),0) rotate(var(--rot));
+  cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;transition:box-shadow .3s var(--ease-spring)}
+.polaroid img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+@keyframes photo-wiggle{0%,100%{rotate:0deg}25%{rotate:-2deg}65%{rotate:2deg}}
+.polaroid:hover:not(.dragging){animation:photo-wiggle .8s ease-in-out infinite alternate;box-shadow:0 10px 20px var(--shadow)}
+.polaroid.dragging{cursor:grabbing;animation:photo-wiggle .35s ease-in-out infinite alternate;box-shadow:0 15px 28px var(--shadow)}
+.photo-tree{--w:22%;--h:210px;left:2%;top:35%;z-index:1}
+.photo-couple{--w:24%;--h:245px;left:19%;top:1%;z-index:3}
+.photo-hippo{--w:27%;--h:235px;left:41%;top:0%;z-index:2}
+.photo-walking{--w:24%;--h:220px;left:58%;top:43%;z-index:3}
+.photo-friends{--w:22%;--h:230px;left:78%;top:16%;z-index:4}
+/* Editorial templates: use UNFRAMED source assets, then create one single frame here. */
+.cover-frame{position:relative;width:min(100%,680px);aspect-ratio:15/8;overflow:hidden;margin:70px auto 34px;
+  padding:0;border:5px solid #fff;background:transparent;box-shadow:0 6px 15px var(--shadow);transform:rotate(-.5deg)}
+.cover-image{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center;max-width:none;max-height:none}
+.article-body{width:min(100%,570px);margin:0 auto}
+.category-label{font-size:12px;font-weight:700;margin:9px 0 10px}
+.story-title{font-family:var(--font-display);font-weight:700;font-size:clamp(38px,4.6vw,66px);letter-spacing:-.032em;line-height:1.03;margin:0 0 34px;overflow-wrap:break-word}
+.story-title span{background:var(--heading-mark);box-decoration-break:clone;-webkit-box-decoration-break:clone;border-radius:4px;padding:0 .06em}
+.published-date{display:block;font-size:12px;margin:-8px 0 24px}
+.story-content{font-size:15px;line-height:1.75;overflow-wrap:break-word}
+.story-content p{margin:0 0 1.3em}
+.story-content p.lead{font-size:21px;line-height:1.55;font-weight:500;margin-bottom:1.45em}
+.story-content p.lead::first-letter{font-family:'Infini Picto',var(--font-display);float:left;font-size:4.4em;line-height:.74;padding:.095em .12em 0 0}
+.story-content strong,.story-content b{font-weight:700}.story-content em,.story-content i{font-style:italic}
+.story-content h2{font-size:16px;font-weight:700;margin:2em 0 .65em}.story-content h3{font-size:15px;font-weight:700;margin:1.8em 0 .6em}
+.story-content ul{list-style:none;padding:0 0 0 25px;margin:0 0 1.8em}.story-content li{position:relative;margin:0 0 8px}
+.story-content ul>li::before{content:'✺';position:absolute;left:-25px;color:var(--body-text)}
+.story-content ol{padding-left:1.4em;margin:0 0 1.8em}
+.story-content blockquote{margin:2.1em 0;padding:0 0 0 1.2em;border-left:3px solid var(--muted);font:400 1.4em/1.5 var(--font-display)}
+.story-content a{color:var(--blue);text-decoration:underline wavy;text-underline-offset:4px}
+.story-content img{max-width:100%;height:auto}.story-content figure{margin:2em 0}.story-content figcaption{font-size:.85em;margin-top:.5em}
+.story-content hr{border:0;border-top:1px solid var(--muted);margin:2.2em 0}
+.story-content code,.story-content pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}.story-content pre{white-space:pre-wrap}
+.story-content table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse}.story-content th,.story-content td{padding:9px;border-bottom:1px solid var(--muted);text-align:left}
+.back-home{display:flex;align-items:center;justify-content:center;gap:9px;margin:85px 0 112px;text-decoration:none;color:var(--ink-ui);font:400 16px/1.6 var(--font-hand)}
+.back-home ion-icon{font-size:19px;color:var(--ink-ui)}
+/* A single shared footer is included by BaseLayout on ALL four page types. */
+.site-footer{position:relative;clear:both;width:100%;padding-bottom:32px}
+.ornament{white-space:nowrap;overflow:hidden;font:700 13px/1.8 ui-monospace,monospace;letter-spacing:3px;margin:0 0 23px}
+.writing-directory{display:block;font:400 12px/2.25 var(--font-body);margin:0 0 88px}
+.directory-group{display:contents}.group-name{font-size:12px;font-weight:700;white-space:nowrap;margin-right:8px}
+.post-chip{display:inline-block;padding:0 8px;margin:0 5px 6px 0;vertical-align:baseline;background:var(--chip-bg);border-radius:2px;
+  color:var(--body-text);font:400 14px/25px var(--font-body);text-decoration:none;transition:background-color .18s ease,color .18s ease}
+.post-chip:hover,.post-chip.active{background:var(--blue);color:#fff}
+.post-chip.inactive{cursor:default}
+/* Original transparent image states and EXACT original 21 fortune messages. */
+.fortune{display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;min-height:210px;padding:0 0 40px}
+.fortune-message{order:0;max-width:min(470px,100%);padding:18px 20px;margin:0 auto 15px;background:#fff;color:var(--ink);
+  border-radius:4px;box-shadow:4px 2px 8px var(--shadow);font:700 16px/1.4 var(--font-body)}
+.fortune-message[hidden]{display:none!important}.fortune-enter{animation:fortune-appear .42s ease-out both}
+@keyframes fortune-appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.cookie-button{order:1;width:114px;height:114px;padding:0;margin:0;border:0;background:transparent;display:grid;place-items:center;
+  cursor:pointer;transform:rotate(0deg) scale(1);transition:transform .25s var(--ease-spring)}
+.cookie-button:hover{transform:rotate(5deg) scale(1.055)}.cookie-button.is-cracked{transform:rotate(-5deg) scale(1.05)}
+.cookie-image{display:block;width:114px;height:114px;object-fit:contain;max-width:none;mix-blend-mode:normal;pointer-events:none;border:0!important;background:transparent!important;filter:none}
+.fortune-label{order:2;font:700 12px/1.6 var(--font-display);margin:5px 0 0}
+@media(prefers-color-scheme:dark){.fortune-message{background:#503267;color:#FFF7EF}}
+/* 404 */
+.not-found{text-align:center;min-height:60vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:13px;padding:80px 0 100px}
+.ren-stimpy{white-space:pre;text-align:left;font:400 clamp(10px,1.5vw,17px)/1.15 ui-monospace,SFMono-Regular,Consolas,monospace;max-width:100%;overflow-x:auto}
+.not-found h1{font:700 clamp(42px,7vw,82px)/1 var(--font-display);margin:12px 0 0}.not-found p{margin:0}
+.error-links{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;margin-top:17px}
+.error-links a{display:inline-flex;align-items:center;gap:7px;font:400 15px/1.5 var(--font-hand);text-decoration:none;color:var(--ink-ui)}
+.error-links ion-icon{font-size:19px;color:var(--ink-ui)}
+@media(max-width:700px){
+  .page-shell{width:min(calc(100% - 60px),540px)}
+  .site-header{padding-top:22px;align-items:flex-start;gap:12px}
+  .site-header .brand{max-width:53%;font-size:13px}.site-header .mail{font-size:13px;gap:6px}.site-header .mail ion-icon{font-size:16px}
+  .hero{margin-top:55px}.intro{font-size:clamp(19px,4.4vw,24px);line-height:1.5}
+  .collage{height:325px;margin-top:65px;margin-bottom:20px}
+  .photo-tree{--w:32%;--h:150px;left:0%;top:29%}
+  .photo-couple{--w:41%;--h:151px;left:9%;top:0%}
+  .photo-hippo{--w:46%;--h:145px;left:50%;top:3%}
+  .photo-walking{--w:40%;--h:159px;left:57%;top:47%}
+  .photo-friends{--w:45%;--h:142px;left:27%;top:58%}
+  .cover-frame{margin:38px auto 27px;border-width:4px}
+  .article-body{width:100%}.story-title{font-size:clamp(34px,9vw,44px);margin-bottom:29px}
+  .story-content{font-size:14px;line-height:1.74}.story-content p.lead{font-size:18px}
+  .back-home{margin:67px 0 88px}
+  .writing-directory{line-height:2.6;margin-bottom:60px}.post-chip{font-size:13px}
+  .not-found{padding:65px 0 80px}.ren-stimpy{font-size:clamp(9px,2.5vw,13px)}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}.polaroid:hover,.polaroid.dragging{animation:none}}
+
+
+/* Filled Ionicons: real Ionicon custom elements load on the live site. These
+   tiny matching filled silhouettes preserve useful, accessible offline previews. */
+ion-icon{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;flex-shrink:0}
+ion-icon svg.ion-fallback{display:block;width:100%;height:100%;overflow:visible}
+ion-icon:defined svg.ion-fallback{display:none}
+/* Match the Figma-link foreground exactly even in the active and expanded states. */
+.expand-link,.expand-link:focus-visible,.expand-link[aria-expanded="true"]{color:#008EB3;text-decoration-color:#008EB3}
+/* Do not underline the filled icon: only the handwritten label. */
+.site-header .mail ion-icon,.back-home ion-icon,.error-links ion-icon{text-decoration:none}
+
+.site-header .mail ion-icon{width:21px;height:21px}
+.back-home ion-icon,.error-links ion-icon{width:19px;height:19px}
+@media(max-width:700px){.site-header .mail ion-icon{width:16px;height:16px}}
+
+
+/* V5.4 — handwritten links match .expand-link's quiet inline text highlight.
+   No white fill, outline, border, glow, or hover movement. Only the text label is highlighted;
+   filled Ionicons remain unchanged. Keyboard focus keeps its separate accessible focus ring. */
+.site-header .mail,
+.back-home,
+.error-links a {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.site-header .mail:hover,
+.back-home:hover,
+.error-links a:hover {
+  transform: none;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.site-header .mail span,
+.back-home span,
+.error-links a span {
+  transition: background-color .18s ease;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.site-header .mail:hover span,
+.back-home:hover span,
+.error-links a:hover span,
+.site-header .mail:focus-visible span,
+.back-home:focus-visible span,
+.error-links a:focus-visible span {
+  background: color-mix(in srgb, var(--blue) 11%, transparent);
+}
+/* Keep the full-width ornamental rule inside the same shared page grid. */
+.site-footer .ornament {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+</style><script>(()=>{const p=['#E7CDF6','#FFE6F5','#BBE6F0','#BCEACF','#FBFBBC','#FECB7F','#FBA1A0','#FFEFE0','#FCE1E4','#ECE5FF','#E5FBF0','#F4E5FF','#FFF7EF','#FFE3F9','#C7F6FD'];document.documentElement.style.setProperty('--random-page',p[Math.floor(Math.random()*p.length)])})();</script></head><body><canvas id="cursor-drawing" class="cursor-drawing" aria-hidden="true" style="position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none"></canvas><div class="page-shell"><header class="site-header"><a class="brand" href="index.html">Pucz Dani’s Little Corner of the Internet</a><a class="mail" href="mailto:dani@pucz.hu"><ion-icon name="send" aria-hidden="true"><svg class="ion-fallback" viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M480 32 28 220c-10 4-10 18 0 22l168 66 66 176c4 11 18 11 22 0L480 32ZM231 280l-99-39 262-111-163 150Z"/></svg></ion-icon><span>Write me whatever</span></a></header><main><figure class="cover-frame"><img class="cover-image" src="images/detectives-original.gif" alt="A detective in snow"></figure><article class="article-body"><p class="category-label">-:~ MY FEELINGS ~:-</p><h1 class="story-title"><span>Keep the Tiny Detectives Busy</span></h1><div class="story-content">
+<p class="lead">There is a version of the world that lives inside me where everything is already decided. Labels are printed, meanings sit still, things behave exactly as they should. I can walk through it and feel like a reasonable person with a reasonable understanding of reasonable things. It has that clean, finished feeling, like a room that has been quietly tidied just before someone important arrives.</p>
+<p><strong>Still, you learn to move through it quickly. You understand what something is, what it means, what to do about it, and there is relief in not having to linger. Nothing stays longer than necessary. Things arrive, get understood, and settle.</strong></p>
+<p>I used to think that was the whole place, not just a part of it: the final version, everything in its place, an easier story to tell myself about the people and things around me.</p>
+<p>But there was always something slightly off, and I suspect you know the feeling. Not enough to break anything, just enough to stay with you. A thought lands too cleanly, then another detail arrives and changes what you thought you knew.</p>
+<p>For a while, I thought the fix was to become better at that world. Sharper. Faster. More finished. Instead, I kept getting interrupted.</p>
+<p>Not loudly, not dramatically. Just small interruptions that made things feel less complete than they pretended to be.</p>
+<p>And that is where the tiny detectives are.</p>
+<p>They have probably been trying to get your attention for years. They are not subtle about it. One of them takes over everything in a polite but unstoppable way, like it genuinely cannot believe how interesting this all is. Another one is deeply suspicious of anything that sounds too final and leaves in whenever a thought ends too neatly, not to challenge it but to gently ask, “Are we sure that's all?”</p>
+<p><strong>And occasionally, they are very funny.</strong></p>
+<p>They are also surprisingly empathetic. Not in a grand, heroic way, but in a very small, steady one. If something feels heavy, they do not try to lighten it immediately. They are more curious about it. They notice the edges of it, even when they cannot understand the whole thing.</p>
+<p>So I have been trying to give them a little more space. To ask one more question before deciding what something means. To listen for the extra version of the story.</p>
+<p>And to leave a few things unfinished, on purpose.</p>
+</div></article><a class="back-home" href="index.html"><ion-icon name="home" aria-hidden="true"><svg class="ion-fallback" viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M256 36 24 233l20 29 36-31v225c0 13 11 24 24 24h116V320h72v160h116c13 0 24-11 24-24V231l36 31 20-29L256 36Z"/></svg></ion-icon><span>Back to Homepage</span></a></main><footer class="site-footer" id="writing"><div class="ornament" aria-hidden="true">-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:-:•:~:•:</div><nav class="writing-directory" aria-label="All writings"><span class="directory-group"><span class="group-name">-:~ A Better Internet ~:-</span><span class="post-chip inactive">You Used to be an Advanced Internet User</span><span class="post-chip inactive">Maybe We Should Focus on the Value</span><span class="post-chip inactive">A Better Internet</span></span><span class="directory-group"><span class="group-name">-:~ Stuff About Working ~:-</span><span class="post-chip inactive">Unlimited Talent</span><span class="post-chip inactive">Sayonara Month</span><span class="post-chip inactive">Focus-Pocus</span><span class="post-chip inactive">Your Magic</span><span class="post-chip inactive">People Giving a Fuck</span><span class="post-chip inactive">My Therapist is Burning the System Down</span><span class="post-chip inactive">The Most Professional Day of My Career</span><span class="post-chip inactive">Or Am I Right?</span><span class="post-chip inactive">The Man of Seriousity</span><span class="post-chip inactive">The Rise and Rise of Inverted Filtering</span><span class="post-chip inactive">The Toddler, the Taxman, the Trauma and My Studio Dreams</span><span class="post-chip inactive">Going Corporate</span><span class="post-chip inactive">Jump in the Car There’s No Time to Explain!</span></span><span class="directory-group"><span class="group-name">-:~ My Feelings ~:-</span><span class="post-chip inactive">Fuck Multiverses</span><span class="post-chip inactive">Adults vs. Children</span><span class="post-chip inactive">I’m Not Into Tiny Women Anymore</span><span class="post-chip inactive">Poking Sadness</span><span class="post-chip inactive">Do You Have Like Three Minutes?</span><span class="post-chip inactive">The Sleeping on the Couch Thing</span><span class="post-chip inactive">Success</span><span class="post-chip inactive">What If You’re the One?</span><span class="post-chip inactive">Presence is the Pattern</span><span class="post-chip inactive">That Son of a Gun Lucky Bastard</span><span class="post-chip inactive">Godspeed Bartók</span><a class="post-chip active" href="article.html">Keep the Tiny Detectives Busy</a><span class="post-chip inactive">Second Feelings</span></span><span class="directory-group"><span class="group-name">-:~ Very Good Lists I’ve Made ~:-</span><span class="post-chip inactive">Incredible People</span><span class="post-chip inactive">Things That Spark Joy</span><span class="post-chip inactive">Songs that doesn’t End</span><span class="post-chip inactive">Every Project Ever</span><span class="post-chip inactive">Dinner &amp; Movie Nights</span></span><span class="directory-group"><span class="group-name">-:~ Upper Middle Class Bragging ~:-</span><span class="post-chip inactive">I didn’t do the Work</span><span class="post-chip inactive">Where’s the Fucking Money?</span><span class="post-chip inactive">A Very Personal Fuck You To Apple TV+</span><span class="post-chip inactive">Big Dad Energy</span><span class="post-chip inactive">State of Disconnected People on Christmas</span></span><span class="directory-group"><span class="group-name">-:~ Important Food Stuff ~:-</span><a class="post-chip" href="recipe.html">The Perfect Ramen Egg</a><span class="post-chip inactive">Everything I Know About Risotto</span><span class="post-chip inactive">My Falafels</span></span></nav><section class="fortune" aria-label="Fortune cookie" data-fortunes="[&quot;Your future self is already annoyed with you, but they love you anyway.&quot;, &quot;You will soon encounter a door with no handle. Knock anyway.&quot;, &quot;Your reflection is not always loyal. Look twice.&quot;, &quot;A great adventure awaits. Bring snacks.&quot;, &quot;You lost something in a past life. It’s hiding in your pocket.&quot;, &quot;A detour is just the universe testing your curiosity.&quot;, &quot;Beware of smiling cats and silent mirrors.&quot;, &quot;Your socks may not match, but your soul is in perfect alignment.&quot;, &quot;Someone is thinking of you. It may be a ghost, but still, that’s nice.&quot;, &quot;The stars left you a voicemail. Check your dreams for the transcript.&quot;, &quot;Your laugh just traveled back in time and changed the course of history.&quot;, &quot;Someone you love is the past version of yourself. Write them a letter.&quot;, &quot;Reality bends when you look at it sideways. Try it.&quot;, &quot;The air around you is thick with unfinished spells. Breathe carefully.&quot;, &quot;Something ancient watches over you. It thinks you’re funny.&quot;, &quot;Your shadow is writing poetry about you. It’s mostly love poems.&quot;, &quot;If you feel like the main character today, it’s because the director finally showed up.&quot;, &quot;Someone knows a secret about you that you haven’t even learned yet.&quot;, &quot;The thing you thought was a coincidence thought the same about you.&quot;, &quot;One of your forgotten dreams is about to wake up and ask for attention.&quot;, &quot;Something you once dismissed as impossible just became an option.&quot;]"><p class="fortune-message" role="status" aria-live="polite" aria-atomic="true" hidden></p><button class="cookie-button" type="button" aria-label="Open a fortune cookie"><img class="cookie-image" src="images/cookie-full.png" data-full="images/cookie-full.png" data-broken="images/cookie-broken.png" width="300" height="300" alt="" draggable="false"></button><p class="fortune-label">∘✺∘ HAVE A FORTUNE COOKIE ∘✺∘</p></section></footer></div><script src="cursor-drawing.js"></script><script src="fortune-cookie.js"></script></body></html>

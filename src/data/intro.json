@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0",
+  "component": "ExpandableIntroduction",
+  "locale": "en",
+  "ending": "Welcome to my little corner of the internet.",
+  "stories": [
+    {
+      "id": "internet",
+      "before": "I like making ",
+      "link": "things for the internet",
+      "after": ".",
+      "pieces": [
+        {
+          "before": ", which I've been doing for over fifteen years, starting with terribly customized MySpace pages and eventually finding my way through agencies, startups, ",
+          "link": "design studios",
+          "after": "",
+          "detail": ", including leading one of Hungary's best-known studios, working on projects for Lufthansa and Profession, and helping an international startup take better care of trees"
+        },
+        {
+          "before": ", and a couple of years working entirely for myself, while developing a soft spot for ",
+          "link": "the internet we used to have",
+          "after": "",
+          "detail": ", when making a website was a perfectly normal way of showing the world who you were, even if that involved a tiled background, a guestbook and music nobody asked to hear"
+        }
+      ]
+    },
+    {
+      "id": "people",
+      "before": "I enjoy ",
+      "link": "helping people make things",
+      "after": ".",
+      "pieces": [
+        {
+          "before": ", which these days means leading around twenty people as Head of Research and Design at Trendency, working to make accessibility, AI-aided design and strategic design useful beyond presentation slides, and learning that ",
+          "link": "being a good leader",
+          "after": "",
+          "detail": " has less to do with having all the answers than with helping other people find their own, preferably somewhere they can ask silly questions, make mistakes, disagree with me and still feel good about coming to work the next day"
+        }
+      ]
+    },
+    {
+      "id": "family",
+      "before": "I'm figuring out how to build ",
+      "link": "a happy family",
+      "after": ".",
+      "pieces": [
+        {
+          "before": ", together with my five-year-old son, who has special needs and a brain that keeps surprising me, and a woman with very curly hair who also happens to be, according to a completely unbiased survey of one person, Hungary's best anxiety coach, as we build a patchwork family with complicated calendars, new little traditions and ",
+          "link": "something that feels like real peace",
+          "after": "",
+          "detail": ", which I've learned isn't about never having a difficult conversation, but about being able to have one without turning it into a competition, and about building a home where everyone gets to feel safe, loved and a little bit weird"
+        }
+      ]
+    },
+    {
+      "id": "restart",
+      "before": "I've had some practice at ",
+      "link": "starting over",
+      "after": ".",
+      "pieces": [
+        {
+          "before": ", from founding an online charity startup, trying to pivot when things went wrong and eventually deciding to close it, to ending a marriage while staying on good terms with my ex-wife, although somewhere along the way I also ",
+          "link": "lost one of my closest friends",
+          "after": "",
+          "detail": ", someone I built that company with and haven't spoken to since, and I still don't really know how to tell that story properly because some things don't become easier to explain just because a few years have passed"
+        },
+        {
+          "before": ", and all of it has made me think differently about ",
+          "link": "responsibility",
+          "after": "",
+          "detail": ", which I'm starting to think has less to do with proving you meant well and more to do with noticing how your choices affect other people, saying sorry when you should and trying to do a little better next time"
+        }
+      ]
+    },
+    {
+      "id": "brain",
+      "before": "I happen to have ",
+      "link": "a rather busy brain",
+      "after": ".",
+      "pieces": [
+        {
+          "before": ", the AuDHD kind, which is very good at spotting patterns, getting curious about things and connecting ideas that might not have needed connecting, while being less reliable at everyday things like remembering where I put something five minutes ago, so I've become quite interested in ",
+          "link": "mentalization",
+          "after": "",
+          "detail": ", which is a fancy word for the surprisingly hard work of remembering that other people have their own thoughts and feelings, that my first guess about them might be wrong, and that sometimes the most useful thing I can do is shut up and listen"
+        },
+        {
+          "before": ", and I'm slowly getting better at ",
+          "link": "living with it",
+          "after": "",
+          "detail": ", without trying to fix every little thing about myself or using my brain as an excuse for being difficult, because apparently accepting yourself and taking responsibility for yourself are things you're allowed to do at the same time"
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "before": "And I like ",
+      "link": "writing things down",
+      "after": ".",
+      "pieces": [
+        {
+          "before": ", mostly about feelings, really good recipes, purchases I probably didn't need, the occasional upper-middle-class brag and other things that don't exactly need to be published on the internet, but I do it anyway because ",
+          "link": "writing helps me understand myself",
+          "after": "",
+          "detail": ", especially when I start with something I'm absolutely sure about and find out, three paragraphs later, that I might have got the whole thing wrong"
+        },
+        {
+          "before": ", and because I still believe ",
+          "link": "personal websites deserve to exist",
+          "after": "",
+          "detail": ", even when they're not selling anything, chasing likes or trying to turn an ordinary person with a few hobbies and some unresolved feelings into a personal brand"
+        }
+      ]
+    }
+  ]
+}
