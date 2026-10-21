@@ -19,6 +19,9 @@ class Element {
     this.dataset = {};
     this.parent = null;
     this.pointer = null;
+    this.complete = false;
+    this.naturalWidth = 0;
+    this.naturalHeight = 0;
     this.classList = {
       contains: (name) => this.className.split(/\s+/).includes(name),
       add: (...names) => {
@@ -223,4 +226,29 @@ test('no-JavaScript homepage fallback uses supplied gallery photos', () => {
   for (const src of ['tree.jpg', 'couple.jpg', 'hippo.jpg', 'walking.jpg', 'friends.jpg']) {
     assert.ok(!page.includes('src="/images/' + src + '"'), src);
   }
+});
+
+test('portrait and landscape cards normalize visual area while preserving image ratios', () => {
+  const { cards } = setup();
+  const portrait = cards()[0];
+  const landscape = cards()[1];
+  const portraitImg = portrait.children[0];
+  const landscapeImg = landscape.children[0];
+  portraitImg.naturalWidth = 750;
+  portraitImg.naturalHeight = 1000;
+  landscapeImg.naturalWidth = 1333;
+  landscapeImg.naturalHeight = 1000;
+  portraitImg.emit('load');
+  landscapeImg.emit('load');
+  const portraitScale = Number(portrait.style.properties['--photo-scale']);
+  const landscapeScale = Number(landscape.style.properties['--photo-scale']);
+  assert.ok(portraitScale < landscapeScale, 'portrait should be narrower');
+  // Compare areas at the same CSS base width: width² / aspect ratio.
+  const portraitArea = portraitScale ** 2 / (750 / 1000);
+  const landscapeArea = landscapeScale ** 2 / (1333 / 1000);
+  assert.ok(Math.abs(portraitArea / landscapeArea - 1) < 0.015,
+    'both image orientations should occupy nearly equal area');
+  const styles = fs.readFileSync('src/styles/site.css', 'utf8');
+  assert.match(styles, /width:calc\(var\(--w\) \* var\(--photo-scale,1\)\)/);
+  assert.match(styles, /\.polaroid img\{[^}]*height:auto/);
 });
