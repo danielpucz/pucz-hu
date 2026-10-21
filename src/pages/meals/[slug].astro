@@ -23,21 +23,3 @@ const publishedAt = entry.data.publishedAt instanceof Date
 >
   <div class="cms-content"><Content /></div>
 </RecipeLayout>
-<style is:global>
-  .story-content .cms-content > p:first-child {
-    font-size: 21px;
-    line-height: 1.55;
-    font-weight: 500;
-    margin-bottom: 1.45em;
-  }
-  .story-content .cms-content > p:first-child::first-letter {
-    font-family: 'Infini Picto', var(--font-display);
-    float: left;
-    font-size: 4.4em;
-    line-height: .74;
-    padding: .095em .12em 0 0;
-  }
-  @media(max-width:700px) {
-    .story-content .cms-content > p:first-child { font-size: 18px; }
-  }
-</style>
