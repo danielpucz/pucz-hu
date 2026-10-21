@@ -5,7 +5,7 @@
 :root{
   --ink:#381652;--page:var(--random-page,#E5FBF0);--body-text:var(--ink);
   --ink-ui:#3D0396;--blue:#008EB3;--accent:#008EB3;
-  --muted:#A69AAE;--chip-bg:#38165214;--shadow:#38165230;
+  --muted:#A69AAE;--chip-bg:#38165221;--shadow:#38165230;
   --paper:#fff;--heading-mark:#3816521B;
   --font-body:'Proza Libre',sans-serif;--font-display:'Infini',Georgia,serif;
   --font-hand:'Gloria Hallelujah',cursive;
@@ -14,7 +14,7 @@
 }
 @media(prefers-color-scheme:dark){:root{
   --page:var(--random-dark-page,#151515);--body-text:#FFF7EF;--ink-ui:#ADD8E6;
-  --chip-bg:#FFF7EF15;--shadow:#00000075;--paper:#160D1D;
+  --chip-bg:#FFF7EF22;--shadow:#00000075;--paper:#160D1D;
   --heading-mark:#FFF7EF20;color-scheme:dark;
 }}
 *,*::before,*::after{box-sizing:border-box}
@@ -89,7 +89,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .writing-directory{display:block;font:400 12px/2.25 var(--font-body);margin:0 0 88px}
 .directory-group{display:contents}.group-name{font-size:12px;font-weight:700;white-space:nowrap;margin-right:8px}
 .post-chip{display:inline-block;padding:0 8px;margin:0 5px 6px 0;vertical-align:baseline;background:var(--chip-bg);border-radius:2px;
-  color:var(--body-text);font:400 14px/25px var(--font-body);text-decoration:none;transition:background-color .18s ease,color .18s ease}
+  color:var(--body-text);font:500 14px/25px var(--font-body);text-decoration:none;transition:background-color .18s ease,color .18s ease}
 .post-chip:hover,.post-chip.active{background:var(--blue);color:#fff}
 .post-chip.inactive{cursor:default}
 /* Original transparent image states and EXACT original 21 fortune messages. */
