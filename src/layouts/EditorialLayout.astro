@@ -11,5 +11,6 @@ const {title,description,category,image,imageAlt,publishedAt,type='article',draf
     {publishedAt && <time datetime={publishedAt} class="published-date">{publishedAt}</time>}
     <div class="story-content"><slot /></div>
   </article>
+  <script is:inline src="/editorial-dropcaps.js"></script>
   <a class="back-home" href="/"><ion-icon name="home" aria-hidden="true"><svg class="ion-fallback" viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M256 36 24 233l20 29 36-31v225c0 13 11 24 24 24h116V320h72v160h116c13 0 24-11 24-24V231l36 31 20-29L256 36Z"/></svg></ion-icon><span>Back to Homepage</span></a>
 </BaseLayout>

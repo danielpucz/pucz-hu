@@ -308,7 +308,7 @@ test('mobile editorial titles are 40–48px and lead descriptions are 22px', () 
   const css = fs.readFileSync('src/styles/site.css', 'utf8');
   const mobile = css.split('@media(max-width:700px){')[1];
   assert.match(mobile, /\.story-title\{font-size:clamp\(40px,10\.5vw,48px\)/);
-  assert.match(mobile, /\.story-content p\.lead\{font-size:22px\}/);
+  assert.match(mobile, /\.story-content p\.lead,\.story-content \.cms-content > p:first-child\{font-size:22px\}/);
   assert.match(mobile, /\.story-content\{font-size:17px;/);
-  assert.match(css, /\.story-content p\.lead\{font-size:21px;/);
+  assert.match(css, /\.story-content p\.lead,\.story-content \.cms-content > p:first-child\{font-size:21px;/);
 });
