@@ -3,8 +3,7 @@
   if (!canvas || canvas.dataset.initialized) return;
   canvas.dataset.initialized = 'true';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const coarse = matchMedia('(pointer: coarse)');
-  if (reduced.matches || coarse.matches) return;
+  if (reduced.matches) return;
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
   let last = null, lastTime = performance.now();
@@ -48,15 +47,55 @@
     last = point; lastTime = performance.now();
   }
   function move(e) {
+    if (e.pointerType === 'touch') return; // Touch draws on taps, not while scrolling.
     pending = e;
     if (!raf) raf = requestAnimationFrame(() => {
       raf=0; if (pending) draw(pending); pending=null;
     });
   }
-  const reset=()=>{last=null;brushWidth=110;distanceTravelled=0;};
+  // A phone tap leaves a soft dab, without hijacking touch scrolling or dragging.
+  let touchTap = null;
+  const MAX_TAP_TRAVEL = 12;
+  function stamp(x, y) {
+    const width = Math.max(56, Math.min(96, innerWidth * .19));
+    ctx.beginPath();
+    ctx.arc(x, y, width / 2, 0, Math.PI * 2);
+    ctx.fillStyle = darkTheme.matches ? '#0F0F0F' : '#FFFFFF';
+    ctx.globalAlpha = 1;
+    ctx.fill();
+  }
+  function touchDown(e) {
+    if (e.pointerType !== 'touch') return;
+    if (e.isPrimary === false) { touchTap = null; return; }
+    // Preserve navigation, buttons, form interactions and draggable photos.
+    if (e.target instanceof Element &&
+        e.target.closest('a, button, input, textarea, select, [role="button"], .draggable-photo')) return;
+    touchTap = { id:e.pointerId, x:e.clientX, y:e.clientY, time:performance.now(), moved:false };
+  }
+  function touchMove(e) {
+    if (!touchTap || e.pointerId !== touchTap.id) return;
+    if (Math.hypot(e.clientX - touchTap.x, e.clientY - touchTap.y) > MAX_TAP_TRAVEL) {
+      touchTap.moved = true;
+    }
+  }
+  function touchEnd(e) {
+    if (!touchTap || e.pointerId !== touchTap.id) return;
+    const tap = touchTap;
+    touchTap = null;
+    if (!tap.moved && !reduced.matches &&
+        Math.hypot(e.clientX - tap.x, e.clientY - tap.y) <= MAX_TAP_TRAVEL &&
+        performance.now() - tap.time < 500) {
+      stamp(e.clientX, e.clientY);
+    }
+  }
+  const reset=()=>{last=null;brushWidth=110;distanceTravelled=0;touchTap=null;};
   resize();
   addEventListener('resize',resize,{passive:true});
   addEventListener('pointermove',move,{passive:true});
+  addEventListener('pointerdown',touchDown,{passive:true});
+  addEventListener('pointermove',touchMove,{passive:true});
+  addEventListener('pointerup',touchEnd,{passive:true});
+  addEventListener('pointercancel',e=>{if(touchTap?.id===e.pointerId)touchTap=null;},{passive:true});
   addEventListener('pointerleave',reset);
   addEventListener('blur',reset);
   document.addEventListener('visibilitychange',reset);
