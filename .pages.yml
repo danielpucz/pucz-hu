@@ -17,7 +17,7 @@ content:
         fields:
           - name: images
             label: Photos in the random pool
-            description: "Add about 30–50 photos. Five appear on reload; dragging reveals more, up to 25 visible. Each image is used once per session."
+            description: "The uploaded photo pool currently has 54 images. Five random photos appear on reload; dragging reveals more, up to 25 visible. You can add or remove photos any time."
             type: object
             required: true
             list:
