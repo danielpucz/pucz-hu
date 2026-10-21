@@ -1,13 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import intro from '../data/intro.json';
+import gallery from '../data/homepage-gallery.json';
 ---
 <BaseLayout title="Pucz Dani’s Little Corner of the Internet" description="Things for the internet, people, family and a rather busy brain. Welcome to my little corner of the internet.">
   <section class="hero" aria-label="A little about me">
     <h1 class="intro" id="intro" data-stories={JSON.stringify(intro.stories)} data-ending={intro.ending}></h1>
     <p class="hint" id="intro-hint">↗ Try clicking the wavy bits.</p>
   </section>
-  <section class="collage" aria-label="Little moments from life">
+  <section class="collage" id="homepage-collage" aria-label="A movable photo collection" data-photo-pool={JSON.stringify(gallery.images)}>
     <div class="polaroid draggable-photo photo-tree" style="--rot:-7deg"><img draggable="false" src="/images/tree.jpg" alt="Climbing a tree on a leafy day" loading="lazy" /></div>
     <div class="polaroid draggable-photo photo-couple" style="--rot:7deg"><img draggable="false" src="/images/couple.jpg" alt="A smiling couple outdoors in winter" loading="lazy" /></div>
     <div class="polaroid draggable-photo photo-hippo" style="--rot:-4deg"><img draggable="false" src="/images/hippo.jpg" alt="A child beside a big blue playground hippopotamus" loading="lazy" /></div>
@@ -15,4 +16,5 @@ import intro from '../data/intro.json';
     <div class="polaroid draggable-photo photo-friends" style="--rot:6deg"><img draggable="false" src="/images/friends.jpg" alt="Friends gathered around an outdoor table" loading="lazy" /></div>
   </section>
   <script is:inline src="/homepage.js"></script>
+  <script is:inline src="/homepage-gallery.js"></script>
 </BaseLayout>
