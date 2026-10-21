@@ -1,0 +1,24 @@
+name: Homepage gallery interaction tests
+on:
+  pull_request:
+    paths:
+      - "public/homepage-gallery.js"
+      - "tests/homepage-gallery.test.cjs"
+      - ".github/workflows/homepage-gallery-test.yml"
+  push:
+    branches: [main]
+    paths:
+      - "public/homepage-gallery.js"
+      - "tests/homepage-gallery.test.cjs"
+permissions:
+  contents: read
+jobs:
+  interaction-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check vanilla JavaScript syntax
+        run: node --check public/homepage-gallery.js
+      - name: Test gallery interactions without external dependencies
+        run: node --test tests/homepage-gallery.test.cjs
