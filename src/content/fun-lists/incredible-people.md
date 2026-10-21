@@ -8,7 +8,7 @@ listType: people
 published: false
 items:
   - _block: person
-    id: Bálint Antal
+    id: Entry 1
     name: Bálint Antal
     role: Developer
     note: Is the most intuitive CEO I know.
