@@ -79,13 +79,24 @@
     );
 
     const image = document.createElement('img');
-    image.src = photo.src;
+    // Match perceived size by photo area, not by equal widths. A 3:4 portrait
+    // takes roughly 75% of the width of a 4:3 landscape at the same area.
+    // The image and its white frame keep their natural, uncropped proportions.
+    function balancePhotoSize() {
+      if (!image.naturalWidth || !image.naturalHeight) return;
+      const aspectRatio = image.naturalWidth / image.naturalHeight;
+      const scale = Math.max(0.68, Math.min(1.12, Math.sqrt(aspectRatio / (4 / 3))));
+      card.style.setProperty('--photo-scale', scale.toFixed(3));
+    }
+    image.addEventListener('load', balancePhotoSize);
     // The interactive card already announces the image description.
     image.alt = '';
     image.draggable = false;
     image.loading = isNew ? 'eager' : 'lazy';
     image.decoding = 'async';
+    image.src = photo.src;
     card.appendChild(image);
+    if (image.complete) balancePhotoSize();
 
     let x = 0, y = 0;
     let activePointer = null, pointerStartX = 0, pointerStartY = 0;
