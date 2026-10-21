@@ -32,7 +32,7 @@ content:
                 required: true
                 options:
                   path: public/images/homepage
-                  extensions: [jpg, jpeg, png, webp, avif]
+                  extensions: [jpg, jpeg, png, webp, avif, gif]
               - name: alt
                 label: Alternative text
                 description: "Describe what is in the photo for visitors using screen readers."
