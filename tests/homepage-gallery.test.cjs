@@ -283,3 +283,32 @@ test('each newly revealed photo briefly lands, then remains freely draggable', (
   assert.match(css, /@keyframes photo-drop\{/);
   assert.match(css, /@media\(prefers-reduced-motion:reduce\)/);
 });
+
+
+test('mobile photos grow while viewport clips offscreen drags', () => {
+  const css = fs.readFileSync('src/styles/site.css', 'utf8');
+  assert.match(css, /html\{[^}]*overflow-x:clip/);
+  assert.match(css, /body\{[^}]*overflow-x:clip/);
+  const mobile = css.split('@media(max-width:700px){')[1];
+  assert.ok(mobile, 'Expected smartphone media query');
+
+  const widths = ['photo-tree', 'photo-couple', 'photo-hippo', 'photo-walking', 'photo-friends']
+    .map((slot) => {
+      const match = mobile.match(new RegExp('\\.' + slot + '\\{--w:(\\d+)%'));
+      assert.ok(match, 'Missing mobile width for ' + slot);
+      return Number(match[1]);
+    });
+  assert.deepEqual(widths, [36, 43, 46, 41, 44]);
+  assert.match(mobile, /\.polaroid\.photo-new\{--w:45%\}/);
+  // Do not clip at the collage boundary: photos can still be dragged around the screen.
+  assert.match(css, /\.collage\{position:relative;/);
+});
+
+test('mobile editorial titles are 40–48px and lead descriptions are 22px', () => {
+  const css = fs.readFileSync('src/styles/site.css', 'utf8');
+  const mobile = css.split('@media(max-width:700px){')[1];
+  assert.match(mobile, /\.story-title\{font-size:clamp\(40px,10\.5vw,48px\)/);
+  assert.match(mobile, /\.story-content p\.lead\{font-size:22px\}/);
+  assert.match(mobile, /\.story-content\{font-size:17px;/);
+  assert.match(css, /\.story-content p\.lead\{font-size:21px;/);
+});
