@@ -1,16 +1,8 @@
 {
   "images": [
     {
-      "src": "/images/homepage/photo-001.jpg",
-      "alt": "A smiling outdoor selfie with friends near a small cottage"
-    },
-    {
       "src": "/images/homepage/photo-002.jpg",
       "alt": "A person standing against a green building in an urban setting"
-    },
-    {
-      "src": "/images/homepage/photo-003.jpg",
-      "alt": "A warmly lit portrait outdoors"
     },
     {
       "src": "/images/homepage/photo-004.jpg",
@@ -51,10 +43,6 @@
     {
       "src": "/images/homepage/photo-013.jpg",
       "alt": "Person posing with a dog indoors"
-    },
-    {
-      "src": "/images/homepage/photo-014.jpg",
-      "alt": "A group of friends seated together for a portrait"
     },
     {
       "src": "/images/homepage/photo-015.jpg",
@@ -213,8 +201,16 @@
       "alt": "A green leafy plant in a bright indoor space"
     },
     {
-      "src": "/images/homepage/photo-054.jpg",
-      "alt": "A group of friends posing together in a colorful restaurant"
+      "src": "/images/homepage/tree.jpeg",
+      "alt": "Man on the tree"
+    },
+    {
+      "src": "/images/homepage/friends.jpeg",
+      "alt": "Two lovers walking"
+    },
+    {
+      "src": "/images/homepage/walking.jpeg",
+      "alt": "Team having fun"
     }
   ]
 }
