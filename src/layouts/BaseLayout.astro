@@ -19,7 +19,13 @@ const {title,description='Pucz Dani’s Little Corner of the Internet',activeTit
   <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
   <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
   <script is:inline>
-    (() => {const colors=['#E7CDF6','#FFE6F5','#BBE6F0','#BCEACF','#FBFBBC','#FECB7F','#FBA1A0','#FFEFE0','#FCE1E4','#ECE5FF','#E5FBF0','#F4E5FF','#FFF7EF','#FFE3F9','#C7F6FD'];document.documentElement.style.setProperty('--random-page',colors[Math.floor(Math.random()*colors.length)]);})();
+    (() => {
+      // Choose once per page load. Each palette affects its own color scheme only.
+      const lightColors=['#E7CDF6','#FFE6F5','#BBE6F0','#BCEACF','#FBFBBC','#FECB7F','#FBA1A0','#FFEFE0','#FCE1E4','#ECE5FF','#E5FBF0','#F4E5FF','#FFF7EF','#FFE3F9','#C7F6FD'];
+      const darkColors=['#151515','#20222E','#252E20','#2E2027','#202E2E','#2E2C20'];
+      document.documentElement.style.setProperty('--random-page',lightColors[Math.floor(Math.random()*lightColors.length)]);
+      document.documentElement.style.setProperty('--random-dark-page',darkColors[Math.floor(Math.random()*darkColors.length)]);
+    })();
   </script>
 </head>
 <body>
