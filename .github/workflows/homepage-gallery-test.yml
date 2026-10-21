@@ -3,6 +3,16 @@ on:
   pull_request:
     paths:
       - "public/homepage-gallery.js"
+      - "public/cursor-drawing.js"
+      - "public/editorial-dropcaps.js"
+      - "src/styles/site.css"
+      - "src/components/CursorDrawing.astro"
+      - "src/layouts/EditorialLayout.astro"
+      - "src/pages/blog/[slug].astro"
+      - "src/pages/articles/[slug].astro"
+      - "src/pages/meals/[slug].astro"
+      - "src/pages/recipes/[slug].astro"
+      - "tests/editorial-decorations.test.cjs"
       - "src/data/homepage-gallery.json"
       - "src/pages/index.astro"
       - ".pages.yml"
@@ -12,6 +22,16 @@ on:
     branches: [main]
     paths:
       - "public/homepage-gallery.js"
+      - "public/cursor-drawing.js"
+      - "public/editorial-dropcaps.js"
+      - "src/styles/site.css"
+      - "src/components/CursorDrawing.astro"
+      - "src/layouts/EditorialLayout.astro"
+      - "src/pages/blog/[slug].astro"
+      - "src/pages/articles/[slug].astro"
+      - "src/pages/meals/[slug].astro"
+      - "src/pages/recipes/[slug].astro"
+      - "tests/editorial-decorations.test.cjs"
       - "src/data/homepage-gallery.json"
       - "src/pages/index.astro"
       - ".pages.yml"
@@ -25,6 +45,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check vanilla JavaScript syntax
-        run: node --check public/homepage-gallery.js
+        run: node --check public/homepage-gallery.js && node --check public/cursor-drawing.js && node --check public/editorial-dropcaps.js
       - name: Test gallery interactions without external dependencies
-        run: node --test tests/homepage-gallery.test.cjs
+        run: node --test tests/homepage-gallery.test.cjs tests/editorial-decorations.test.cjs
