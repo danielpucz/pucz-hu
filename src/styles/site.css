@@ -13,7 +13,7 @@
   color-scheme:light;
 }
 @media(prefers-color-scheme:dark){:root{
-  --page:#160D1D;--body-text:#FFF7EF;--ink-ui:#ADD8E6;
+  --page:var(--random-dark-page,#151515);--body-text:#FFF7EF;--ink-ui:#ADD8E6;
   --chip-bg:#FFF7EF15;--shadow:#00000075;--paper:#160D1D;
   --heading-mark:#FFF7EF20;color-scheme:dark;
 }}
@@ -25,7 +25,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .page-shell{width:min(calc(100% - 60px),1150px);margin-inline:auto;position:relative;z-index:1;isolation:isolate}
 /* Header: handwritten words are ink; the filled Ionicon is NOT underlined. */
 .site-header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:52px}
-.site-header .brand{font-size:15px;font-weight:500;line-height:1.5;text-decoration:none;color:var(--muted)}
+.site-header .brand{font-size:15px;font-weight:500;line-height:1.5;text-decoration:none;color:var(--body-text);opacity:1}
 .site-header .mail{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;text-decoration:none;color:var(--ink-ui);font:400 16px/1.5 var(--font-hand)}
 .site-header .mail ion-icon{font-size:21px;color:var(--ink-ui);flex-shrink:0}
 .site-header .mail span,.back-home span,.error-links a span{
