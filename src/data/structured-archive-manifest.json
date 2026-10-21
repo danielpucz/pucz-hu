@@ -1,0 +1,11 @@
+{
+  "source": "src/data/archive-lists/*.html (original archived Webflow cards)",
+  "funLists": {
+    "incredible-people": 45,
+    "things-that-sparks-joy": 134,
+    "list-of-songs-that-doesnt-end-but-fade-out": 41
+  },
+  "events": 7,
+  "projects": 225,
+  "note": "All imported collections remain unpublished; no site templates altered."
+}
