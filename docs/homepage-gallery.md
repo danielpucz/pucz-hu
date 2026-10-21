@@ -9,7 +9,7 @@ Open **Pages CMS → Homepage → Photo gallery**. The gallery is one ordered JS
 
 The gallery now contains **54 photographs supplied by the site owner**, replacing all temporary archive placeholders. The upload is under `public/images/homepage/`, using numerically named copies (`photo-001.jpg` through `photo-054.jpg`). The originals were converted to lightweight, orientation-corrected web JPEGs with EXIF/camera metadata removed. **Each photo retains its original aspect ratio: no images are cropped to fit a fixed frame.** The web copies are up to 1000 pixels wide or tall.
 
-Use JPG, WebP or AVIF wherever possible. Compress photos for the web before uploading (typically no more than 1200–1600 pixels on the long edge). The page initially loads five randomly selected photos and loads further pictures only as they are uncovered. Keep images at their natural proportions; the Polaroid frame automatically follows each photo's dimensions.
+Use JPG, WebP or AVIF wherever possible. Compress photos for the web before uploading (typically no more than 1200–1600 pixels on the long edge). The page initially loads five randomly selected photos and loads further pictures only as they are uncovered. Keep images at their natural proportions; the Polaroid frame automatically follows each photo's dimensions. Each image's width is scaled according to the square root of its intrinsic aspect ratio relative to a 4:3 landscape. A portrait therefore gets a narrower frame than a landscape, bringing their visible areas much closer without cropping, on both desktop and mobile.
 
 ## Interaction rules
 
