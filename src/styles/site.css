@@ -43,12 +43,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .new-copy{animation:copy-enter .3s ease-out both}
 @keyframes copy-enter{from{opacity:.35}to{opacity:1}}
 .hint{font:400 13px/1.5 var(--font-hand);color:var(--ink-ui);margin-top:19px}
-/* Photos keep their naturally overlapping collage but are draggable anywhere. */
-.collage{position:relative;height:435px;margin:105px auto 52px;max-width:1100px}
+/* A slightly scattered horizontal row, like photographs laid out on a table. */
+.collage{position:relative;height:335px;margin:105px auto 52px;max-width:1100px}
 /* Scale each photo by the square root of its aspect ratio, keeping visible areas
    balanced while leaving the original picture dimensions and crop intact. */
 .polaroid{position:absolute;display:block;width:calc(var(--w) * var(--photo-scale,1));height:auto;padding:5px;background:#fff;
-  box-shadow:0 3px 10px var(--shadow);transform:translate3d(var(--dx,0px),var(--dy,0px),0) rotate(var(--rot));
+  box-shadow:0 3px 10px var(--shadow);transform:translate3d(var(--dx,0px),var(--dy,0px),0) translateY(-50%) rotate(var(--rot));
   cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;transition:box-shadow .16s ease}
 .polaroid img{display:block;width:100%;height:auto;max-height:none;object-fit:contain;pointer-events:none;-webkit-user-drag:none}
 .polaroid:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
@@ -57,14 +57,22 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   .polaroid.wiggle-once:not(.dragging):not(.just-dropped){animation:photo-wiggle .46s ease-in-out 1;box-shadow:0 9px 18px var(--shadow)}
 }
 .polaroid.dragging{cursor:grabbing;animation:none;box-shadow:0 14px 24px var(--shadow)}
-/* Newly dealt photos enter at the center, with no bounce or release animation. */
-.polaroid.photo-new{--w:20%;left:50%;top:50%;
+/* New photos land in the center with a brief paper-drop motion.
+   This only runs when a photo first appears, never on drag release. */
+.polaroid.photo-new{--w:22%;left:50%;top:50%;
   transform:translate(-50%,-50%) translate3d(var(--dx,0px),var(--dy,0px),0) rotate(var(--rot))}
-.photo-tree{--w:19%;left:2%;top:35%;z-index:1}
-.photo-couple{--w:21%;left:19%;top:1%;z-index:3}
-.photo-hippo{--w:22%;left:41%;top:0%;z-index:2}
-.photo-walking{--w:20%;left:58%;top:43%;z-index:3}
-.photo-friends{--w:19%;left:78%;top:16%;z-index:4}
+.polaroid.photo-new.photo-enter{animation:photo-drop .5s cubic-bezier(.2,.72,.22,1) both}
+@keyframes photo-drop{
+  0%{opacity:0;transform:translate(-50%,-50%) translate3d(0,-38px,0) rotate(calc(var(--rot) - 5deg)) scale(1.055);box-shadow:0 20px 25px var(--shadow)}
+  58%{opacity:1;transform:translate(-50%,-50%) translate3d(0,4px,0) rotate(calc(var(--rot) + 1deg)) scale(.988);box-shadow:0 2px 7px var(--shadow)}
+  79%{transform:translate(-50%,-50%) translate3d(0,-2px,0) rotate(calc(var(--rot) - .25deg)) scale(1.004)}
+  100%{opacity:1;transform:translate(-50%,-50%) translate3d(0,0,0) rotate(var(--rot)) scale(1);box-shadow:0 3px 10px var(--shadow)}
+}
+.photo-tree{--w:21%;left:0%;top:47%;z-index:1}
+.photo-couple{--w:23%;left:20%;top:53%;z-index:3}
+.photo-hippo{--w:24%;left:40%;top:44%;z-index:2}
+.photo-walking{--w:22%;left:60%;top:55%;z-index:3}
+.photo-friends{--w:21%;left:79%;top:49%;z-index:4}
 /* Editorial templates: use UNFRAMED source assets, then create one single frame here. */
 .cover-frame{position:relative;width:min(100%,680px);aspect-ratio:15/8;overflow:hidden;margin:70px auto 34px;
   padding:0;border:5px solid #fff;background:transparent;box-shadow:0 6px 15px var(--shadow);transform:rotate(-.5deg)}
@@ -124,13 +132,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   .site-header{padding-top:22px;align-items:flex-start;gap:12px}
   .site-header .brand{max-width:53%;font-size:13px}.site-header .mail{font-size:13px;gap:6px}.site-header .mail ion-icon{font-size:16px}
   .hero{margin-top:55px}.intro{font-size:clamp(19px,4.4vw,24px);line-height:1.5}
-  .collage{height:325px;margin-top:65px;margin-bottom:20px}
-  .photo-tree{--w:28%;left:0%;top:29%}
-  .photo-couple{--w:34%;left:9%;top:0%}
-  .photo-hippo{--w:37%;left:50%;top:3%}
-  .photo-walking{--w:32%;left:57%;top:47%}
-  .photo-friends{--w:35%;left:27%;top:58%}
-  .polaroid.photo-new{--w:36%}
+  .collage{height:265px;margin-top:65px;margin-bottom:20px}
+  .photo-tree{--w:31%;left:0%;top:45%}
+  .photo-couple{--w:37%;left:17%;top:54%}
+  .photo-hippo{--w:40%;left:35%;top:44%}
+  .photo-walking{--w:35%;left:53%;top:55%}
+  .photo-friends{--w:38%;left:69%;top:47%}
+  .polaroid.photo-new{--w:39%}
   .cover-frame{margin:38px auto 27px;border-width:4px}
   .article-body{width:100%}.story-title{font-size:clamp(34px,9vw,44px);margin-bottom:29px}
   .story-content{font-size:14px;line-height:1.74}.story-content p.lead{font-size:18px}
