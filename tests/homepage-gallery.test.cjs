@@ -192,3 +192,17 @@ test('focused photographs support keyboard movement and revealing another', () =
   card.emit('keydown', { key: 'Enter' });
   assert.equal(cards().length, 7);
 });
+
+test('the CMS gallery source has at least five distinct, existing image files', () => {
+  const { images } = JSON.parse(fs.readFileSync('src/data/homepage-gallery.json', 'utf8'));
+  assert.ok(Array.isArray(images) && images.length >= 5);
+  const seen = new Set();
+  for (const image of images) {
+    assert.ok(typeof image.src === 'string' && image.src.startsWith('/images/'), image.src);
+    assert.ok(!seen.has(image.src), 'Duplicate CMS image: ' + image.src);
+    seen.add(image.src);
+    assert.ok(fs.existsSync('public' + decodeURIComponent(image.src)), 'Missing image: ' + image.src);
+    assert.ok(typeof image.alt === 'string' && image.alt.trim().length > 0,
+      'Missing alternative text for ' + image.src);
+  }
+});
