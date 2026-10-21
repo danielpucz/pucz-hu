@@ -85,7 +85,7 @@ const events = defineCollection({
     date: z.string().optional(),
     note: z.string().optional(),
     details: z.array(z.object({ key: z.string(), value: z.string() })).default([]),
-    sourceOrder: z.number().int(),
+    sourceOrder: z.number().int().default(9999),
     published: z.boolean().default(false),
   }),
 });
@@ -100,7 +100,7 @@ const projects = defineCollection({
     client: z.string().optional(),
     work: z.string().optional(),
     url: z.string().optional(),
-    sourceOrder: z.number().int(),
+    sourceOrder: z.number().int().default(9999),
     published: z.boolean().default(false),
   }),
 });
