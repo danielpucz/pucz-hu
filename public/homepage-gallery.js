@@ -70,6 +70,12 @@
     const card = document.createElement('div');
     card.className = 'polaroid draggable-photo ' + positionClass;
     card.style.setProperty('--rot', rotation);
+    if (isNew) {
+      card.classList.add('photo-enter');
+      card.addEventListener('animationend', (event) => {
+        if (event.animationName === 'photo-drop') card.classList.remove('photo-enter');
+      });
+    }
     card.tabIndex = 0;
     card.setAttribute('role', 'button');
     card.setAttribute(
@@ -144,7 +150,8 @@
 
     card.addEventListener('pointerenter', (event) => {
       if (fineHover.matches && (event.pointerType === 'mouse' || event.pointerType === 'pen') &&
-          activePointer === null && !card.classList.contains('just-dropped')) {
+          activePointer === null && !card.classList.contains('just-dropped') &&
+          !card.classList.contains('photo-enter')) {
         card.classList.add('wiggle-once');
       }
     });
@@ -154,6 +161,7 @@
     card.addEventListener('pointerdown', (event) => {
       if (activePointer !== null || (event.pointerType === 'mouse' && event.button !== 0)) return;
       activePointer = event.pointerId;
+      card.classList.remove('photo-enter'); // Never let the landing animation fight a drag.
       pointerStartX = event.clientX;
       pointerStartY = event.clientY;
       startX = x;
@@ -183,7 +191,7 @@
         event.preventDefault();
         if (!keyboardMoving) {
           keyboardMoving = true;
-          card.classList.remove('wiggle-once');
+          card.classList.remove('wiggle-once', 'photo-enter');
           card.classList.add('dragging');
           card.style.zIndex = String(++topLayer);
           preloadNext();
@@ -195,6 +203,7 @@
         place();
       } else if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
+        card.classList.remove('photo-enter');
         preloadNext();
         showNext();
       }
