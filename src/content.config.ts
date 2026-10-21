@@ -26,13 +26,7 @@ const recipes = defineCollection({
   schema: editorialSchema,
 });
 
-const lists = defineCollection({
-  loader: glob({ base: './src/content/lists', pattern: '**/*.md' }),
-  schema: editorialSchema,
-});
-
-// The old "lists" loader is retained until the one-time structured import removes
-// its Markdown snapshots. The original HTML cards remain in src/data/archive-lists.
+// The original HTML cards remain archived in src/data/archive-lists.
 const funListEntry = z.discriminatedUnion('_block', [
   z.object({
     _block: z.literal('person'),
@@ -111,4 +105,4 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { articles, recipes, lists, funLists, eventSeries, events, projects };
+export const collections = { articles, recipes, funLists, eventSeries, events, projects };
