@@ -45,7 +45,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .hint{font:400 13px/1.5 var(--font-hand);color:var(--ink-ui);margin-top:19px}
 /* Photos keep their naturally overlapping collage but are draggable anywhere. */
 .collage{position:relative;height:435px;margin:105px auto 52px;max-width:1100px}
-.polaroid{position:absolute;display:block;width:var(--w);height:auto;padding:5px;background:#fff;
+/* Scale each photo by the square root of its aspect ratio, keeping visible areas
+   balanced while leaving the original picture dimensions and crop intact. */
+.polaroid{position:absolute;display:block;width:calc(var(--w) * var(--photo-scale,1));height:auto;padding:5px;background:#fff;
   box-shadow:0 3px 10px var(--shadow);transform:translate3d(var(--dx,0px),var(--dy,0px),0) rotate(var(--rot));
   cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;transition:box-shadow .16s ease}
 .polaroid img{display:block;width:100%;height:auto;max-height:none;object-fit:contain;pointer-events:none;-webkit-user-drag:none}
