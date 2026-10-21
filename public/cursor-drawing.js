@@ -7,11 +7,12 @@
   if (reduced.matches || coarse.matches) return;
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
-  let last = null, lastTime = performance.now(), start = performance.now();
-  let pending = null, raf = 0, count = 0;
-  const lightColors = ['#FFFFFF','#FFFFFF','#868E80','#4ba8c2','#A7EBCA','#FFFFFF','#D8EBA7'];
-  const darkColors = ['#30223B','#392946','#26363F','#40324E','#283D43','#4A3450','#303948'];
+  let last = null, lastTime = performance.now();
+  let pending = null, raf = 0;
   const darkTheme = matchMedia('(prefers-color-scheme: dark)');
+  const MIN_WIDTH = 70, MAX_WIDTH = 160;
+  let brushWidth = 110; // About 10× the former 7–16px marker.
+  let distanceTravelled = 0;
   function resize() {
     const ratio = Math.min(devicePixelRatio || 1, 2);
     canvas.width = Math.ceil(innerWidth * ratio);
@@ -24,17 +25,24 @@
     const point = {x:e.clientX,y:e.clientY};
     if (last) {
       const dist = Math.hypot(point.x-last.x,point.y-last.y);
-      if (dist > .5 && dist < 150 && performance.now()-lastTime < 250) {
+      const elapsed = performance.now() - lastTime;
+      if (dist > .5 && dist < 150 && elapsed < 250) {
+        // A slower hand leaves a wider stroke; faster motion tapers the brush.
+        // Subtle travel-based variation gives a natural bristle-like rhythm.
+        const speed = dist / Math.max(elapsed, 8);
+        distanceTravelled += dist;
+        const motionWidth = MAX_WIDTH - Math.min(speed / 2, 1) * (MAX_WIDTH - MIN_WIDTH);
+        const variation = Math.sin(distanceTravelled * .018) * 9;
+        const targetWidth = Math.max(MIN_WIDTH, Math.min(MAX_WIDTH, motionWidth + variation));
+        brushWidth += (targetWidth - brushWidth) * .18;
         ctx.beginPath();
         ctx.moveTo(last.x,last.y);
         ctx.lineTo(point.x,point.y);
         ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-        const colors = darkTheme.matches ? darkColors : lightColors;
-        ctx.strokeStyle = colors[Math.floor(count/12) % colors.length];
-        // A wider, translucent marker; tint stays behind the content.
-        ctx.globalAlpha = darkTheme.matches ? 0.27 : 0.30;
-        ctx.lineWidth = 7 + Math.abs(Math.sin((performance.now()-start)*.003))*9;
-        ctx.stroke(); ctx.globalAlpha = 1; count++;
+        ctx.strokeStyle = darkTheme.matches ? '#0F0F0F' : '#F3F3F3';
+        ctx.globalAlpha = 1;
+        ctx.lineWidth = brushWidth;
+        ctx.stroke();
       }
     }
     last = point; lastTime = performance.now();
@@ -45,7 +53,7 @@
       raf=0; if (pending) draw(pending); pending=null;
     });
   }
-  const reset=()=>{last=null;};
+  const reset=()=>{last=null;brushWidth=110;distanceTravelled=0;};
   resize();
   addEventListener('resize',resize,{passive:true});
   addEventListener('pointermove',move,{passive:true});
