@@ -66,12 +66,12 @@ class Element {
 function setup(options = {}) {
   const { poolCount = 30, random = 0.31, hover = true } = options;
   const collage = new Element('section');
-  collage.dataset.photoPool = JSON.stringify({
-    images: Array.from({ length: poolCount }, (_, i) => ({
+  collage.dataset.photoPool = JSON.stringify(
+    Array.from({ length: poolCount }, (_, i) => ({
       src: '/images/photo-' + i + '.jpg',
       alt: 'Test photo ' + i,
-    })),
-  });
+    }))
+  );
   const document = new Element('document');
   document.querySelector = (selector) => selector === '#homepage-collage' ? collage : null;
   document.createElement = (tag) => new Element(tag);
