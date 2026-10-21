@@ -209,8 +209,8 @@ content:
             fields:
               - name: id
                 label: Stable item ID (do not change after reordering)
+                description: "For a new entry, enter a unique ID. Keep it unchanged when moving the item."
                 type: string
-                readonly: true
               - name: name
                 type: string
                 required: true
@@ -225,8 +225,8 @@ content:
             fields:
               - name: id
                 label: Stable item ID
+                description: "For a new entry, enter a unique ID. Keep it unchanged when moving the item."
                 type: string
-                readonly: true
               - name: text
                 type: text
                 required: true
@@ -237,8 +237,8 @@ content:
             fields:
               - name: id
                 label: Stable item ID
+                description: "For a new entry, enter a unique ID. Keep it unchanged when moving the item."
                 type: string
-                readonly: true
               - name: artist
                 type: string
                 required: true
@@ -276,9 +276,10 @@ content:
             required: true
           - name: slug
             label: Series identifier (used by events)
+            description: "Use a stable URL-style identifier (e.g. dinner-and-movie-night); don't change it after adding events."
             type: string
             required: true
-            readonly: true
+            pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
           - name: navigationTitle
             label: Footer label
             type: string
@@ -379,6 +380,7 @@ content:
           - name: sourceOrder
             label: Original archive order
             type: number
+            default: 9999
           - name: published
             label: Published (off until event pages are designed)
             type: boolean
@@ -457,6 +459,7 @@ content:
           - name: sourceOrder
             label: Original archive position
             type: number
+            default: 9999
           - name: published
             label: Published (off until project page design is approved)
             type: boolean
