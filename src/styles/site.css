@@ -18,7 +18,8 @@
   --heading-mark:#FFF7EF20;color-scheme:dark;
 }}
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth}
+/* Clip at the viewport root too: off-screen dragged photos must not widen mobile pages. */
+html{scroll-behavior:smooth;overflow-x:clip}
 body{margin:0;min-width:0;background:var(--page);color:var(--body-text);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:clip}
 a{color:inherit}button{font:inherit}
 a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:5px}
@@ -132,15 +133,16 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   .site-header .brand{max-width:53%;font-size:13px}.site-header .mail{font-size:13px;gap:6px}.site-header .mail ion-icon{font-size:16px}
   .hero{margin-top:55px}.intro{font-size:clamp(19px,4.4vw,24px);line-height:1.5}
   .collage{height:265px;margin-top:65px;margin-bottom:20px}
-  .photo-tree{--w:31%;left:0%;top:45%}
-  .photo-couple{--w:37%;left:17%;top:54%}
-  .photo-hippo{--w:40%;left:35%;top:44%}
-  .photo-walking{--w:35%;left:53%;top:55%}
-  .photo-friends{--w:38%;left:69%;top:47%}
-  .polaroid.photo-new{--w:39%}
+  /* A little bigger on smartphones; preserve the natural image proportions. */
+  .photo-tree{--w:36%;left:0%;top:45%}
+  .photo-couple{--w:43%;left:17%;top:54%}
+  .photo-hippo{--w:46%;left:35%;top:44%}
+  .photo-walking{--w:41%;left:53%;top:55%}
+  .photo-friends{--w:44%;left:65%;top:47%}
+  .polaroid.photo-new{--w:45%}
   .cover-frame{margin:38px auto 27px;border-width:4px}
-  .article-body{width:100%}.story-title{font-size:clamp(34px,9vw,44px);margin-bottom:29px}
-  .story-content{font-size:17px;line-height:1.74}.story-content p.lead{font-size:18px}
+  .article-body{width:100%}.story-title{font-size:clamp(40px,10.5vw,48px);margin-bottom:29px}
+  .story-content{font-size:17px;line-height:1.74}.story-content p.lead{font-size:22px}
   .back-home{margin:67px 0 88px}
   .writing-directory{line-height:2.6;margin-bottom:60px}.post-chip{font-size:13px}
   .not-found{padding:65px 0 80px}.ren-stimpy{font-size:clamp(9px,2.5vw,13px)}
