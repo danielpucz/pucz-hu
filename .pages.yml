@@ -147,17 +147,20 @@ content:
         options:
           format: markdown
 
-  - name: lists
-    label: Lists (archive drafts)
+  # Fun Lists remain at /list/<original-slug>/ when their layouts are approved.
+  - name: fun_lists
+    label: Fun Lists
     type: collection
-    path: src/content/lists
+    path: src/content/fun-lists
     format: yaml-frontmatter
     filename: "{primary}.md"
+    exclude: [".gitkeep"]
     operations:
       rename: false
     view:
-      fields: [title, published]
+      fields: [title, listType, published]
       primary: title
+      sort: [title]
     fields:
       - name: title
         label: Title
@@ -170,28 +173,296 @@ content:
         label: Short description
         type: text
       - name: category
-        label: Category
+        label: Writing category
         type: string
         default: "Very Good Lists I’ve Made"
-      - name: image
-        label: Cover (optional)
-        type: image
-      - name: imageAlt
-        label: Cover description
-        type: text
       - name: legacyPath
-        label: Original URL
+        label: Original URL (always /list/...)
         type: string
-      - name: primaryPath
-        label: URL group
-        type: string
-        default: list
+        readonly: true
+      - name: listType
+        label: List type
+        type: select
+        required: true
+        options:
+          values:
+            - name: people
+              label: People
+            - name: joy
+              label: Things that spark joy
+            - name: songs
+              label: Songs
       - name: published
-        label: Published (keep off until list templates are approved)
+        label: Published (keep off until visual design is approved)
         type: boolean
         default: false
+      - name: items
+        label: List entries
+        type: block
+        list:
+          collapsible:
+            collapsed: true
+            summary: "Entry {index}"
+        blocks:
+          - name: person
+            label: Person
+            fields:
+              - name: id
+                label: Stable item ID (do not change after reordering)
+                type: string
+                readonly: true
+              - name: name
+                type: string
+                required: true
+              - name: role
+                type: string
+              - name: note
+                type: text
+              - name: url
+                type: string
+          - name: joy
+            label: Joyful thing
+            fields:
+              - name: id
+                label: Stable item ID
+                type: string
+                readonly: true
+              - name: text
+                type: text
+                required: true
+              - name: url
+                type: string
+          - name: song
+            label: Song
+            fields:
+              - name: id
+                label: Stable item ID
+                type: string
+                readonly: true
+              - name: artist
+                type: string
+                required: true
+              - name: track
+                type: string
+                required: true
+              - name: url
+                type: string
       - name: body
-        label: Archived introduction and items
+        label: Original introduction
         type: rich-text
         options:
           format: markdown
+
+  # Events: field keys are stable, but visible labels come from each event series.
+  - name: events_group
+    label: Events
+    type: group
+    items:
+      - name: event_series
+        label: Event series & labels
+        type: collection
+        path: src/content/event-series
+        format: yaml-frontmatter
+        filename: "{primary}.md"
+        exclude: [".gitkeep"]
+        operations:
+          rename: false
+        view:
+          fields: [title, published]
+          primary: title
+        fields:
+          - name: title
+            type: string
+            required: true
+          - name: slug
+            label: Series identifier (used by events)
+            type: string
+            required: true
+            readonly: true
+          - name: navigationTitle
+            label: Footer label
+            type: string
+          - name: description
+            type: text
+          - name: category
+            type: string
+          - name: legacyPath
+            label: Original archive URL
+            type: string
+            readonly: true
+          - name: labels
+            label: Renamable main fields for this series
+            type: object
+            fields:
+              - name: title
+                label: Event title label (e.g. Film, Talk, Excursion)
+                type: string
+              - name: date
+                label: Date label
+                type: string
+          - name: detailDefinitions
+            label: Renamable extra fields for this series
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{label}"
+            description: "The key stays stable. Change the label without changing any event records."
+            fields:
+              - name: key
+                label: Machine key (don't rename once in use)
+                type: string
+                required: true
+              - name: label
+                label: Display name (change freely)
+                type: string
+                required: true
+          - name: published
+            type: boolean
+            default: false
+          - name: body
+            label: Event series introduction
+            type: rich-text
+            options:
+              format: markdown
+
+      - name: events
+        label: Event records
+        type: collection
+        path: src/content/events
+        format: yaml-frontmatter
+        filename: "{primary}.md"
+        exclude: [".gitkeep"]
+        operations:
+          rename: false
+        view:
+          fields: [title, series, date, published]
+          primary: title
+          sort: [date, title]
+        fields:
+          - name: title
+            label: Main title (renamed on page by the event series)
+            type: string
+            required: true
+          - name: series
+            label: Event series
+            type: reference
+            required: true
+            options:
+              collection: event_series
+              value: "{fields.slug}"
+              label: "{fields.title}"
+          - name: date
+            label: Date
+            type: date
+            options:
+              format: yyyy-MM-dd
+          - name: note
+            label: Personal note
+            type: text
+          - name: details
+            label: Additional series-defined details
+            description: "Use each field key from Event series & labels. Their display names are set there."
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{key}: {value}"
+            fields:
+              - name: key
+                label: Stable field key
+                type: string
+                required: true
+              - name: value
+                label: Value
+                type: text
+          - name: sourceOrder
+            label: Original archive order
+            type: number
+          - name: published
+            label: Published (off until event pages are designed)
+            type: boolean
+            default: false
+
+  # A curated portfolio and an exhaustive career archive may share these records.
+  - name: projects_group
+    label: Projects
+    type: group
+    items:
+      - name: project_archive
+        label: Every Project Ever page
+        type: file
+        path: src/data/project-archive.md
+        format: yaml-frontmatter
+        fields:
+          - name: title
+            type: string
+            required: true
+          - name: navigationTitle
+            label: Footer label
+            type: string
+          - name: description
+            type: text
+          - name: category
+            type: string
+          - name: legacyPath
+            label: Original URL
+            type: string
+            readonly: true
+          - name: published
+            label: Published (off until project pages are designed)
+            type: boolean
+            default: false
+          - name: body
+            label: Original archive introduction
+            type: rich-text
+            options:
+              format: markdown
+      - name: projects
+        label: Project records
+        type: collection
+        path: src/content/projects
+        format: yaml-frontmatter
+        filename: "{primary}.md"
+        exclude: [".gitkeep"]
+        operations:
+          rename: false
+        view:
+          fields: [title, year, client, published]
+          primary: title
+          sort: [year, title]
+        fields:
+          - name: title
+            label: Project title
+            type: string
+            required: true
+          - name: summary
+            label: Short description
+            type: text
+          - name: year
+            label: Year (original source text)
+            type: string
+          - name: type
+            label: Engagement type
+            type: string
+          - name: client
+            label: Client
+            type: string
+          - name: work
+            label: Work / discipline
+            type: string
+          - name: url
+            label: External project link (optional)
+            type: string
+          - name: sourceOrder
+            label: Original archive position
+            type: number
+          - name: published
+            label: Published (off until project page design is approved)
+            type: boolean
+            default: false
+          - name: body
+            label: Optional future project case-study text
+            type: rich-text
+            options:
+              format: markdown
