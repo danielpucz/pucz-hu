@@ -7,9 +7,9 @@ Open **Pages CMS → Homepage → Photo gallery**. The gallery is one ordered JS
 - **Photo**: select an image or upload a new one. New uploads should go into `public/images/homepage/`.
 - **Alternative text**: a concise description of the photo, used by the keyboard- and screen-reader-accessible photo card.
 
-The initial 30 entries are **temporary testing images from the existing site and article archive**. Replace them with your preferred 30–50 photos before considering the gallery final. Their existing site paths are preserved: no copies have been added.
+The gallery now contains **54 photographs supplied by the site owner**, replacing all temporary archive placeholders. The upload is under `public/images/homepage/`, using numerically named copies (`photo-001.jpg` through `photo-054.jpg`). The originals were converted to lightweight, orientation-corrected web JPEGs with EXIF/camera metadata removed. **Each photo retains its original aspect ratio: no images are cropped to fit a fixed frame.** The web copies are up to 1000 pixels wide or tall.
 
-Use JPG, WebP or AVIF wherever possible. Compress photos for the web before uploading (typically at most 1200–1600 pixels wide and ideally under 350 KB each). The page initially loads five images and adds only the images visitors uncover.
+Use JPG, WebP or AVIF wherever possible. Compress photos for the web before uploading (typically no more than 1200–1600 pixels on the long edge). The page initially loads five randomly selected photos and loads further pictures only as they are uncovered. Keep images at their natural proportions; the Polaroid frame automatically follows each photo's dimensions.
 
 ## Interaction rules
 
@@ -28,6 +28,6 @@ Use JPG, WebP or AVIF wherever possible. Compress photos for the web before uplo
 - Editor: `.pages.yml`, **Homepage / Photo gallery**
 - Static fallback and JSON bootstrap: `src/pages/index.astro`
 - Image interaction: `public/homepage-gallery.js` (separate from expanding intro text in `public/homepage.js`)
-- Photo visual style and phone/tablet layout: `src/styles/site.css`
+- Photo visual style, responsive sizing and preserved intrinsic aspect ratios: `src/styles/site.css`
 
 Only the homepage photo pool and its interaction styles are touched. The shared site header/footer, articles, recipes, other CMS collections, global random background, and background brush are unchanged.
