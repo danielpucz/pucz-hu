@@ -206,3 +206,21 @@ test('the CMS gallery source has at least five distinct, existing image files', 
       'Missing alternative text for ' + image.src);
   }
 });
+
+
+test('uploaded photo frames keep intrinsic aspect ratio without cropping', () => {
+  const css = fs.readFileSync('src/styles/site.css', 'utf8');
+  assert.match(css, /\.polaroid\{[^}]*height:auto/);
+  assert.match(css, /\.polaroid img\{[^}]*height:auto/);
+  assert.match(css, /\.polaroid img\{[^}]*object-fit:contain/);
+  assert.doesNotMatch(css, /\.polaroid img\{[^}]*object-fit:cover/);
+  assert.doesNotMatch(css, /\.polaroid\{[^}]*height:var\(--h\)/);
+});
+
+test('no-JavaScript homepage fallback uses supplied gallery photos', () => {
+  const page = fs.readFileSync('src/pages/index.astro', 'utf8');
+  assert.match(page, /src="\/images\/homepage\/photo-001\.jpg"/);
+  for (const src of ['tree.jpg', 'couple.jpg', 'hippo.jpg', 'walking.jpg', 'friends.jpg']) {
+    assert.ok(!page.includes('src="/images/' + src + '"'), src);
+  }
+});
