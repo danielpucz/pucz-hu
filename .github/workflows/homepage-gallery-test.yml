@@ -3,12 +3,18 @@ on:
   pull_request:
     paths:
       - "public/homepage-gallery.js"
+      - "src/data/homepage-gallery.json"
+      - "src/pages/index.astro"
+      - ".pages.yml"
       - "tests/homepage-gallery.test.cjs"
       - ".github/workflows/homepage-gallery-test.yml"
   push:
     branches: [main]
     paths:
       - "public/homepage-gallery.js"
+      - "src/data/homepage-gallery.json"
+      - "src/pages/index.astro"
+      - ".pages.yml"
       - "tests/homepage-gallery.test.cjs"
 permissions:
   contents: read
