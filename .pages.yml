@@ -38,6 +38,22 @@ content:
             - My Feelings
             - Very Good Lists I’ve Made
             - Upper Middle Class Bragging
+            - Uncategorized
+      - name: navigationTitle
+        label: Optional footer label (when different from title)
+        type: string
+      - name: legacyPath
+        label: Original website path (preserved for migrated posts)
+        type: string
+      - name: primaryPath
+        label: URL group (leave empty for new writing)
+        type: select
+        options:
+          values:
+            - blog
+            - articles
+            - meals
+            - recipes
       - name: image
         label: Cover image
         type: image
@@ -92,6 +108,21 @@ content:
         options:
           values:
             - Important Food Stuff
+      - name: navigationTitle
+        label: Optional footer label (when different from title)
+        type: string
+      - name: legacyPath
+        label: Original website path (preserved for migrated posts)
+        type: string
+      - name: primaryPath
+        label: URL group (leave empty for new writing)
+        type: select
+        options:
+          values:
+            - blog
+            - articles
+            - meals
+            - recipes
       - name: image
         label: Cover image
         type: image
@@ -112,6 +143,55 @@ content:
         default: false
       - name: body
         label: Recipe, ingredients and instructions
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: lists
+    label: Lists (archive drafts)
+    type: collection
+    path: src/content/lists
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    operations:
+      rename: false
+    view:
+      fields: [title, published]
+      primary: title
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: navigationTitle
+        label: Footer label
+        type: string
+      - name: description
+        label: Short description
+        type: text
+      - name: category
+        label: Category
+        type: string
+        default: "Very Good Lists I’ve Made"
+      - name: image
+        label: Cover (optional)
+        type: image
+      - name: imageAlt
+        label: Cover description
+        type: text
+      - name: legacyPath
+        label: Original URL
+        type: string
+      - name: primaryPath
+        label: URL group
+        type: string
+        default: list
+      - name: published
+        label: Published (keep off until list templates are approved)
+        type: boolean
+        default: false
+      - name: body
+        label: Archived introduction and items
         type: rich-text
         options:
           format: markdown

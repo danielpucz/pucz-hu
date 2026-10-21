@@ -11,6 +11,9 @@ const editorialSchema = z.object({
   imageAlt: z.string(),
   publishedAt: z.union([z.string(), z.date()]).optional().nullable(),
   published: z.boolean().default(false),
+  navigationTitle: z.string().optional(),
+  legacyPath: z.string().optional(),
+  primaryPath: z.enum(['blog', 'articles', 'meals', 'recipes', 'list']).optional(),
 });
 
 const articles = defineCollection({
@@ -23,4 +26,9 @@ const recipes = defineCollection({
   schema: editorialSchema,
 });
 
-export const collections = { articles, recipes };
+const lists = defineCollection({
+  loader: glob({ base: './src/content/lists', pattern: '**/*.md' }),
+  schema: editorialSchema,
+});
+
+export const collections = { articles, recipes, lists };

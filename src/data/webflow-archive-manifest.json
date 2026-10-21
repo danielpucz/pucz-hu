@@ -1,0 +1,420 @@
+[
+  {
+    "path": "blog/you-used-to-be-an-advanced-internet-user.html",
+    "category": "A Better Internet",
+    "navigationTitle": "You Used to be an Advanced Internet User",
+    "title": "You Used to Be an Advanced Internet User",
+    "status": "imported",
+    "target": "src/content/articles/you-used-to-be-an-advanced-internet-user.md",
+    "cover": "/images/archive/mario-thumbnail.webp"
+  },
+  {
+    "path": "blog/maybe-we-should-focus-on-the-value.html",
+    "category": "A Better Internet",
+    "navigationTitle": "Maybe We Should Focus on the Value",
+    "title": "Maybe We Should Focus on the Value",
+    "status": "imported",
+    "target": "src/content/articles/maybe-we-should-focus-on-the-value.md",
+    "cover": "/images/archive/170589c0bc55bba4a3e6c96c70bec0c8.gif"
+  },
+  {
+    "path": "blog/ai-girlfriends.html",
+    "category": "A Better Internet",
+    "navigationTitle": "AI Girlfriends",
+    "title": "AI Girlfriends",
+    "status": "imported",
+    "target": "src/content/articles/ai-girlfriends.md",
+    "cover": "/images/archive/ai-girlfriends.gif"
+  },
+  {
+    "path": "blog/when-the-internet-was-still-a-very-good-place.html",
+    "category": "A Better Internet",
+    "navigationTitle": "A Very, Very Good Place",
+    "title": "When the Internet was Still a Very Very Good Place",
+    "status": "imported",
+    "target": "src/content/articles/when-the-internet-was-still-a-very-good-place.md",
+    "cover": "/images/archive/giphy-1.gif"
+  },
+  {
+    "path": "blog/a-better-internet.html",
+    "category": "A Better Internet",
+    "navigationTitle": "A Better Internet",
+    "title": "Better Internet, Less Trust Issues",
+    "status": "imported",
+    "target": "src/content/articles/a-better-internet.md",
+    "cover": "/images/archive/dialup.webp"
+  },
+  {
+    "path": "blog/reboot-in-recovery-mode.html",
+    "category": "A Better Internet",
+    "navigationTitle": "Reboot in Recovery Mode",
+    "title": "Reboot in Recovery Mode",
+    "status": "imported",
+    "target": "src/content/articles/reboot-in-recovery-mode.md",
+    "cover": "/images/archive/d0207e9829d5d856ea97309af266a1d7-ezgif.com-crop.gif"
+  },
+  {
+    "path": "blog/unlimited-talent.html",
+    "category": "Stuff About Working",
+    "navigationTitle": "Unlimited Talent",
+    "title": "Unlimited Talent",
+    "status": "imported",
+    "target": "src/content/articles/unlimited-talent.md",
+    "cover": "/images/archive/Rube_Goldbergs_22Self-Operating_Napkin22_cropped-copy.jpg"
+  },
+  {
+    "path": "blog/sayonara-month.html",
+    "category": "Stuff About Working",
+    "navigationTitle": "Sayonara Month",
+    "title": "The Sayonara Month",
+    "status": "imported",
+    "target": "src/content/articles/sayonara-month.md",
+    "cover": "/images/archive/tumblr_m8ix3540Zu1rxfo1ho1_500.gif"
+  },
+  {
+    "path": "blog/focus-pocus.html",
+    "category": "Stuff About Working",
+    "navigationTitle": "Focus-Pocus",
+    "title": "Focus-Pocus",
+    "status": "imported",
+    "target": "src/content/articles/focus-pocus.md",
+    "cover": "/images/archive/lilo.gif"
+  },
+  {
+    "path": "blog/your-magic.html",
+    "category": "Stuff About Working",
+    "navigationTitle": "Your Magic",
+    "title": "Your Magic",
+    "status": "imported",
+    "target": "src/content/articles/your-magic.md",
+    "cover": "/images/archive/tumblr_lgcxavQF6K1qeegbeo1_r1_500-ezgif.com-crop.gif"
+  },
+  {
+    "path": "blog/people-giving-a-fuck.html",
+    "category": "Stuff About Working",
+    "navigationTitle": "People Giving a Fuck",
+    "title": "People Giving a Fuck",
+    "status": "imported",
+    "target": "src/content/articles/people-giving-a-fuck.md",
+    "cover": "/images/archive/tumblr_ec1459c252ddfab4b958d3424799e893_8ed58790_640.gif"
+  },
+  {
+    "path": "blog/my-therapist-burns-the-system.html",
+    "category": "Stuff About Working",
+    "navigationTitle": "My Therapist is Burning the System Down",
+    "title": "My Therapist is Burning Down the System",
+    "status": "imported",
+    "target": "src/content/articles/my-therapist-burns-the-system.md",
+    "cover": "/images/archive/soprano.gif"
+  },
+  {
+    "path": "blog/the-most-professional-workday-of-my-career.html",
+    "category": "Stuff About Working",
+    "navigationTitle": "The Most Professional Day of My Career",
+    "title": "The Most Professional Day of My Career",
+    "status": "imported",
+    "target": "src/content/articles/the-most-professional-workday-of-my-career.md",
+    "cover": "/images/archive/pub.gif"
+  },
+  {
+    "path": "blog/or-am-i-right.html",
+    "category": "Stuff About Working",
+    "navigationTitle": "Or Am I Right?",
+    "title": "Or Am I Right?",
+    "status": "imported",
+    "target": "src/content/articles/or-am-i-right.md",
+    "cover": "/images/archive/denethor-lotr.avif"
+  },
+  {
+    "path": "blog/man-of-seriousity.html",
+    "category": "Stuff About Working",
+    "navigationTitle": "The Man of Seriousity",
+    "title": "Man of Seriousity",
+    "status": "imported",
+    "target": "src/content/articles/man-of-seriousity.md",
+    "cover": "/images/archive/tension.gif"
+  },
+  {
+    "path": "blog/the-rise-and-rise-of-inverted-filtering.html",
+    "category": "Stuff About Working",
+    "navigationTitle": "The Rise and Rise of Inverted Filtering",
+    "title": "The Rise and Rise of Inverted Filtering",
+    "status": "imported",
+    "target": "src/content/articles/the-rise-and-rise-of-inverted-filtering.md",
+    "cover": "/images/archive/4mFx.gif"
+  },
+  {
+    "path": "blog/the-toddler-the-taxman-the-trauma-and-my-studio-dreams.html",
+    "category": "Stuff About Working",
+    "navigationTitle": "The Toddler, the Taxman, the Trauma and My Studio Dreams",
+    "title": "The Toddler, the Taxman, the Trauma and My Studio Dreams",
+    "status": "imported",
+    "target": "src/content/articles/the-toddler-the-taxman-the-trauma-and-my-studio-dreams.md",
+    "cover": "/images/archive/funny-celebrate-24.gif"
+  },
+  {
+    "path": "blog/going-corporate.html",
+    "category": "Stuff About Working",
+    "navigationTitle": "Going Corporate",
+    "title": "Going Corporate",
+    "status": "imported",
+    "target": "src/content/articles/going-corporate.md",
+    "cover": "/images/archive/hero-image.webp"
+  },
+  {
+    "path": "blog/jump-in-the-car-no-time-to-explain.html",
+    "category": "Stuff About Working",
+    "navigationTitle": "Jump in the Car There’s No Time to Explain!",
+    "title": "Jump in the Car, No Time to Explain",
+    "status": "imported",
+    "target": "src/content/articles/jump-in-the-car-no-time-to-explain.md",
+    "cover": "/images/archive/orangutan-driving.gif"
+  },
+  {
+    "path": "blog/fuck-multiverses.html",
+    "category": "My Feelings",
+    "navigationTitle": "Fuck Multiverses",
+    "title": "Fuck Multiverses",
+    "status": "imported",
+    "target": "src/content/articles/fuck-multiverses.md",
+    "cover": "/images/archive/giphy1-ezgif.com-optimize-1.gif"
+  },
+  {
+    "path": "blog/adults-vs-children.html",
+    "category": "My Feelings",
+    "navigationTitle": "Adults vs. Children",
+    "title": "Adults vs. Children",
+    "status": "imported",
+    "target": "src/content/articles/adults-vs-children.md",
+    "cover": "/images/archive/briggs-Large.png"
+  },
+  {
+    "path": "blog/apparently-not-into-tiny-women-anymore.html",
+    "category": "My Feelings",
+    "navigationTitle": "I’m Not Into Tiny Women Anymore",
+    "title": "Apparently, I'm Not Into Tiny Women Anymore",
+    "status": "imported",
+    "target": "src/content/articles/apparently-not-into-tiny-women-anymore.md",
+    "cover": "/images/archive/rachel.gif"
+  },
+  {
+    "path": "blog/poking-unbearable-sadness.html",
+    "category": "My Feelings",
+    "navigationTitle": "Poking Sadness",
+    "title": "Poking Sadness",
+    "status": "imported",
+    "target": "src/content/articles/poking-unbearable-sadness.md",
+    "cover": "/images/archive/scott-pilgrim-self-respect.gif"
+  },
+  {
+    "path": "blog/do-you-have-like-3-minutes.html",
+    "category": "My Feelings",
+    "navigationTitle": "Do You Have Like Three Minutes?",
+    "title": "Do You Have Like Three Minutes?",
+    "status": "imported",
+    "target": "src/content/articles/do-you-have-like-3-minutes.md",
+    "cover": "/images/archive/et.jpg"
+  },
+  {
+    "path": "blog/sleeping-on-the-couch.html",
+    "category": "My Feelings",
+    "navigationTitle": "The Sleeping on the Couch Thing",
+    "title": "The sleeping on the couch thing",
+    "status": "imported",
+    "target": "src/content/articles/sleeping-on-the-couch.md",
+    "cover": "/images/archive/rabbits.jpg"
+  },
+  {
+    "path": "blog/what-if-youre-the-one.html",
+    "category": "My Feelings",
+    "navigationTitle": "What If You're the One?",
+    "title": "You're the One",
+    "status": "imported",
+    "target": "src/content/articles/what-if-youre-the-one.md",
+    "cover": "/images/archive/the-one.jpg"
+  },
+  {
+    "path": "blog/success.html",
+    "category": "My Feelings",
+    "navigationTitle": "Success",
+    "title": "Success",
+    "status": "imported",
+    "target": "src/content/articles/success.md",
+    "cover": "/images/archive/Frame-1.jpeg"
+  },
+  {
+    "path": "blog/what-if-life-is-not-100-transactional.html",
+    "category": "My Feelings",
+    "navigationTitle": "What If Life is Not 100% Transactional",
+    "title": "What If Life is Not 100% Transactional?",
+    "status": "imported",
+    "target": "src/content/articles/what-if-life-is-not-100-transactional.md",
+    "cover": "/images/archive/MV5BNzFmMDI4YzgtOTk4Yi00NWIzLWI2ZmUtMzM4ZTVlM2Q2OTU5XkEyXkFqcGc._V1_.jpg"
+  },
+  {
+    "path": "blog/presence-is-the-pattern.html",
+    "category": "My Feelings",
+    "navigationTitle": "Presence is the Pattern",
+    "title": "Presence is the Pattern",
+    "status": "imported",
+    "target": "src/content/articles/presence-is-the-pattern.md",
+    "cover": "/images/archive/IMG_7882.jpeg"
+  },
+  {
+    "path": "blog/that-son-of-a-gun-lucky-bastard.html",
+    "category": "My Feelings",
+    "navigationTitle": "That Son of a Gun Lucky Bastard",
+    "title": "That Son of a Gun Lucky Bastard",
+    "status": "imported",
+    "target": "src/content/articles/that-son-of-a-gun-lucky-bastard.md",
+    "cover": "/images/archive/buster-scruggs-vfx-east-side-bbs-01-020-a.webp"
+  },
+  {
+    "path": "blog/godspeed-bartok.html",
+    "category": "My Feelings",
+    "navigationTitle": "Godspeed Bartók",
+    "title": "Godspeed Bartók",
+    "status": "imported",
+    "target": "src/content/articles/godspeed-bartok.md",
+    "cover": "/images/archive/koltozes-Large.jpeg"
+  },
+  {
+    "path": "blog/keep-the-tiny-detectives-busy.html",
+    "category": "My Feelings",
+    "navigationTitle": "Keep the Tiny Detectives Busy",
+    "status": "already-migrated"
+  },
+  {
+    "path": "blog/second-feelings.html",
+    "category": "My Feelings",
+    "navigationTitle": "Second Feelings",
+    "title": "Second Feelings",
+    "status": "imported",
+    "target": "src/content/articles/second-feelings.md",
+    "cover": "/images/archive/elmo-1.9.gif"
+  },
+  {
+    "path": "list/incredible-people.html",
+    "category": "Very Good Lists I’ve Made",
+    "navigationTitle": "Incredible People",
+    "title": "Incredible People",
+    "status": "imported",
+    "target": "src/content/lists/incredible-people.md",
+    "cover": ""
+  },
+  {
+    "path": "list/things-that-sparks-joy.html",
+    "category": "Very Good Lists I’ve Made",
+    "navigationTitle": "Things That Spark Joy",
+    "title": "A List of Things That Sparks Joy",
+    "status": "imported",
+    "target": "src/content/lists/things-that-sparks-joy.md",
+    "cover": ""
+  },
+  {
+    "path": "list/list-of-songs-that-doesnt-end-but-fade-out.html",
+    "category": "Very Good Lists I’ve Made",
+    "navigationTitle": "Songs that doesn’t End",
+    "title": "A List of Songs that Doesn't End, Just Fade Out",
+    "status": "imported",
+    "target": "src/content/lists/list-of-songs-that-doesnt-end-but-fade-out.md",
+    "cover": ""
+  },
+  {
+    "path": "list/every-project-ever.html",
+    "category": "Very Good Lists I’ve Made",
+    "navigationTitle": "Every Project Ever",
+    "title": "Every Project Ever*",
+    "status": "imported",
+    "target": "src/content/lists/every-project-ever.md",
+    "cover": ""
+  },
+  {
+    "path": "list/dinner-and-movie-night.html",
+    "category": "Very Good Lists I’ve Made",
+    "navigationTitle": "Dinner & Movie Nights",
+    "title": "Movie & Dinner Nights",
+    "status": "imported",
+    "target": "src/content/lists/dinner-and-movie-night.md",
+    "cover": ""
+  },
+  {
+    "path": "blog/i-didnt-do-the-work.html",
+    "category": "Upper Middle Class Bragging",
+    "navigationTitle": "I didn’t do the Work",
+    "title": "I didn't do the work",
+    "status": "imported",
+    "target": "src/content/articles/i-didnt-do-the-work.md",
+    "cover": "/images/archive/image-1.jpg"
+  },
+  {
+    "path": "blog/where-is-the-fucking-money.html",
+    "category": "Upper Middle Class Bragging",
+    "navigationTitle": "Where’s the Fucking Money?",
+    "title": "Where is the Fucking Money?",
+    "status": "imported",
+    "target": "src/content/articles/where-is-the-fucking-money.md",
+    "cover": "/images/archive/dumbanddumber.gif"
+  },
+  {
+    "path": "blog/fuck-you-to-apple-tv.html",
+    "category": "Upper Middle Class Bragging",
+    "navigationTitle": "A Very Personal Fuck You To Apple TV+",
+    "title": "A Very Personal Fuck You to Apple TV+",
+    "status": "imported",
+    "target": "src/content/articles/fuck-you-to-apple-tv.md",
+    "cover": "/images/archive/severance.jpeg"
+  },
+  {
+    "path": "blog/big-dad-energy.html",
+    "category": "Upper Middle Class Bragging",
+    "navigationTitle": "Big Dad Energy",
+    "title": "Big Dad Energy",
+    "status": "imported",
+    "target": "src/content/articles/big-dad-energy.md",
+    "cover": "/images/archive/dani-og.jpg"
+  },
+  {
+    "path": "blog/state-of-disconnected-people-on-christmas.html",
+    "category": "Upper Middle Class Bragging",
+    "navigationTitle": "State of Disconnected People on Christmas",
+    "title": "State of Disconnected People on Christmas",
+    "status": "imported",
+    "target": "src/content/articles/state-of-disconnected-people-on-christmas.md",
+    "cover": "/images/archive/b66269dfcf30e833_1147289.gif"
+  },
+  {
+    "path": "meals/the-perfect-ramen-egg.html",
+    "category": "Important Food Stuff",
+    "navigationTitle": "Perfect Ramen Egg",
+    "status": "already-migrated"
+  },
+  {
+    "path": "meals/everything-i-know-about-risotto.html",
+    "category": "Important Food Stuff",
+    "navigationTitle": "Everything I Know About Risotto",
+    "title": "Everything I Know About Risotto",
+    "status": "imported",
+    "target": "src/content/recipes/everything-i-know-about-risotto.md",
+    "cover": "/images/archive/risotto.jpeg"
+  },
+  {
+    "path": "meals/my-falafels.html",
+    "category": "Important Food Stuff",
+    "navigationTitle": "My Falafels",
+    "title": "My Falafels",
+    "status": "imported",
+    "target": "src/content/recipes/my-falafels.md",
+    "cover": "/images/archive/falafel.jpeg"
+  },
+  {
+    "path": "blog/getting-the-mojo-back.html",
+    "category": "Uncategorized",
+    "navigationTitle": "",
+    "unlisted": true,
+    "title": "Getting the Mojo Back",
+    "status": "imported",
+    "target": "src/content/articles/getting-the-mojo-back.md",
+    "cover": "/images/archive/IMG_7882.jpeg"
+  }
+]
