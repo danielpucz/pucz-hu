@@ -84,6 +84,7 @@ function drawHarness() {
   const dark = { matches: false, addEventListener() {} };
   const reduced = { matches: false, addEventListener() {} };
   let now = 1000;
+  const InteractiveElement = class { closest() { return {}; } };
   const window = {
     document: {
       querySelector: () => canvas,
@@ -96,7 +97,7 @@ function drawHarness() {
     performance: { now: () => now },
     devicePixelRatio: 1,
     innerWidth: 390, innerHeight: 844,
-    Math, Element: class { closest() { return null; } },
+    Math, Element: InteractiveElement,
     HTMLElement: class {},
     requestAnimationFrame() { return 1; },
     addEventListener(name, callback) {
@@ -109,7 +110,7 @@ function drawHarness() {
     for (const fn of listeners.get(name) || []) fn(event);
   }
   const touch = { pointerType: 'touch', isPrimary: true, pointerId: 1, clientX: 120, clientY: 220, target: {} };
-  return { calls, emit, touch, dark, advance: (ms) => { now += ms; } };
+  return { calls, emit, touch, dark, InteractiveElement, advance: (ms) => { now += ms; } };
 }
 
 test('touch tapping stamps a mark, but scrolling, cancellations and dragged photos do not', () => {
@@ -129,8 +130,11 @@ test('touch tapping stamps a mark, but scrolling, cancellations and dragged phot
   h.emit('pointerup', h.touch);
   assert.equal(h.calls.stamps, 1);
 
-  const interactive = { ...h.touch, target: new (class { closest() { return {}; } })() };
-  // The script guards with instanceof Element; simulate an interactive Element in another check.
+  const interactive = { ...h.touch, target: new h.InteractiveElement() };
+  h.emit('pointerdown', interactive);
+  h.emit('pointerup', interactive);
+  assert.equal(h.calls.stamps, 1, 'tapping a draggable or interactive element must not paint');
+
   h.dark.matches = true;
   h.emit('pointerdown', h.touch);
   h.emit('pointerup', h.touch);
