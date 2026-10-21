@@ -252,3 +252,34 @@ test('portrait and landscape cards normalize visual area while preserving image 
   assert.match(styles, /width:calc\(var\(--w\) \* var\(--photo-scale,1\)\)/);
   assert.match(styles, /\.polaroid img\{[^}]*height:auto/);
 });
+
+test('the five photos sit in a scattered horizontal row and are slightly larger', () => {
+  const css = fs.readFileSync('src/styles/site.css', 'utf8');
+  const desktop = css.split('@media(max-width:700px)')[0];
+  const slots = ['photo-tree', 'photo-couple', 'photo-hippo', 'photo-walking', 'photo-friends'];
+  const positions = slots.map((slot) => {
+    const match = desktop.match(new RegExp('\\.' + slot + '\\{--w:(\\d+)%;left:(\\d+)%;top:(\\d+)%'));
+    assert.ok(match, 'Missing desktop position for ' + slot);
+    return { width: Number(match[1]), left: Number(match[2]), top: Number(match[3]) };
+  });
+  assert.deepEqual(positions.map((p) => p.left), [0, 20, 40, 60, 79]);
+  assert.ok(positions.every((p) => p.top >= 40 && p.top <= 60));
+  assert.ok(positions.every((p, i) => p.width > [19, 21, 22, 20, 19][i]));
+  assert.match(css, /translateY\(-50%\) rotate\(var\(--rot\)\)/);
+});
+
+test('each newly revealed photo briefly lands, then remains freely draggable', () => {
+  const { cards } = setup();
+  drag(cards()[0]);
+  const newCard = cards()[5];
+  assert.ok(newCard.classList.contains('photo-enter'));
+  newCard.emit('animationend', { animationName: 'photo-drop' });
+  assert.ok(!newCard.classList.contains('photo-enter'));
+  drag(newCard, 2);
+  assert.equal(cards().length, 7);
+
+  const css = fs.readFileSync('src/styles/site.css', 'utf8');
+  assert.match(css, /\.polaroid\.photo-new\.photo-enter\{animation:photo-drop/);
+  assert.match(css, /@keyframes photo-drop\{/);
+  assert.match(css, /@media\(prefers-reduced-motion:reduce\)/);
+});
