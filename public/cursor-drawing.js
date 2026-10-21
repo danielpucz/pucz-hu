@@ -39,7 +39,7 @@
         ctx.moveTo(last.x,last.y);
         ctx.lineTo(point.x,point.y);
         ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-        ctx.strokeStyle = darkTheme.matches ? '#0F0F0F' : '#F3F3F3';
+        ctx.strokeStyle = darkTheme.matches ? '#0F0F0F' : '#FFFFFF';
         ctx.globalAlpha = 1;
         ctx.lineWidth = brushWidth;
         ctx.stroke();
