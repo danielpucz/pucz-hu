@@ -5,6 +5,40 @@ media:
   rename: safe
 
 content:
+  - name: homepage_group
+    label: Homepage
+    type: group
+    items:
+      - name: homepage_gallery
+        label: Photo gallery
+        type: file
+        path: src/data/homepage-gallery.json
+        format: json
+        fields:
+          - name: images
+            label: Photos in the random pool
+            description: "The uploaded photo pool currently has 54 images. Five random photos appear on reload; dragging reveals more, up to 25 visible. You can add or remove photos any time."
+            type: object
+            required: true
+            list:
+              min: 5
+              collapsible:
+                collapsed: true
+                summary: "{alt}"
+            fields:
+              - name: src
+                label: Photo
+                type: image
+                required: true
+                options:
+                  path: public/images/homepage
+                  extensions: [jpg, jpeg, png, webp, avif, gif]
+              - name: alt
+                label: Alternative text
+                description: "Describe what is in the photo for visitors using screen readers."
+                type: text
+                required: true
+
   - name: articles
     label: Articles
     type: collection

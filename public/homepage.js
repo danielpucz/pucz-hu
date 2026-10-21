@@ -19,17 +19,4 @@
       render(id);document.querySelector('#intro-hint').hidden=first.size>0;
     });render();
   }
-  // Keep photos freely draggable, with a small rotational wiggle while grabbed.
-  let maxZ=30;
-  document.querySelectorAll('.draggable-photo').forEach(photo=>{
-    let x=0,y=0,originX=0,originY=0,pressX=0,pressY=0,pointer=null;
-    photo.addEventListener('pointerdown',e=>{
-      if(e.pointerType==='mouse'&&e.button!==0)return;
-      pointer=e.pointerId;pressX=e.clientX;pressY=e.clientY;originX=x;originY=y;
-      photo.style.zIndex=String(++maxZ);photo.classList.add('dragging');photo.setPointerCapture(pointer);e.preventDefault();
-    });
-    photo.addEventListener('pointermove',e=>{if(e.pointerId!==pointer)return;x=originX+e.clientX-pressX;y=originY+e.clientY-pressY;photo.style.setProperty('--dx',x+'px');photo.style.setProperty('--dy',y+'px')});
-    const end=e=>{if(e.pointerId!==pointer)return;pointer=null;photo.classList.remove('dragging');if(photo.hasPointerCapture(e.pointerId))photo.releasePointerCapture(e.pointerId)};
-    photo.addEventListener('pointerup',end);photo.addEventListener('pointercancel',end);
-  });
 })();
