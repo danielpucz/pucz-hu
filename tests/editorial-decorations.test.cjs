@@ -24,9 +24,9 @@ test('editorial highlights get slimmer and CMS lead sizes match regular leads', 
 
 test('dropcap boxes reserve identical width/height independently of glyph', () => {
   assert.match(css, /\.story-content \.dropcap\{[^}]*inline-size:1\.12em;block-size:\.87em/);
-  assert.match(css, /font:400 4em\\/\\.75 'Infini Picto'/);
-  assert.match(css, /\\.story-content \\.dropcap\\{[^}]*inline-size:1\\.12em;block-size:\\.87em;[^}]*padding-block-start:\\.07em/);
-  assert.match(css, /float:left;font-size:4em;line-height:\\.74;padding:\\.165em/);
+  assert.match(css, /font:400 4em\/\.75 'Infini Picto'/);
+  assert.match(css, /\.story-content \.dropcap\{[^}]*inline-size:1\.12em;block-size:\.87em;[^}]*padding-block-start:\.07em/);
+  assert.match(css, /float:left;font-size:4em;line-height:\.74;padding:\.165em/);
   const layout = fs.readFileSync('src/layouts/EditorialLayout.astro', 'utf8');
   assert.match(layout, /src="\/editorial-dropcaps\.js"/);
 
