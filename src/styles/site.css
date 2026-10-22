@@ -84,20 +84,21 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 /* Slightly slimmer line-highlights, keeping their overlapping fragments. */
 .story-title span{background:linear-gradient(to bottom,transparent 6%,var(--heading-mark) 6%,var(--heading-mark) 94%,transparent 94%);box-decoration-break:clone;-webkit-box-decoration-break:clone;border-radius:4px;padding:0 .04em}
 .published-date{display:block;font-size:12px;margin:-8px 0 24px}
-.story-content{font-size:17px;line-height:1.75;overflow-wrap:break-word}
+/* A little extra air between the title/date and the beginning of the story. */
+.story-content{font-size:17px;line-height:1.75;overflow-wrap:break-word;padding-top:8px}
 .story-content p{margin:0 0 1.3em}
 /* The CMS opening paragraph and hand-built lead share the same typography. */
 .story-content p.lead,.story-content .cms-content > p:first-child{font-size:21px;line-height:1.55;font-weight:500;margin-bottom:1.45em}
 /* Non-JS fallback: first-letter styling without an injected span. */
 .story-content p.lead:not(.has-dropcap)::first-letter,
 .story-content .cms-content > p:first-child:not(.has-dropcap)::first-letter{
-  font-family:'Infini Picto',var(--font-display);float:left;font-size:4.4em;line-height:.74;padding:.095em .12em 0 0
+  font-family:'Infini Picto',var(--font-display);float:left;font-size:4em;line-height:.74;padding:.095em .12em 0 0
 }
 /* Fixed glyph box: I and G reserve the same width and height. */
 .story-content .dropcap{
   display:flex;align-items:flex-start;justify-content:center;float:left;
   inline-size:1.12em;block-size:.87em;margin:.075em .12em 0 0;
-  font:400 4.4em/.75 'Infini Picto',var(--font-display);white-space:nowrap
+  font:400 4em/.75 'Infini Picto',var(--font-display);white-space:nowrap
 }
 .story-content strong,.story-content b{font-weight:700}.story-content em,.story-content i{font-style:italic}
 .story-content h2{font-size:16px;font-weight:700;margin:2em 0 .65em}.story-content h3{font-size:15px;font-weight:700;margin:1.8em 0 .6em}
@@ -117,7 +118,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .ornament{white-space:nowrap;overflow:hidden;font:700 13px/1.8 ui-monospace,monospace;letter-spacing:3px;margin:0 0 23px}
 .writing-directory{display:block;font:400 12px/2.25 var(--font-body);margin:0 0 88px}
 .directory-group{display:contents}.group-name{font-size:12px;font-weight:700;white-space:nowrap;margin-right:8px}
-.post-chip{display:inline-block;padding:0 8px;margin:0 8px 9px 0;vertical-align:baseline;background:var(--chip-bg);border-radius:2px;
+.post-chip{display:inline-block;padding:0 8px;margin:0 5px 6px 0;vertical-align:baseline;background:var(--chip-bg);border-radius:2px;
   color:var(--body-text);font:500 14px/25px var(--font-body);text-decoration:none;transition:background-color .18s ease,color .18s ease}
 .post-chip:hover,.post-chip.active{background:var(--blue);color:#fff}
 .post-chip.inactive{cursor:default}
@@ -154,7 +155,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   .polaroid.photo-new{--w:45%}
   .cover-frame{margin:38px auto 27px;border-width:4px}
   .article-body{width:100%}.story-title{font-size:clamp(40px,10.5vw,48px);margin-bottom:29px}
-  .story-content{font-size:17px;line-height:1.74}.story-content p.lead,.story-content .cms-content > p:first-child{font-size:22px}
+  .story-content{font-size:18px;line-height:1.74}.story-content p.lead,.story-content .cms-content > p:first-child{font-size:22px}
   .back-home{margin:67px 0 88px}
   .writing-directory{line-height:2.6;margin-bottom:60px}.post-chip{font-size:14px}
   .not-found{padding:65px 0 80px}.ren-stimpy{font-size:clamp(9px,2.5vw,13px)}
