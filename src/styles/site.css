@@ -92,12 +92,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 /* Non-JS fallback: first-letter styling without an injected span. */
 .story-content p.lead:not(.has-dropcap)::first-letter,
 .story-content .cms-content > p:first-child:not(.has-dropcap)::first-letter{
-  font-family:'Infini Picto',var(--font-display);float:left;font-size:4em;line-height:.74;padding:.095em .12em 0 0
+  font-family:'Infini Picto',var(--font-display);float:left;font-size:4em;line-height:.74;padding:.165em .12em 0 0
 }
 /* Fixed glyph box: I and G reserve the same width and height. */
 .story-content .dropcap{
   display:flex;align-items:flex-start;justify-content:center;float:left;
   inline-size:1.12em;block-size:.87em;margin:.075em .12em 0 0;
+  /* Move the visible letter, not its fixed-size float box, down toward the lead baseline. */
+  padding-block-start:.07em;
   font:400 4em/.75 'Infini Picto',var(--font-display);white-space:nowrap
 }
 .story-content strong,.story-content b{font-weight:700}.story-content em,.story-content i{font-style:italic}
