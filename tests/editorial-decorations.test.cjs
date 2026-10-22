@@ -5,8 +5,8 @@ const vm = require('node:vm');
 
 const css = fs.readFileSync('src/styles/site.css', 'utf8');
 
-test('footer chips have 1.5x spacing and slightly larger text only on phones', () => {
-  assert.match(css, /\.post-chip\{[^}]*padding:0 8px;margin:0 8px 9px 0/);
+test('footer chips use the original spacing and slightly larger text only on phones', () => {
+  assert.match(css, /\.post-chip\{[^}]*padding:0 8px;margin:0 5px 6px 0/);
   assert.match(css, /\.post-chip\{[^}]*font:500 14px\/25px/);
   assert.match(css, /\.writing-directory\{line-height:2\.6;margin-bottom:60px\}\.post-chip\{font-size:14px\}/);
 });
@@ -24,6 +24,9 @@ test('editorial highlights get slimmer and CMS lead sizes match regular leads', 
 
 test('dropcap boxes reserve identical width/height independently of glyph', () => {
   assert.match(css, /\.story-content \.dropcap\{[^}]*inline-size:1\.12em;block-size:\.87em/);
+  assert.match(css, /font:400 4em\/\.75 'Infini Picto'/);
+  assert.match(css, /\.story-content \.dropcap\{[^}]*inline-size:1\.12em;block-size:\.87em;[^}]*padding-block-start:\.11em/);
+  assert.match(css, /float:left;font-size:4em;line-height:\.74;padding:\.205em/);
   const layout = fs.readFileSync('src/layouts/EditorialLayout.astro', 'utf8');
   assert.match(layout, /src="\/editorial-dropcaps\.js"/);
 
@@ -149,4 +152,13 @@ test('touch canvas is not hidden just for coarse pointers', () => {
   assert.doesNotMatch(component, /@media[^{]*pointer: coarse/);
   assert.match(component, /prefers-reduced-motion: reduce/);
   assert.match(component, /pointer-events: none/);
+});
+
+
+test('small-screen body text is 18px and still distinct from the 22px lead', () => {
+  const mobile = css.split('@media(max-width:700px){')[1];
+  assert.match(mobile, /\.story-content\{font-size:18px;line-height:1\.74\}/);
+  assert.match(mobile, /\.story-content p\.lead,\.story-content \.cms-content > p:first-child\{font-size:22px\}/);
+  assert.match(css, /\.story-content\{font-size:17px;line-height:1\.75;[^}]*padding-top:8px\}/);
+  assert.match(css, /font-size:4em;line-height:\.74/);
 });
