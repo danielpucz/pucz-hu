@@ -41,11 +41,100 @@
   const initialCount = Math.min(slots.length, photos.length);
   const maxVisible = Math.min(25, photos.length);
   const fineHover = matchMedia('(hover: hover) and (pointer: fine)');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  // Mobile Safari can cancel a touch pointer sequence before pointerup.
+  // Use native touchend as the source of tap gestures where touch events exist.
+  const nativeTouchEvents = 'ontouchstart' in globalThis;
   let nextIndex = initialCount;
   let visibleCount = initialCount;
   let topLayer = 30;
   let nextPreload = null;
   let previousNewAngle = null;
+  let lastTap = null;
+  let activePeek = null;
+
+  function finishPeek() {
+    if (!activePeek) return;
+    const peek = activePeek;
+    activePeek = null;
+    peek.timers.forEach(clearTimeout);
+    if (peek.frame) cancelAnimationFrame(peek.frame);
+    peek.clone.remove();
+    peek.card.classList.remove('photo-peeking');
+  }
+
+  function showPeek(card) {
+    if (activePeek) return;
+    const rect = card.getBoundingClientRect();
+    // offsetWidth/Height are the unrotated photo frame dimensions.
+    const width = card.offsetWidth;
+    const height = card.offsetHeight;
+    if (!width || !height) return;
+
+    // Animate a visual copy so the real photo never loses its position
+    // in the draggable pile. Put it on body, outside the page-shell stacking context.
+    const clone = card.cloneNode(true);
+    clone.classList.remove('wiggle-once', 'just-dropped', 'dragging', 'photo-enter');
+    clone.classList.add('photo-peek-clone');
+    clone.setAttribute('aria-hidden', 'true');
+    clone.removeAttribute('role');
+    clone.removeAttribute('tabindex');
+    const angle = Number.parseFloat(card.style.getPropertyValue('--rot')) || 0;
+    const sourceX = rect.left + rect.width / 2;
+    const sourceY = rect.top + rect.height / 2;
+    clone.style.position = 'fixed';
+    clone.style.left = (sourceX - width / 2) + 'px';
+    clone.style.top = (sourceY - height / 2) + 'px';
+    clone.style.width = width + 'px';
+    clone.style.height = height + 'px';
+    clone.style.transform = 'rotate(' + angle + 'deg)';
+    clone.style.zIndex = '10000';
+
+    // Desktop feels like holding up a photograph ~3.5x bigger;
+    // on phones, the viewport's width/height set the maximum size.
+    const mobile = innerWidth <= 700;
+    const scale = Math.min(3.5, innerWidth * (mobile ? .86 : .76) / width,
+      innerHeight * .76 / height);
+    const focusedTransform =
+      'translate(' + (innerWidth / 2 - sourceX).toFixed(1) + 'px,' +
+      (innerHeight / 2 - sourceY).toFixed(1) + 'px) rotate(0deg) scale(' +
+      scale.toFixed(3) + ')';
+    const peek = { card, clone, timers: [], frame: 0 };
+    activePeek = peek;
+    document.body.appendChild(clone);
+    card.classList.add('photo-peeking');
+    const duration = reducedMotion.matches ? 0 : 420;
+    peek.frame = requestAnimationFrame(() => {
+      if (activePeek === peek) clone.style.transform = focusedTransform;
+    });
+    // Keep the image centered for roughly two seconds once the animation completes.
+    peek.timers.push(setTimeout(() => {
+      if (activePeek !== peek) return;
+      const current = card.getBoundingClientRect();
+      clone.style.transform =
+        'translate(' + (current.left + current.width / 2 - sourceX).toFixed(1) + 'px,' +
+        (current.top + current.height / 2 - sourceY).toFixed(1) + 'px) rotate(' +
+        angle + 'deg)';
+      peek.timers.push(setTimeout(finishPeek, duration + 30));
+    }, duration + 2000));
+  }
+
+  function handleTap(card, event) {
+    const now = Date.now();
+    if (lastTap && lastTap.card === card &&
+        lastTap.pointerType === event.pointerType &&
+        now - lastTap.time <= 550 &&
+        Math.hypot(event.clientX - lastTap.x, event.clientY - lastTap.y) < 44) {
+      lastTap = null;
+      showPeek(card);
+      return true;
+    }
+    lastTap = {
+      card, pointerType: event.pointerType, time: now,
+      x: event.clientX, y: event.clientY,
+    };
+    return false;
+  }
 
   function nextLandingRotation() {
     // Tilt each incoming snapshot a little differently, without making the pile look chaotic.
@@ -123,6 +212,7 @@
     let x = 0, y = 0;
     let activePointer = null, pointerStartX = 0, pointerStartY = 0;
     let startX = 0, startY = 0, didDrag = false, keyboardMoving = false;
+    let touchStart = null;
 
     function place() {
       card.style.setProperty('--dx', x + 'px');
@@ -135,6 +225,7 @@
       if (!didDrag && Math.hypot(dx, dy) < 9) return;
       if (!didDrag) {
         didDrag = true;
+        if (touchStart) touchStart.moved = true;
         card.classList.remove('wiggle-once');
         card.classList.add('dragging');
         card.style.zIndex = String(++topLayer);
@@ -154,6 +245,8 @@
         movePointer(event); // Include the final movement even if events were throttled.
       }
       const completedDrag = didDrag && !cancelled;
+      const completedTap = !didDrag && !cancelled;
+      if (completedDrag && touchStart) touchStart.moved = true;
       activePointer = null;
       didDrag = false;
       card.classList.remove('dragging', 'wiggle-once');
@@ -161,7 +254,13 @@
       if (card.hasPointerCapture?.(event.pointerId)) {
         card.releasePointerCapture(event.pointerId);
       }
-      if (completedDrag) showNext();
+      if (completedDrag) {
+        lastTap = null;
+        showNext();
+      } else if (completedTap && (event.pointerType !== 'touch' || !nativeTouchEvents)) {
+        // Pointer fallback for desktop and touch platforms without Touch Events.
+        handleTap(card, event);
+      }
     }
 
     card.addEventListener('pointerenter', (event) => {
@@ -175,7 +274,8 @@
       if (activePointer === null) card.classList.remove('wiggle-once', 'just-dropped');
     });
     card.addEventListener('pointerdown', (event) => {
-      if (activePointer !== null || (event.pointerType === 'mouse' && event.button !== 0)) return;
+      if (activePointer !== null || activePeek?.card === card ||
+          (event.pointerType === 'mouse' && event.button !== 0)) return;
       activePointer = event.pointerId;
       card.classList.remove('photo-enter'); // Never let the landing animation fight a drag.
       pointerStartX = event.clientX;
@@ -194,6 +294,52 @@
     });
     card.addEventListener('pointerup', (event) => finishPointer(event));
     card.addEventListener('pointercancel', (event) => finishPointer(event, true));
+
+    if (nativeTouchEvents) {
+      // A real phone uses touchstart/touchend for tap recognition. Pointer events
+      // remain responsible for moving photos, so swipe-to-drag is unchanged.
+      card.addEventListener('touchstart', (event) => {
+        if (activePeek || event.touches.length !== 1) {
+          touchStart = null;
+          return;
+        }
+        const touch = event.touches[0];
+        touchStart = {
+          id: touch.identifier, x: touch.clientX, y: touch.clientY, moved: false,
+        };
+      }, { passive: true });
+      card.addEventListener('touchmove', (event) => {
+        if (!touchStart) return;
+        const touch = Array.from(event.touches).find(t => t.identifier === touchStart.id);
+        if (!touch || Math.hypot(touch.clientX - touchStart.x,
+          touch.clientY - touchStart.y) > 12) touchStart.moved = true;
+      }, { passive: true });
+      card.addEventListener('touchend', (event) => {
+        if (!touchStart) return;
+        const touch = Array.from(event.changedTouches)
+          .find(t => t.identifier === touchStart.id);
+        if (!touch) return;
+        const started = touchStart;
+        touchStart = null;
+        if (started.moved || activePeek ||
+            Math.hypot(touch.clientX - started.x, touch.clientY - started.y) > 12) return;
+        if (handleTap(card, {
+          pointerType: 'touch', clientX: touch.clientX, clientY: touch.clientY,
+        })) {
+          // Avoid native double-tap zoom / extra synthesized click on iOS.
+          event.preventDefault();
+        }
+      }, { passive: false });
+      card.addEventListener('touchcancel', () => {
+        touchStart = null;
+        lastTap = null;
+      }, { passive: true });
+    }
+
+    card.addEventListener('dblclick', (event) => {
+      event.preventDefault();
+      if (!didDrag) showPeek(card);
+    });
     card.addEventListener('lostpointercapture', (event) => finishPointer(event, true));
 
     const arrows = {
@@ -243,6 +389,8 @@
   }
 
   function resetGallery() {
+    finishPeek();
+    lastTap = null;
     nextIndex = initialCount;
     visibleCount = initialCount;
     topLayer = 30;
