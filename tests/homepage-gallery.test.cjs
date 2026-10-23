@@ -88,7 +88,7 @@ class Element {
 }
 
 function setup(options = {}) {
-  const { poolCount = 30, random = 0.31, hover = true, viewportWidth = 390, viewportHeight = 844 } = options;
+  const { poolCount = 30, random = 0.31, hover = true, viewportWidth = 390, viewportHeight = 844, nativeTouch = false } = options;
   const collage = new Element('section');
   collage.dataset.photoPool = JSON.stringify(
     Array.from({ length: poolCount }, (_, i) => ({
@@ -122,6 +122,7 @@ function setup(options = {}) {
     clock = end;
   }
   const context = {
+    ...(nativeTouch ? { ontouchstart: null } : {}),
     document,
     HTMLElement: Element,
     Image: class { constructor() { this.src = ''; } },
@@ -135,6 +136,7 @@ function setup(options = {}) {
     clearTimeout: (id) => timers.delete(id),
     Math: Object.assign(Object.create(Math), { random: () => random }),
     console,
+    Date: class extends Date { static now() { return clock; } },
   };
   vm.runInNewContext(script, context);
   return { collage, document, body: document.body, advance,
@@ -393,6 +395,65 @@ test('double-tap previews on phones without interfering with single taps or drag
   assert.ok(!photo.classList.contains('photo-peeking'));
   drag(photo, 23, 35, 18, 'touch');
   assert.equal(cards().length, 6, 'drag-to-reveal should still work after preview');
+});
+
+
+test('native iPhone double-tap opens preview even if Safari cancels the pointer sequence', () => {
+  const { cards, body, advance } = setup({ nativeTouch: true, viewportWidth: 390 });
+  const card = cards()[0];
+  function touch(id, cancelledPointer = false) {
+    const touch = { identifier: id, clientX: 120, clientY: 215 };
+    card.emit('pointerdown', { pointerId: id, pointerType: 'touch', clientX: touch.clientX, clientY: touch.clientY });
+    card.emit('touchstart', { touches: [touch], changedTouches: [touch] });
+    card.emit(cancelledPointer ? 'pointercancel' : 'pointerup',
+      { pointerId: id, pointerType: 'touch', clientX: touch.clientX, clientY: touch.clientY });
+    return card.emit('touchend', { touches: [], changedTouches: [touch] });
+  }
+  const first = touch(101, true);
+  assert.equal(body.children.length, 0);
+  assert.equal(first.defaultPrevented, undefined);
+  advance(250);
+  const second = touch(102);
+  assert.equal(second.defaultPrevented, true, 'second native touchend prevents browser double-tap zoom');
+  assert.equal(body.children.length, 1, 'native touchend, not pointerup, must trigger peek');
+  assert.equal(cards().length, 5, 'no new photo should spawn');
+  advance(3000);
+  assert.equal(body.children.length, 0);
+  assert.ok(!card.classList.contains('photo-peeking'));
+});
+
+test('touch and pointer events for one tap are not double-counted on mobile browsers', () => {
+  const { cards, body, advance } = setup({ nativeTouch: true });
+  const card = cards()[0];
+  const first = { identifier: 5, clientX: 90, clientY: 180 };
+  card.emit('pointerdown', { pointerType: 'touch', pointerId: 5, clientX: 90, clientY: 180 });
+  card.emit('touchstart', { touches: [first], changedTouches: [first] });
+  card.emit('pointerup', { pointerType: 'touch', pointerId: 5, clientX: 90, clientY: 180 });
+  card.emit('touchend', { touches: [], changedTouches: [first] });
+  assert.equal(body.children.length, 0, 'one physical tap should not trigger preview');
+  advance(600);
+  // A second isolated tap after the threshold still should not trigger it.
+  const second = { identifier: 6, clientX: 90, clientY: 180 };
+  card.emit('pointerdown', { pointerType: 'touch', pointerId: 6, clientX: 90, clientY: 180 });
+  card.emit('touchstart', { touches: [second], changedTouches: [second] });
+  card.emit('pointerup', { pointerType: 'touch', pointerId: 6, clientX: 90, clientY: 180 });
+  card.emit('touchend', { touches: [], changedTouches: [second] });
+  assert.equal(body.children.length, 0);
+});
+
+test('dragging and swipe gestures never trigger native touch peek', () => {
+  const { cards, body } = setup({ nativeTouch: true });
+  const card = cards()[0];
+  const start = { identifier: 10, clientX: 80, clientY: 170 };
+  const end = { identifier: 10, clientX: 145, clientY: 225 };
+  card.emit('pointerdown', { pointerType: 'touch', pointerId: 10, clientX: start.clientX, clientY: start.clientY });
+  card.emit('touchstart', { touches: [start], changedTouches: [start] });
+  card.emit('pointermove', { pointerType: 'touch', pointerId: 10, clientX: end.clientX, clientY: end.clientY });
+  card.emit('touchmove', { touches: [end], changedTouches: [end] });
+  card.emit('pointerup', { pointerType: 'touch', pointerId: 10, clientX: end.clientX, clientY: end.clientY });
+  card.emit('touchend', { touches: [], changedTouches: [end] });
+  assert.equal(cards().length, 6, 'dragging still reveals a fresh photo');
+  assert.equal(body.children.length, 0, 'dragging is not a preview gesture');
 });
 
 test('only one preview exists at a time, and C clears it without leaving hidden photos', () => {
