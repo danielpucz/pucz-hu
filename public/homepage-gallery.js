@@ -45,6 +45,22 @@
   let visibleCount = initialCount;
   let topLayer = 30;
   let nextPreload = null;
+  let previousNewAngle = null;
+
+  function nextLandingRotation() {
+    // Tilt each incoming snapshot a little differently, without making the pile look chaotic.
+    // Avoid near-identical angles on consecutive drops, including if randomness repeats.
+    let angle = 0;
+    for (let attempt = 0; attempt < 6; attempt++) {
+      angle = (Math.random() < .5 ? -1 : 1) * (3 + Math.random() * 11);
+      if (previousNewAngle === null || Math.abs(angle - previousNewAngle) >= 5) break;
+    }
+    if (previousNewAngle !== null && Math.abs(angle - previousNewAngle) < 5) {
+      angle = previousNewAngle > 0 ? -8 : 8;
+    }
+    previousNewAngle = angle;
+    return angle.toFixed(1) + 'deg';
+  }
 
   function preloadNext() {
     if (nextIndex >= photos.length || visibleCount >= maxVisible) return;
@@ -57,7 +73,7 @@
   function showNext() {
     if (visibleCount >= maxVisible || nextIndex >= photos.length) return;
     const photo = photos[nextIndex++];
-    const rotation = ((Math.random() - 0.5) * 12).toFixed(1) + 'deg';
+    const rotation = nextLandingRotation();
     const card = buildPhoto(photo, 'photo-new', rotation, true);
     card.style.zIndex = String(++topLayer);
     collage.appendChild(card);
@@ -231,6 +247,7 @@
     visibleCount = initialCount;
     topLayer = 30;
     nextPreload = null;
+    previousNewAngle = null;
     collage.querySelectorAll('.draggable-photo').forEach((photo) => photo.remove());
     for (let i = 0; i < initialCount; i++) {
       const slot = slots[i];
