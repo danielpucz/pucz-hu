@@ -58,6 +58,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   .polaroid.wiggle-once:not(.dragging):not(.just-dropped){animation:photo-wiggle .46s ease-in-out 1;box-shadow:0 9px 18px var(--shadow)}
 }
 .polaroid.dragging{cursor:grabbing;animation:none;box-shadow:0 14px 24px var(--shadow)}
+/* A temporary enlarged copy lives above the page, while its source keeps its spot in the pile. */
+.polaroid.photo-peeking{visibility:hidden}
+.polaroid.photo-peek-clone{
+  pointer-events:none;touch-action:none;cursor:default;will-change:transform;
+  transition:transform .42s cubic-bezier(.2,.72,.22,1),box-shadow .42s ease;
+  box-shadow:0 18px 48px var(--shadow)
+}
 /* New photos land in the center with a brief paper-drop motion.
    This only runs when a photo first appears, never on drag release. */
 .polaroid.photo-new{--w:22%;left:50%;top:50%;
