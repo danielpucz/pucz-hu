@@ -268,6 +268,31 @@ test('the five photos sit in a scattered horizontal row and are slightly larger'
   assert.match(css, /translateY\(-50%\) rotate\(var\(--rot\)\)/);
 });
 
+
+test('consecutive newly dropped photos use visibly varied angles, even when randomness repeats', () => {
+  // Constant RNG exposes accidental repeats without relying on flaky random tests.
+  const { cards, document } = setup({ random: 0.31 });
+  const angles = [];
+  for (let i = 0; i < 6; i++) {
+    drag(cards()[0], 100 + i);
+    angles.push(Number.parseFloat(cards().at(-1).style.properties['--rot']));
+  }
+  assert.ok(angles.every((angle) => Math.abs(angle) >= 3 && Math.abs(angle) <= 14),
+    'incoming photos should have a gentle but noticeable tilt in either direction');
+  assert.ok(angles.slice(1).every((angle, i) => Math.abs(angle - angles[i]) >= 5),
+    'adjacent drops should not have nearly identical rotation angles');
+  assert.ok(angles.some((angle) => angle < 0) && angles.some((angle) => angle > 0),
+    'repeated random input should not force all photos to lean the same way');
+
+  const css = fs.readFileSync('src/styles/site.css', 'utf8');
+  assert.match(css, /@keyframes photo-drop\{[\s\S]*rotate\(var\(--rot\)\)/);
+
+  document.emit('keydown', { key: 'c' });
+  drag(cards()[0], 999);
+  assert.equal(Number.parseFloat(cards()[5].style.properties['--rot']), angles[0],
+    'reset should restart the landing-angle sequence');
+});
+
 test('each newly revealed photo briefly lands, then remains freely draggable', () => {
   const { cards } = setup();
   drag(cards()[0]);
