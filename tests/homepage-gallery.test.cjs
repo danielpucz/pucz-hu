@@ -12,6 +12,7 @@ class Element {
     this.style = {
       properties: {},
       setProperty(key, value) { this.properties[key] = value; },
+      getPropertyValue(key) { return this.properties[key] || ''; },
     };
     this.attributes = {};
     this.children = [];
@@ -22,6 +23,8 @@ class Element {
     this.complete = false;
     this.naturalWidth = 0;
     this.naturalHeight = 0;
+    this.offsetWidth = 160;
+    this.offsetHeight = 125;
     this.classList = {
       contains: (name) => this.className.split(/\s+/).includes(name),
       add: (...names) => {
@@ -57,6 +60,24 @@ class Element {
     return event;
   }
   setAttribute(name, value) { this.attributes[name] = String(value); }
+  removeAttribute(name) { delete this.attributes[name]; }
+  getBoundingClientRect() {
+    const x = Number.parseFloat(this.style.properties['--dx']) || 0;
+    const y = Number.parseFloat(this.style.properties['--dy']) || 0;
+    return { left: 60 + x, top: 180 + y, width: 160, height: 125,
+      right: 220 + x, bottom: 305 + y };
+  }
+  cloneNode(deep = false) {
+    const clone = new Element(this.tagName);
+    clone.className = this.className;
+    clone.attributes = { ...this.attributes };
+    clone.style.properties = { ...this.style.properties };
+    clone.offsetWidth = this.offsetWidth;
+    clone.offsetHeight = this.offsetHeight;
+    clone.src = this.src;
+    if (deep) this.children.forEach((child) => clone.appendChild(child.cloneNode(true)));
+    return clone;
+  }
   setPointerCapture(id) { this.pointer = id; }
   hasPointerCapture(id) { return this.pointer === id; }
   releasePointerCapture(id) { if (this.pointer === id) this.pointer = null; }
@@ -67,7 +88,7 @@ class Element {
 }
 
 function setup(options = {}) {
-  const { poolCount = 30, random = 0.31, hover = true } = options;
+  const { poolCount = 30, random = 0.31, hover = true, viewportWidth = 390, viewportHeight = 844 } = options;
   const collage = new Element('section');
   collage.dataset.photoPool = JSON.stringify(
     Array.from({ length: poolCount }, (_, i) => ({
@@ -78,16 +99,46 @@ function setup(options = {}) {
   const document = new Element('document');
   document.querySelector = (selector) => selector === '#homepage-collage' ? collage : null;
   document.createElement = (tag) => new Element(tag);
+  document.body = new Element('body');
+  // A controlled clock verifies the 2-second hold and the animated return.
+  let clock = 0, nextTimerId = 1;
+  const timers = new Map();
+  function setFakeTimeout(callback, delay) {
+    const id = nextTimerId++;
+    timers.set(id, { callback, due: clock + delay });
+    return id;
+  }
+  function advance(milliseconds) {
+    const end = clock + milliseconds;
+    while (true) {
+      const pending = [...timers].filter(([, timer]) => timer.due <= end)
+        .sort((a, b) => a[1].due - b[1].due)[0];
+      if (!pending) break;
+      const [id, timer] = pending;
+      timers.delete(id);
+      clock = timer.due;
+      timer.callback();
+    }
+    clock = end;
+  }
   const context = {
     document,
     HTMLElement: Element,
     Image: class { constructor() { this.src = ''; } },
-    matchMedia: () => ({ matches: hover }),
+    matchMedia: (query) => ({ matches:
+      query === '(prefers-reduced-motion: reduce)' ? false : hover }),
+    innerWidth: viewportWidth,
+    innerHeight: viewportHeight,
+    requestAnimationFrame: (callback) => { callback(); return 1; },
+    cancelAnimationFrame() {},
+    setTimeout: setFakeTimeout,
+    clearTimeout: (id) => timers.delete(id),
     Math: Object.assign(Object.create(Math), { random: () => random }),
     console,
   };
   vm.runInNewContext(script, context);
-  return { collage, document, cards: () => collage.querySelectorAll('.draggable-photo') };
+  return { collage, document, body: document.body, advance,
+    cards: () => collage.querySelectorAll('.draggable-photo') };
 }
 
 function drag(card, id = 1, dx = 35, dy = 18, pointerType = 'mouse') {
@@ -291,6 +342,82 @@ test('consecutive newly dropped photos use visibly varied angles, even when rand
   drag(cards()[0], 999);
   assert.equal(Number.parseFloat(cards()[5].style.properties['--rot']), angles[0],
     'reset should restart the landing-angle sequence');
+});
+
+
+test('double-click briefly centers and enlarges a photo, then returns it exactly to its place', () => {
+  const { cards, body, advance } = setup({ viewportWidth: 1280, viewportHeight: 900 });
+  const original = cards()[0];
+  const startAngle = original.style.properties['--rot'];
+  original.emit('dblclick');
+  assert.ok(original.classList.contains('photo-peeking'));
+  assert.equal(body.children.length, 1);
+  const preview = body.children[0];
+  assert.ok(preview.classList.contains('photo-peek-clone'));
+  assert.equal(preview.attributes['aria-hidden'], 'true');
+  assert.equal(preview.style.width, '160px');
+  assert.equal(preview.style.height, '125px');
+  assert.match(preview.style.transform, /scale\(3\.500\)/);
+  assert.ok(!preview.classList.contains('dragging'));
+
+  advance(2419);
+  assert.equal(body.children.length, 1);
+  assert.match(preview.style.transform, /scale\(3\.500\)/);
+  advance(1);
+  assert.equal(preview.style.transform, 'translate(0.0px,0.0px) rotate(-7deg)');
+  advance(450);
+  assert.equal(body.children.length, 0);
+  assert.ok(!original.classList.contains('photo-peeking'));
+  assert.equal(original.style.properties['--rot'], startAngle);
+  assert.equal(cards().length, 5, 'previewing must never spawn another photo');
+});
+
+test('double-tap previews on phones without interfering with single taps or dragging', () => {
+  const { cards, body, advance } = setup({ viewportWidth: 390, viewportHeight: 844 });
+  const photo = cards()[0];
+  function tap(pointerId) {
+    photo.emit('pointerdown', { pointerId, pointerType: 'touch', clientX: 125, clientY: 200 });
+    photo.emit('pointerup', { pointerId, pointerType: 'touch', clientX: 125, clientY: 200 });
+  }
+  tap(21);
+  assert.equal(body.children.length, 0);
+  tap(22);
+  assert.equal(body.children.length, 1);
+  const clone = body.children[0];
+  const scale = Number.parseFloat(clone.style.transform.match(/scale\(([\d.]+)\)/)[1]);
+  assert.ok(scale > 1 && scale < 3.5, 'mobile zoom must fit the viewport');
+  assert.ok(160 * scale <= 390 * .86 + 1, 'mobile enlarged width must be viewport-based');
+  assert.equal(cards().length, 5);
+  advance(2420 + 450);
+  assert.equal(body.children.length, 0);
+  assert.ok(!photo.classList.contains('photo-peeking'));
+  drag(photo, 23, 35, 18, 'touch');
+  assert.equal(cards().length, 6, 'drag-to-reveal should still work after preview');
+});
+
+test('only one preview exists at a time, and C clears it without leaving hidden photos', () => {
+  const { cards, body, document, advance } = setup();
+  const photo = cards()[0];
+  photo.emit('dblclick');
+  assert.equal(body.children.length, 1);
+  cards()[1].emit('dblclick');
+  assert.equal(body.children.length, 1);
+  document.emit('keydown', { key: 'c' });
+  assert.equal(body.children.length, 0);
+  assert.equal(cards().length, 5);
+  assert.ok(cards().every((card) => !card.classList.contains('photo-peeking')));
+  advance(4000);
+  assert.equal(body.children.length, 0);
+  cards()[0].emit('dblclick');
+  assert.equal(body.children.length, 1, 'reset must allow a fresh preview');
+});
+
+test('CSS keeps the temporary preview above the collage without affecting dragging', () => {
+  const css = fs.readFileSync('src/styles/site.css', 'utf8');
+  assert.match(css, /\.polaroid\.photo-peeking\{visibility:hidden\}/);
+  assert.match(css, /\.polaroid\.photo-peek-clone\{[^}]*pointer-events:none/);
+  assert.match(css, /transition:transform \.42s cubic-bezier/);
+  assert.match(css, /@media\(prefers-reduced-motion:reduce\)/);
 });
 
 test('each newly revealed photo briefly lands, then remains freely draggable', () => {
