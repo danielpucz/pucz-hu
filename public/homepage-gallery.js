@@ -42,6 +42,9 @@
   const maxVisible = Math.min(25, photos.length);
   const fineHover = matchMedia('(hover: hover) and (pointer: fine)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  // Mobile Safari can cancel a touch pointer sequence before pointerup.
+  // Use native touchend as the source of tap gestures where touch events exist.
+  const nativeTouchEvents = 'ontouchstart' in globalThis;
   let nextIndex = initialCount;
   let visibleCount = initialCount;
   let topLayer = 30;
@@ -120,16 +123,17 @@
     const now = Date.now();
     if (lastTap && lastTap.card === card &&
         lastTap.pointerType === event.pointerType &&
-        now - lastTap.time <= 420 &&
-        Math.hypot(event.clientX - lastTap.x, event.clientY - lastTap.y) < 30) {
+        now - lastTap.time <= 550 &&
+        Math.hypot(event.clientX - lastTap.x, event.clientY - lastTap.y) < 44) {
       lastTap = null;
       showPeek(card);
-    } else {
-      lastTap = {
-        card, pointerType: event.pointerType, time: now,
-        x: event.clientX, y: event.clientY,
-      };
+      return true;
     }
+    lastTap = {
+      card, pointerType: event.pointerType, time: now,
+      x: event.clientX, y: event.clientY,
+    };
+    return false;
   }
 
   function nextLandingRotation() {
@@ -208,6 +212,7 @@
     let x = 0, y = 0;
     let activePointer = null, pointerStartX = 0, pointerStartY = 0;
     let startX = 0, startY = 0, didDrag = false, keyboardMoving = false;
+    let touchStart = null;
 
     function place() {
       card.style.setProperty('--dx', x + 'px');
@@ -220,6 +225,7 @@
       if (!didDrag && Math.hypot(dx, dy) < 9) return;
       if (!didDrag) {
         didDrag = true;
+        if (touchStart) touchStart.moved = true;
         card.classList.remove('wiggle-once');
         card.classList.add('dragging');
         card.style.zIndex = String(++topLayer);
@@ -240,6 +246,7 @@
       }
       const completedDrag = didDrag && !cancelled;
       const completedTap = !didDrag && !cancelled;
+      if (completedDrag && touchStart) touchStart.moved = true;
       activePointer = null;
       didDrag = false;
       card.classList.remove('dragging', 'wiggle-once');
@@ -250,7 +257,8 @@
       if (completedDrag) {
         lastTap = null;
         showNext();
-      } else if (completedTap) {
+      } else if (completedTap && (event.pointerType !== 'touch' || !nativeTouchEvents)) {
+        // Pointer fallback for desktop and touch platforms without Touch Events.
         handleTap(card, event);
       }
     }
@@ -286,6 +294,48 @@
     });
     card.addEventListener('pointerup', (event) => finishPointer(event));
     card.addEventListener('pointercancel', (event) => finishPointer(event, true));
+
+    if (nativeTouchEvents) {
+      // A real phone uses touchstart/touchend for tap recognition. Pointer events
+      // remain responsible for moving photos, so swipe-to-drag is unchanged.
+      card.addEventListener('touchstart', (event) => {
+        if (activePeek || event.touches.length !== 1) {
+          touchStart = null;
+          return;
+        }
+        const touch = event.touches[0];
+        touchStart = {
+          id: touch.identifier, x: touch.clientX, y: touch.clientY, moved: false,
+        };
+      }, { passive: true });
+      card.addEventListener('touchmove', (event) => {
+        if (!touchStart) return;
+        const touch = Array.from(event.touches).find(t => t.identifier === touchStart.id);
+        if (!touch || Math.hypot(touch.clientX - touchStart.x,
+          touch.clientY - touchStart.y) > 12) touchStart.moved = true;
+      }, { passive: true });
+      card.addEventListener('touchend', (event) => {
+        if (!touchStart) return;
+        const touch = Array.from(event.changedTouches)
+          .find(t => t.identifier === touchStart.id);
+        if (!touch) return;
+        const started = touchStart;
+        touchStart = null;
+        if (started.moved || activePeek ||
+            Math.hypot(touch.clientX - started.x, touch.clientY - started.y) > 12) return;
+        if (handleTap(card, {
+          pointerType: 'touch', clientX: touch.clientX, clientY: touch.clientY,
+        })) {
+          // Avoid native double-tap zoom / extra synthesized click on iOS.
+          event.preventDefault();
+        }
+      }, { passive: false });
+      card.addEventListener('touchcancel', () => {
+        touchStart = null;
+        lastTap = null;
+      }, { passive: true });
+    }
+
     card.addEventListener('dblclick', (event) => {
       event.preventDefault();
       if (!didDrag) showPeek(card);
