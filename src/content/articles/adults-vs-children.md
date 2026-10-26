@@ -1,15 +1,14 @@
 ---
-title: "Adults vs. Children"
-navigationTitle: "Adults vs. Children"
-description: "Nostalgic peace about difference of adults and children."
-category: "My Feelings"
-image: "/images/archive/briggs-Large.png"
-imageAlt: "mayor briggs twin peaks"
+title: Adults vs. Children
+description: Nostalgic peace about difference of adults and children.
+category: My Feelings
+navigationTitle: Adults vs. Children
+legacyPath: /blog/adults-vs-children/
+primaryPath: blog
+image: /images/briggs.png
+imageAlt: mayor briggs twin peaks
 published: true
-legacyPath: "/blog/adults-vs-children/"
-primaryPath: "blog"
 ---
-
 I remember sitting in a crowded lecture hall. My professor — a man with completely bald head and a knack for making the ordinary profound — posed a question that has lingered with me ever since. *“What is the difference between adults and children?”* he asked, his voice curling around the syllables like a gentle coaxing. There was silence at first, as if we all knew the answer but were afraid to say something so obvious. Then someone ventured, “Responsibility?” Another added, “Experience?” The professor nodded but didn’t seem satisfied. Instead, he leaned against his desk and said, *“The difference is this:* *Adults are ready to save children, and children, sometimes, need to be saved.**”*
 
 It wasn’t what I expected. It wasn’t about paying bills or knowing how to change a flat tire. It wasn’t about cynicism or wisdom or the weary march of time. It was simpler and far more profound. His words echoed with a quiet truth that I didn’t fully understand until years later, when I found myself standing at the edge of adulthood, feeling simultaneously unprepared and called to act.
