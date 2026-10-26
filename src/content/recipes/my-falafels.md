@@ -1,15 +1,20 @@
 ---
-title: "My Falafels"
-navigationTitle: "My Falafels"
-description: "Let’s be honest: falafel has a reputation. It's that cool, crunchy thing you order when you're trying to be a little healthy but still want to feel like a person. It's meatless but mighty. It's got range. Wraps, bowls, finger food, lunchbox superstar. But more importantly: it's something you can make. Yes, you. You don’t need a food truck. You don’t need a Middle Eastern grandmother whispering wisdom through the steam. You just need a blender, a pan, and the courage to fry things."
-category: "Important Food Stuff"
-image: "/images/archive/falafel.jpeg"
-imageAlt: "Falafel balls"
+title: My Falafels
+description: "Let’s be honest: falafel has a reputation. It's that cool, crunchy
+  thing you order when you're trying to be a little healthy but still want to
+  feel like a person. It's meatless but mighty. It's got range. Wraps, bowls,
+  finger food, lunchbox superstar. But more importantly: it's something you can
+  make. Yes, you. You don’t need a food truck. You don’t need a Middle Eastern
+  grandmother whispering wisdom through the steam. You just need a blender, a
+  pan, and the courage to fry things."
+category: Important Food Stuff
+navigationTitle: My Falafels
+legacyPath: /meals/my-falafels/
+primaryPath: meals
+image: /images/archive/falafel.jpeg
+imageAlt: Falafel balls
 published: true
-legacyPath: "/meals/my-falafels/"
-primaryPath: "meals"
 ---
-
 *Let’s be honest: falafel has a reputation. It's that cool, crunchy thing you order when you're trying to be a little healthy but still want to feel like a person. It's meatless but mighty. But more importantly: it's something you can make. Yes, you.*
 
 Yes, you. You don’t need a food truck. You don’t need a Middle Eastern grandmother whispering wisdom through the steam. You just need a blender, a pan, and the courage to fry things.
