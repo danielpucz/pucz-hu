@@ -153,7 +153,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   .page-shell{width:min(calc(100% - 60px),540px)}
   .site-header{padding-top:22px;align-items:flex-start;gap:12px}
   .site-header .brand{max-width:53%;font-size:13px}.site-header .mail{font-size:13px;gap:6px}.site-header .mail ion-icon{font-size:16px}
-  .hero{margin-top:55px}.intro{font-size:28px;line-height:1.5}
+  .hero{margin-top:55px}.intro{font-size:25px;line-height:1.5}
   .collage{height:265px;margin-top:65px;margin-bottom:20px}
   /* A little bigger on smartphones; preserve the natural image proportions. */
   .photo-tree{--w:36%;left:0%;top:45%}
