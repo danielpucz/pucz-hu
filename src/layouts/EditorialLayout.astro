@@ -3,7 +3,14 @@ import BaseLayout from './BaseLayout.astro';
 interface Props { title:string; description:string; category:string; image:string; imageAlt:string; publishedAt?:string; type?:'article'|'recipe'; draft?:boolean }
 const {title,description,category,image,imageAlt,publishedAt,type='article',draft=false}=Astro.props;
 ---
-<BaseLayout title={`${title} · Pucz Dani’s Little Corner of the Internet`} description={description} activeTitle={title}>
+<BaseLayout
+  title={`${title} · Pucz Dani’s Little Corner of the Internet`}
+  description={description}
+  activeTitle={title}
+  ogImage={image}
+  ogImageAlt={imageAlt}
+  ogType="article"
+>
   <figure class="cover-frame"><img src={image} alt={imageAlt} class="cover-image" loading="eager" /></figure>
   <article class="article-body" data-cms-type={type} data-cms-category={category} data-cms-draft={draft}>
     <p class="category-label">-:~ {category.toUpperCase()} ~:-</p>
