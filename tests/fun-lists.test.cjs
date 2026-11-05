@@ -54,6 +54,14 @@ test('the list route uses the CMS records, preserves legacy path, and includes s
   assert.ok(route.includes('target="_blank" rel="noopener noreferrer"'));
 });
 
+test('song cards link from their titles, without redundant Listen actions', () => {
+  const route = read('src/pages/list/[slug].astro');
+  assert.ok(route.includes('class="fun-list-song-title" href={item.url}'),
+    'song titles retain their original YouTube destinations');
+  assert.ok(!route.includes('fun-list-song-listen'), 'no separate Listen button or link');
+  assert.ok(!route.includes('>Listen</a>'), 'no visible Listen label');
+});
+
 test('links to all published fun lists appear within the existing footer directory', () => {
   const footer = read('src/components/ArticleDirectory.astro');
   assert.ok(footer.includes("getCollection('funLists', ({ data }) => data.published)"));
@@ -62,15 +70,21 @@ test('links to all published fun lists appear within the existing footer directo
   assert.ok(footer.includes("category: data.category || 'Very Good Lists I’ve Made'"));
 });
 
-test('responsive list pages preserve Figma card styling, dark-theme paper, and wrapping', () => {
+test('responsive list pages use content-height paper notes, purple handwriting, and natural wrapping', () => {
   const css = read('src/styles/site.css');
-  assert.match(css, /\.fun-list-grid\{display:grid;grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
+  assert.match(css, /\.fun-list-grid\{display:grid;grid-template-columns:repeat\(3,minmax\(0,1fr\)\);gap:23px;align-items:start\}/);
   assert.match(css, /\.fun-list-card\{[^}]*background:var\(--postit-color,#FAFFC7\);color:#381652/);
-  assert.match(css, /\.fun-list-card-person\{[^}]*min-height:/);
-  assert.match(css, /\.fun-list-card-joy\{[^}]*min-height:/);
-  assert.match(css, /\.fun-list-card-song\{[^}]*min-height:/);
-  assert.match(css, /\.fun-list-joy-text\{[^}]*var\(--font-hand\)/);
-  assert.match(css, /\.fun-list-person-note\{[^}]*var\(--font-hand\)/);
+  const listCss = css.slice(css.indexOf('/* Fun Lists:'));
+  for (const selector of ['.fun-list-card-joy', '.fun-list-card-person', '.fun-list-card-song']) {
+    const rules = [...listCss.matchAll(new RegExp('\\' + selector + '\\{([^}]*)\\}', 'g'))];
+    assert.ok(rules.length > 0, selector + ' must have layout rules');
+    assert.ok(rules.every(([, body]) => !/(?:min-)?height\s*:|aspect-ratio\s*:/.test(body)),
+      selector + ' must hug its content across desktop, tablet and mobile');
+  }
+  assert.match(css, /--postit-ink:#3D0396/);
+  assert.match(css, /\.fun-list-card \.fun-list-joy-text\{[^}]*var\(--font-hand\);color:var\(--postit-ink\)/);
+  assert.match(css, /\.fun-list-card \.fun-list-person-note\{[^}]*var\(--font-hand\);color:var\(--postit-ink\)/);
+  assert.ok(!listCss.includes('.fun-list-song-listen'), 'no abandoned Listen link styling');
   assert.match(css, /\.fun-list-song-title\{[^}]*var\(--font-display\)/);
   assert.match(css, /@media\(max-width:700px\)\{[^]*?\.fun-list-grid\{grid-template-columns:minmax\(0,1fr\)/);
 });
