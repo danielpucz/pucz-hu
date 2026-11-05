@@ -4,15 +4,17 @@
   const cards = [...document.querySelectorAll('.fun-list-card')];
   if (!cards.length) return;
 
+  // Pale, slightly luminous paper: the old highlighter palette mixed with
+  // white, not a theme-dependent background or a saturated neon fill.
   const colors = [
-    '#F4FF8F', // highlighter yellow
-    '#FFB9E5', // candy pink
-    '#ACFFD3', // mint
-    '#A7E9FF', // light cyan
-    '#E2C2FF', // lilac
-    '#FFCEA0', // peach
-    '#D2FF9C', // lime
-    '#FFB6BA', // coral pink
+    '#FAFFC7', // pale highlighter yellow
+    '#FFDCF2', // blush pink
+    '#D6FFE9', // mint
+    '#D3F4FF', // sky blue
+    '#F1E1FF', // lavender
+    '#FFE7D0', // peach
+    '#E9FFCE', // light lime
+    '#FFDBDD', // light coral
   ];
   const hasTouchEvents = 'ontouchstart' in window;
   let previousColor = -1;
@@ -26,12 +28,34 @@
     card.style.setProperty('--postit-color', colors[colorIndex]);
     previousColor = colorIndex;
 
+    // Keep the layout's reading order, but let each paper sit a little crooked.
+    // A few notes land completely straight; the rest tilt by at most ~3.3°.
+    const straight = Math.random() < 0.16;
+    const angle = straight ? 0 : (Math.random() * 6.6 - 3.3);
+    card.style.setProperty('--postit-rotation', angle.toFixed(1) + 'deg');
+    // A few pixels of irregularity break up perfectly aligned grid edges.
+    card.style.setProperty('--postit-scatter-x', ((Math.random() - 0.5) * 10).toFixed(1) + 'px');
+    card.style.setProperty('--postit-scatter-y', ((Math.random() - 0.5) * 8).toFixed(1) + 'px');
+
     let x = 0;
     let y = 0;
     let tracking = null;
     let touch = null;
     let suppressClick = false;
     let clickTimer = null;
+    let hoverArmed = true;
+
+    // Just like the homepage photos: wiggle once when the pointer arrives,
+    // not constantly while hovering, and not while the note is being dragged.
+    card.addEventListener('pointerenter', (event) => {
+      if (!hoverArmed || tracking || (event.pointerType !== 'mouse' && event.pointerType !== 'pen')) return;
+      hoverArmed = false;
+      card.classList.add('postit-wiggle-once');
+    });
+    card.addEventListener('pointerleave', () => {
+      hoverArmed = true;
+      card.classList.remove('postit-wiggle-once');
+    });
 
     const position = () => {
       card.style.setProperty('--postit-x', x + 'px');
