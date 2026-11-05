@@ -162,3 +162,10 @@ test('small-screen body text is 18px and still distinct from the 22px lead', () 
   assert.match(css, /\.story-content\{font-size:17px;line-height:1\.75;[^}]*padding-top:8px\}/);
   assert.match(css, /font-size:4em;line-height:\.74/);
 });
+
+
+test('homepage introductory text uses 36px on desktop and 28px on phones', () => {
+  assert.match(css, /\.intro\{font:400 36px\/1\.5 var\(--font-body\)/);
+  const mobile = css.split('@media(max-width:700px){')[1];
+  assert.match(mobile, /\.hero\{margin-top:55px\}\.intro\{font-size:28px;line-height:1\.5\}/);
+});
