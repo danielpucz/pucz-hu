@@ -5,6 +5,11 @@ on:
       - "public/homepage-gallery.js"
       - "public/homepage.js"
       - "tests/homepage-intro.test.cjs"
+      - "tests/launch-seo.test.cjs"
+      - "tests/seo-build-output.test.cjs"
+      - "astro.config.mjs"
+      - "package.json"
+      - "public/robots.txt"
       - "public/cursor-drawing.js"
       - "public/editorial-dropcaps.js"
       - "src/styles/site.css"
@@ -26,7 +31,7 @@ on:
       - "src/content.config.ts"
       - "src/components/ArticleDirectory.astro"
       - "tests/fun-lists.test.cjs"
-      - "tests/fun-list-interactions.test.cjs tests/social-metadata.test.cjs"
+      - "tests/fun-list-interactions.test.cjs"
       - "public/fun-list-cards.js"
       - "tests/homepage-gallery.test.cjs"
       - ".github/workflows/homepage-gallery-test.yml"
@@ -36,6 +41,11 @@ on:
       - "public/homepage-gallery.js"
       - "public/homepage.js"
       - "tests/homepage-intro.test.cjs"
+      - "tests/launch-seo.test.cjs"
+      - "tests/seo-build-output.test.cjs"
+      - "astro.config.mjs"
+      - "package.json"
+      - "public/robots.txt"
       - "public/cursor-drawing.js"
       - "public/editorial-dropcaps.js"
       - "src/styles/site.css"
@@ -71,4 +81,21 @@ jobs:
       - name: Check vanilla JavaScript syntax
         run: node --check public/homepage.js && node --check public/homepage-gallery.js && node --check public/cursor-drawing.js && node --check public/editorial-dropcaps.js && node --check public/fun-list-cards.js
       - name: Test gallery interactions without external dependencies
-        run: node --test tests/homepage-intro.test.cjs tests/homepage-gallery.test.cjs tests/editorial-decorations.test.cjs tests/fun-lists.test.cjs tests/fun-list-interactions.test.cjs
+        run: node --test tests/homepage-intro.test.cjs tests/homepage-gallery.test.cjs tests/editorial-decorations.test.cjs tests/fun-lists.test.cjs tests/fun-list-interactions.test.cjs tests/social-metadata.test.cjs tests/launch-seo.test.cjs
+
+  seo-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CONTEXT: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Astro and sitemap dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build the actual static website
+        run: npm run build
+      - name: Validate generated SEO pages, schema, sitemap and robots.txt
+        run: node --test tests/seo-build-output.test.cjs

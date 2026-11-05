@@ -2,14 +2,29 @@
 import BaseLayout from './BaseLayout.astro';
 interface Props { title:string; description:string; category:string; image:string; imageAlt:string; publishedAt?:string; type?:'article'|'recipe'; draft?:boolean }
 const {title,description,category,image,imageAlt,publishedAt,type='article',draft=false}=Astro.props;
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? new URL('https://pucz.hu')).href;
+const imageUrl = image?.trim() ? new URL(image, Astro.site ?? new URL('https://pucz.hu')).href : undefined;
+// Only include facts that are already present in the CMS entry. No invented dates,
+// ingredients, ratings or preparation times.
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': type === 'recipe' ? 'Recipe' : 'BlogPosting',
+  ...(type === 'recipe' ? { name: title } : { headline: title }),
+  description,
+  ...(imageUrl ? { image: imageUrl } : {}),
+  author: { '@type': 'Person', name: 'Dani Pucz', url: 'https://pucz.hu/' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+  ...(publishedAt ? { datePublished: publishedAt } : {}),
+};
 ---
 <BaseLayout
-  title={`${title} · Pucz Dani’s Little Corner of the Internet`}
+  title={`${title} ~ Pucz.hu`}
   description={description}
   activeTitle={title}
   ogImage={image}
   ogImageAlt={imageAlt}
   ogType="article"
+  structuredData={structuredData}
 >
   <figure class="cover-frame"><img src={image} alt={imageAlt} class="cover-image" loading="eager" /></figure>
   <article class="article-body" data-cms-type={type} data-cms-category={category} data-cms-draft={draft}>

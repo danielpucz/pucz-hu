@@ -18,7 +18,7 @@ const displayTitle = entry.data.displayTitle || entry.data.title;
 const icon = listType === 'joy' ? '🔥' : listType === 'people' ? '★★★★★' : '♫♫♫♫♫';
 ---
 <BaseLayout
-  title={entry.data.title + ' — Pucz.hu'}
+  title={displayTitle + ' ~ Pucz.hu'}
   description={entry.data.description || entry.data.title}
   activeTitle={entry.data.navigationTitle || entry.data.title}
 >
