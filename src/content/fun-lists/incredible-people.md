@@ -5,7 +5,7 @@ description: A list of social proof for people making work and life sweeter.
 category: Very Good Lists I’ve Made
 legacyPath: /list/incredible-people/
 listType: people
-published: false
+published: true
 items:
   - _block: person
     id: Entry 1

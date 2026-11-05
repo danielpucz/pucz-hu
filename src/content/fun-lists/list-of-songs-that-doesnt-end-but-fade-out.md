@@ -1,5 +1,6 @@
 ---
 title: A List of Songs that Doesn't End, Just Fade Out
+displayTitle: List of Songs that doesn’t End
 navigationTitle: Songs that doesn’t End
 description: Some songs don’t stop; they dissolve like a sunset or the last warm night of summer. They keep going somewhere beyond the speakers,
   beyond the moment, an echoing note that whispers in your memory. Here’s a list of songs that fade out, never quite over. Somewhere, these songs
@@ -7,7 +8,7 @@ description: Some songs don’t stop; they dissolve like a sunset or the last wa
 category: Very Good Lists I’ve Made
 legacyPath: /list/list-of-songs-that-doesnt-end-but-fade-out/
 listType: songs
-published: false
+published: true
 items:
 - _block: song
   id: songs-001

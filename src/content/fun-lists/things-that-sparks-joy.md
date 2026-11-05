@@ -5,7 +5,7 @@ description: A list of random things in life that makes life heavenly.
 category: Very Good Lists I’ve Made
 legacyPath: /list/things-that-sparks-joy/
 listType: joy
-published: false
+published: true
 items:
 - _block: joy
   id: joy-001
@@ -412,6 +412,8 @@ items:
   url: /list/list-of-songs-that-doesnt-end-but-fade-out
 ---
 
-Sometimes, joy sneaks in quietly, a fleeting memory, a song you hum without realizing, the way sunlight dances on your morning coffee. This list is my gratitude: tiny, random sparks of happiness that remind me life is full of wonder. Maybe some will spark joy for you too.
+Sometimes, joy sneaks in quietly, a fleeting memory, a song you hum without realizing, the way sunlight dances on your morning coffee.
+
+This list is my gratitude: tiny, random sparks of happiness that remind me life is full of wonder. Maybe some will spark joy for you too.
 
 Let's begin.

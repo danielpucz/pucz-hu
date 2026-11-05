@@ -63,6 +63,7 @@ const archivePageFields = z.object({
 const funLists = defineCollection({
   loader: glob({ base: './src/content/fun-lists', pattern: '**/*.md' }),
   schema: archivePageFields.extend({
+    displayTitle: z.string().optional(),
     listType: z.enum(['people', 'joy', 'songs']),
     items: z.array(funListEntry).default([]),
   }),

@@ -5,9 +5,10 @@ interface Props { activeTitle?: string }
 const { activeTitle } = Astro.props;
 type DirectoryPost = { title: string; href?: string; actualTitle?: string };
 type CmsPost = { title: string; actualTitle: string; category: string; href: string };
-const [articles, recipes] = await Promise.all([
+const [articles, recipes, funLists] = await Promise.all([
   getCollection('articles', ({ data }) => data.published),
   getCollection('recipes', ({ data }) => data.published),
+  getCollection('funLists', ({ data }) => data.published),
 ]);
 const cmsPosts: CmsPost[] = [
   ...articles.map(({ id, data }) => ({
@@ -15,6 +16,12 @@ const cmsPosts: CmsPost[] = [
     actualTitle: data.title,
     category: data.category,
     href: `/${data.primaryPath === 'blog' ? 'blog' : 'articles'}/${encodeURIComponent(id)}/`,
+  })),
+  ...funLists.map(({ id, data }) => ({
+    title: data.navigationTitle || data.title,
+    actualTitle: data.title,
+    category: data.category || 'Very Good Lists I’ve Made',
+    href: data.legacyPath || '/list/' + encodeURIComponent(id) + '/',
   })),
   ...recipes.map(({ id, data }) => ({
     title: data.navigationTitle || data.title,

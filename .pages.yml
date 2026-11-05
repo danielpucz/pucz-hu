@@ -200,6 +200,9 @@ content:
         label: Title
         type: string
         required: true
+      - name: displayTitle
+        label: Optional on-page heading (when shorter than title)
+        type: string
       - name: navigationTitle
         label: Footer label
         type: string
@@ -227,7 +230,7 @@ content:
             - name: songs
               label: Songs
       - name: published
-        label: Published (keep off until visual design is approved)
+        label: Published on website
         type: boolean
         default: false
       - name: items
