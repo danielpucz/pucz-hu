@@ -46,7 +46,8 @@ test('the list route uses the CMS records, preserves legacy path, and includes s
   assert.ok(route.includes("entry.data.legacyPath?.split('/')"));
   assert.ok(route.includes("import BaseLayout"));
   assert.ok(route.includes('<Content />'), 'original markdown intro must be rendered');
-  for (const block of ['joy', 'person', 'song']) assert.ok(route.includes("item._block === '" + block + "'"));
+  for (const block of ['joy', 'person']) assert.ok(route.includes("item._block === '" + block + "'"));
+  assert.ok(route.includes('fun-list-card-song'), 'song entries use the remaining discriminated union branch');
   assert.ok(route.includes('entry.data.items.map'), 'render the entire CMS collection');
   assert.ok(route.includes('class="back-home fun-list-back"'));
   assert.ok(route.includes('target="_blank" rel="noopener noreferrer"'));
