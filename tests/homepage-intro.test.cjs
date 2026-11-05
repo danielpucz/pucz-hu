@@ -88,7 +88,8 @@ test('expandable phrases wrap as true inline spans instead of atomic button boxe
   assert.equal(intro.textContent, expected, 'keep exactly the same copy and punctuation');
   const css = fs.readFileSync('src/styles/site.css', 'utf8');
   assert.match(css, /\.expand-link\{display:inline;/);
-  assert.doesNotMatch(css.match(/\\.expand-link\\{[^}]*\\}/)?.[0] || '', /white-space:\\s*nowrap/);
+  const linkRule = css.slice(css.indexOf('.expand-link{'), css.indexOf('}', css.indexOf('.expand-link{'))); 
+  assert.doesNotMatch(linkRule, /white-space:\s*nowrap/);
 });
 
 test('clicks still reveal/hide nested copy and focus the same phrase', () => {
