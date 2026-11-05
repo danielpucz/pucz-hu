@@ -53,7 +53,6 @@ const icon = listType === 'joy' ? '🔥' : listType === 'people' ? '★★★★
               ? <a class="fun-list-song-title" href={item.url} target="_blank" rel="noopener noreferrer">{item.track}</a>
               : <span class="fun-list-song-title">{item.track}</span>}
             <span class="fun-list-song-artist">{item.artist}</span>
-            {item.url && <a class="fun-list-song-listen" href={item.url} target="_blank" rel="noopener noreferrer">Listen</a>}
           </article>
       )}
     </section>
