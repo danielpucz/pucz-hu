@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - "public/homepage-gallery.js"
+      - "public/homepage.js"
+      - "tests/homepage-intro.test.cjs"
       - "public/cursor-drawing.js"
       - "public/editorial-dropcaps.js"
       - "src/styles/site.css"
@@ -29,6 +31,8 @@ on:
     branches: [main]
     paths:
       - "public/homepage-gallery.js"
+      - "public/homepage.js"
+      - "tests/homepage-intro.test.cjs"
       - "public/cursor-drawing.js"
       - "public/editorial-dropcaps.js"
       - "src/styles/site.css"
@@ -59,6 +63,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check vanilla JavaScript syntax
-        run: node --check public/homepage-gallery.js && node --check public/cursor-drawing.js && node --check public/editorial-dropcaps.js && node --check public/fun-list-cards.js
+        run: node --check public/homepage.js && node --check public/homepage-gallery.js && node --check public/cursor-drawing.js && node --check public/editorial-dropcaps.js && node --check public/fun-list-cards.js
       - name: Test gallery interactions without external dependencies
-        run: node --test tests/homepage-gallery.test.cjs tests/editorial-decorations.test.cjs tests/fun-lists.test.cjs tests/fun-list-interactions.test.cjs
+        run: node --test tests/homepage-intro.test.cjs tests/homepage-gallery.test.cjs tests/editorial-decorations.test.cjs tests/fun-lists.test.cjs tests/fun-list-interactions.test.cjs
