@@ -36,7 +36,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 /* Hover behavior is defined by the highlighted clickable treatment below. */
 /* One homepage paragraph; only the underlined fragments open in place. */
 .hero{margin:100px 0 0;max-width:1070px}
-.intro{font:400 clamp(21px,2.35vw,30px)/1.5 var(--font-body);letter-spacing:-.018em;max-width:1020px;margin:0}
+.intro{font:400 36px/1.5 var(--font-body);letter-spacing:-.018em;max-width:1020px;margin:0}
 .expand-link{display:inline;padding:0;margin:0;border:0;background:transparent;cursor:pointer;text-align:left;color:var(--blue);
   font:inherit;letter-spacing:inherit;overflow-wrap:normal;text-decoration:underline wavy var(--blue);text-decoration-thickness:1.3px;text-underline-offset:4px;text-decoration-skip-ink:none}
 .expand-link:hover{background:color-mix(in srgb,var(--blue) 11%,transparent)}
@@ -153,7 +153,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   .page-shell{width:min(calc(100% - 60px),540px)}
   .site-header{padding-top:22px;align-items:flex-start;gap:12px}
   .site-header .brand{max-width:53%;font-size:13px}.site-header .mail{font-size:13px;gap:6px}.site-header .mail ion-icon{font-size:16px}
-  .hero{margin-top:55px}.intro{font-size:clamp(19px,4.4vw,24px);line-height:1.5}
+  .hero{margin-top:55px}.intro{font-size:28px;line-height:1.5}
   .collage{height:265px;margin-top:65px;margin-bottom:20px}
   /* A little bigger on smartphones; preserve the natural image proportions. */
   .photo-tree{--w:36%;left:0%;top:45%}
