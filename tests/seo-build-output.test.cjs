@@ -58,3 +58,18 @@ test('real list HTML has the site suffix and default social image', () => {
   assert.ok(lists.includes('<title>A List of Things That Sparks Joy ~ Pucz.hu</title>'));
   assert.ok(lists.includes('content="https://pucz.hu/images/pucz-hu-og.jpg"'));
 });
+
+test('legacy 301 redirects point to real generated pages, not missing endpages', () => {
+  const redirects = fs.readFileSync('public/_redirects', 'utf8');
+  const missing = [];
+  for (const line of redirects.split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const [from, to, status] = trimmed.split(/\s+/);
+    if (status !== '301' || !to?.startsWith('/')) continue;
+    const relative = to.replace(/^\/+/, '').replace(/\/+$/, '');
+    const resolved = path.join(output, relative, 'index.html');
+    if (!fs.existsSync(resolved)) missing.push(from + ' => ' + to);
+  }
+  assert.deepEqual(missing, [], 'Redirect targets without generated pages');
+});
