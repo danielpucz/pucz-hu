@@ -247,13 +247,27 @@ ion-icon:defined svg.ion-fallback{display:none}
 .fun-list-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:23px;align-items:stretch}
 /* Soft, photo-like paper shadows and theme-independent highlighter colors. */
 .fun-list-card{
-  position:relative;min-width:0;background:var(--postit-color,#F4FF8F);color:#381652;
+  position:relative;min-width:0;background:var(--postit-color,#FAFFC7);color:#381652;
   border-radius:0;overflow-wrap:anywhere;cursor:grab;touch-action:pan-y;
-  transform:translate3d(var(--postit-x,0px),var(--postit-y,0px),0);
+  transform:translate3d(
+    calc(var(--postit-x,0px) + var(--postit-scatter-x,0px)),
+    calc(var(--postit-y,0px) + var(--postit-scatter-y,0px)),0)
+    rotate(var(--postit-rotation,0deg));
   box-shadow:0 3px 10px var(--shadow);
   transition:box-shadow .16s ease;user-select:none;-webkit-user-select:none;
 }
-.fun-list-card.postit-dragging{cursor:grabbing;box-shadow:0 14px 24px var(--shadow)}
+@keyframes postit-wiggle{
+  0%,100%{rotate:0deg}
+  26%{rotate:-1.7deg}
+  66%{rotate:1.4deg}
+}
+@media(hover:hover) and (pointer:fine){
+  .fun-list-card.postit-wiggle-once:not(.postit-dragging){
+    animation:postit-wiggle .46s ease-in-out 1;
+    box-shadow:0 9px 18px var(--shadow)
+  }
+}
+.fun-list-card.postit-dragging{cursor:grabbing;animation:none;box-shadow:0 14px 24px var(--shadow)}
 .fun-list-card a{cursor:pointer}
 .fun-list-card a{color:inherit;text-decoration-line:underline;text-decoration-style:wavy;text-decoration-thickness:1px;text-underline-offset:3px}
 .fun-list-card a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
