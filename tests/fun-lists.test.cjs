@@ -50,6 +50,7 @@ test('the list route uses the CMS records, preserves legacy path, and includes s
   assert.ok(route.includes('fun-list-card-song'), 'song entries use the remaining discriminated union branch');
   assert.ok(route.includes('entry.data.items.map'), 'render the entire CMS collection');
   assert.ok(route.includes('class="back-home fun-list-back"'));
+  assert.ok(route.includes('src="/fun-list-cards.js"'), 'list interactions only load on the list routes');
   assert.ok(route.includes('target="_blank" rel="noopener noreferrer"'));
 });
 
@@ -64,7 +65,7 @@ test('links to all published fun lists appear within the existing footer directo
 test('responsive list pages preserve Figma card styling, dark-theme paper, and wrapping', () => {
   const css = read('src/styles/site.css');
   assert.match(css, /\.fun-list-grid\{display:grid;grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
-  assert.match(css, /\.fun-list-card\{[^}]*background:#fff;color:#381652/);
+  assert.match(css, /\.fun-list-card\{[^}]*background:var\(--postit-color,#F4FF8F\);color:#381652/);
   assert.match(css, /\.fun-list-card-person\{[^}]*min-height:/);
   assert.match(css, /\.fun-list-card-joy\{[^}]*min-height:/);
   assert.match(css, /\.fun-list-card-song\{[^}]*min-height:/);
