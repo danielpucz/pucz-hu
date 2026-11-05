@@ -42,7 +42,7 @@ class Card {
   }
 }
 
-function setup({ count = 8, touch = false, random = 0.23 } = {}) {
+function setup({ count = 8, touch = false, random = 0.23, randomSequence = null } = {}) {
   const cards = Array.from({ length: count }, () => new Card());
   let now = 0;
   let currentId = 0;
@@ -65,10 +65,12 @@ function setup({ count = 8, touch = false, random = 0.23 } = {}) {
     }
     now = end;
   }
+  let randomIndex = 0;
   const context = {
     document: { querySelectorAll: () => cards },
     window: touch ? { ontouchstart: null } : {},
-    Math: Object.assign(Object.create(Math), { random: () => random }),
+    Math: Object.assign(Object.create(Math), { random: () =>
+      randomSequence ? randomSequence[(randomIndex++) % randomSequence.length] : random }),
     setTimeout: setFakeTimeout,
     clearTimeout: (id) => timers.delete(id),
   };
@@ -86,10 +88,78 @@ test('every card receives a shuffled light-neon paper color, even in dark mode',
   assert.notEqual(setup({ random: 0.03 }).cards[0].values['--postit-color'],
     setup({ random: 0.88 }).cards[0].values['--postit-color']);
   const css = fs.readFileSync('src/styles/site.css','utf8');
-  assert.match(css, /\.fun-list-card\{[^}]*background:var\(--postit-color,#F4FF8F\)/);
+  assert.match(css, /\.fun-list-card\{[^}]*background:var\(--postit-color,#FAFFC7\)/);
   assert.match(css, /\.fun-list-card\{[^}]*box-shadow:0 3px 10px var\(--shadow\)/);
   assert.match(css, /\.fun-list-card\.postit-dragging\{[^}]*box-shadow:0 14px 24px var\(--shadow\)/);
   assert.match(css, /\.fun-list-card\{[^}]*touch-action:pan-y/);
+});
+
+
+test('paper shades are notably more white than highlighter neon and stay the same across themes', () => {
+  const { cards } = setup({ count: 40 });
+  const colors = [...new Set(cards.map(card => card.values['--postit-color']))];
+  assert.ok(colors.length >= 4);
+  for (const color of colors) {
+    const channels = color.match(/[A-F\d]{2}/gi).map(channel => parseInt(channel,16));
+    assert.ok(Math.min(...channels) >= 195, color + ' should be very light pastel');
+    assert.ok(Math.max(...channels) === 255 || Math.max(...channels) >= 250);
+  }
+  const css = fs.readFileSync('src/styles/site.css', 'utf8');
+  const paperRule = css.slice(css.indexOf('.fun-list-card{'),css.indexOf('}',css.indexOf('.fun-list-card{')));
+  assert.ok(paperRule.includes('background:var(--postit-color,#FAFFC7)'), 'inline background is not dark-mode-dependent');
+});
+
+test('random notes are subtly tilted, occasionally straight, and slightly offset from the grid', () => {
+  // Program the paper geometry: first and last notes straight, middle notes tilting opposite ways.
+  const randomSequence = [
+    .21, .02, .45, .55,
+    .31, .92, .80, .10, .85,
+    .44, .96, .15, .86, .14,
+    .27, .04, .37, .63,
+  ];
+  const { cards } = setup({ count: 4, randomSequence });
+  const angles = cards.map(card => parseFloat(card.values['--postit-rotation']));
+  assert.equal(angles[0],0);
+  assert.ok(angles[1] > 0 && angles[1] < 3.4);
+  assert.ok(angles[2] < 0 && angles[2] > -3.4);
+  assert.equal(angles[3],0);
+  assert.ok(cards.every(card => Math.abs(parseFloat(card.values['--postit-scatter-x'])) <= 5));
+  assert.ok(cards.every(card => Math.abs(parseFloat(card.values['--postit-scatter-y'])) <= 4));
+  assert.ok(cards.some(card => parseFloat(card.values['--postit-scatter-x']) !== 0));
+  const css = fs.readFileSync('src/styles/site.css', 'utf8');
+  assert.match(css, /rotate\(var\(--postit-rotation,0deg\)\)/);
+  assert.match(css, /var\(--postit-scatter-x,0px\)/);
+  assert.match(css, /var\(--postit-scatter-y,0px\)/);
+});
+
+test('a photo-like hover wiggle runs once per pointer entry but never interrupts dragging', () => {
+  const { cards } = setup();
+  const card = cards[0];
+  const css = fs.readFileSync('src/styles/site.css', 'utf8');
+  assert.match(css, /@keyframes postit-wiggle\{/);
+  assert.match(css, /@media\(hover:hover\) and \(pointer:fine\)/);
+  assert.match(css, /\.fun-list-card\.postit-wiggle-once:not\(\.postit-dragging\)/);
+  card.emit('pointerenter', { pointerType: 'touch' });
+  assert.equal(card.classList.contains('postit-wiggle-once'),false);
+  card.emit('pointerenter', { pointerType: 'mouse' });
+  assert.equal(card.classList.contains('postit-wiggle-once'),true);
+  // An animation ending doesn't re-arm wiggle while the pointer stays inside.
+  card.classList.remove('postit-wiggle-once');
+  card.emit('pointerenter', { pointerType: 'mouse' });
+  assert.equal(card.classList.contains('postit-wiggle-once'),false);
+  card.emit('pointerleave', { pointerType: 'mouse' });
+  card.emit('pointerenter', { pointerType: 'mouse' });
+  assert.equal(card.classList.contains('postit-wiggle-once'),true);
+  card.emit('pointerdown',{pointerId:12,pointerType:'mouse',clientX:10,clientY:10});
+  card.emit('pointermove',{pointerId:12,pointerType:'mouse',clientX:50,clientY:40});
+  assert.equal(card.classList.contains('postit-wiggle-once'),false);
+  assert.equal(card.classList.contains('postit-dragging'),true);
+  card.emit('pointerup',{pointerId:12,pointerType:'mouse',clientX:50,clientY:40});
+  card.emit('pointerenter', { pointerType: 'mouse' });
+  assert.equal(card.classList.contains('postit-wiggle-once'),false);
+  card.emit('pointerleave', { pointerType: 'mouse' });
+  card.emit('pointerenter', { pointerType: 'mouse' });
+  assert.equal(card.classList.contains('postit-wiggle-once'),true);
 });
 
 test('clickable post-it links still work without a drag', () => {
