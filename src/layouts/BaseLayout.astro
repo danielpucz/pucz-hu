@@ -3,8 +3,31 @@ import '../styles/site.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import CursorDrawing from '../components/CursorDrawing.astro';
-interface Props { title:string; description?:string; activeTitle?:string; noindex?:boolean }
-const {title,description='Pucz Dani’s Little Corner of the Internet',activeTitle,noindex=false}=Astro.props;
+interface Props {
+  title: string;
+  description?: string;
+  activeTitle?: string;
+  noindex?: boolean;
+  ogImage?: string;
+  ogImageAlt?: string;
+  ogType?: 'website' | 'article';
+}
+const {
+  title,
+  description = 'Pucz Dani’s Little Corner of the Internet',
+  activeTitle,
+  noindex = false,
+  ogImage,
+  ogImageAlt,
+  ogType = 'website',
+} = Astro.props;
+
+const siteOrigin = Astro.site ?? new URL('https://pucz.hu');
+const canonicalUrl = new URL(Astro.url.pathname, siteOrigin).href;
+const defaultOgImage = '/images/pucz-hu-og.webp';
+const chosenOgImage = ogImage?.trim() || defaultOgImage;
+const ogImageUrl = new URL(chosenOgImage, siteOrigin).href;
+const imageAlt = ogImageAlt?.trim() || 'Pucz Dani’s Little Corner of the Internet, with two overlapping photographs on a pale blue background';
 ---
 <!doctype html>
 <html lang="en">
@@ -12,6 +35,19 @@ const {title,description='Pucz Dani’s Little Corner of the Internet',activeTit
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:site_name" content="Pucz Dani’s Little Corner of the Internet" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:alt" content={imageAlt} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageUrl} />
+  <meta name="twitter:image:alt" content={imageAlt} />
   <link rel="icon" type="image/png" sizes="120x120" href="/favicon.png" />
   <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
   {noindex && <meta name="robots" content="noindex" />}
