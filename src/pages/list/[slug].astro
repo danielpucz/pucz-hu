@@ -1,0 +1,66 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Keep each original /list/ URL, including its historical spelling.
+export async function getStaticPaths() {
+  const entries = await getCollection('funLists', ({ data }) => data.published);
+  return entries.map((entry) => ({
+    params: { slug: entry.data.legacyPath?.split('/').filter(Boolean).at(-1) || entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const listType = entry.data.listType;
+const displayTitle = entry.data.displayTitle || entry.data.title;
+const icon = listType === 'joy' ? '🔥' : listType === 'people' ? '★★★★★' : '♫♫♫♫♫';
+---
+<BaseLayout
+  title={entry.data.title + ' — Pucz.hu'}
+  description={entry.data.description || entry.data.title}
+  activeTitle={entry.data.navigationTitle || entry.data.title}
+>
+  <article class:list={['fun-list-page', 'fun-list-' + listType]}>
+    <header class="fun-list-heading">
+      <div class:list={['fun-list-symbol', 'fun-list-symbol-' + listType]} aria-hidden="true">{icon}</div>
+      <p class="fun-list-category">-:~ VERY GOOD LISTS I'VE MADE ~:-</p>
+      <h1 class="fun-list-title">{displayTitle}</h1>
+      <div class="fun-list-introduction">
+        <Content />
+      </div>
+    </header>
+
+    <section class="fun-list-grid" aria-label={entry.data.title + ' entries'}>
+      {entry.data.items.map((item) => item._block === 'joy'
+        ? <article class="fun-list-card fun-list-card-joy">
+            <span class="fun-list-joy-icon" aria-hidden="true">🔥</span>
+            {item.url
+              ? <a class="fun-list-joy-text" href={item.url} target={item.url.startsWith('http') ? '_blank' : undefined} rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}>{item.text}</a>
+              : <span class="fun-list-joy-text">{item.text}</span>}
+          </article>
+        : item._block === 'person'
+        ? <article class="fun-list-card fun-list-card-person">
+            {item.url
+              ? <a class="fun-list-person-name" href={item.url} target={item.url.startsWith('http') ? '_blank' : undefined} rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}>{item.name}</a>
+              : <span class="fun-list-person-name">{item.name}</span>}
+            {item.role && <span class="fun-list-person-role">{item.role}</span>}
+            {item.note && <p class="fun-list-person-note">{item.note}</p>}
+          </article>
+        : <article class="fun-list-card fun-list-card-song">
+            {item.url
+              ? <a class="fun-list-song-title" href={item.url} target="_blank" rel="noopener noreferrer">{item.track}</a>
+              : <span class="fun-list-song-title">{item.track}</span>}
+            <span class="fun-list-song-artist">{item.artist}</span>
+            {item.url && <a class="fun-list-song-listen" href={item.url} target="_blank" rel="noopener noreferrer">Listen</a>}
+          </article>
+      )}
+    </section>
+
+    <a href="/" class="back-home fun-list-back">
+      <ion-icon name="home" aria-hidden="true"></ion-icon>
+      <span>Back to Homepage</span>
+    </a>
+  </article>
+</BaseLayout>
