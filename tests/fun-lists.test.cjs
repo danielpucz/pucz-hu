@@ -65,7 +65,7 @@ test('links to all published fun lists appear within the existing footer directo
 test('responsive list pages preserve Figma card styling, dark-theme paper, and wrapping', () => {
   const css = read('src/styles/site.css');
   assert.match(css, /\.fun-list-grid\{display:grid;grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
-  assert.match(css, /\.fun-list-card\{[^}]*background:var\(--postit-color,#F4FF8F\);color:#381652/);
+  assert.match(css, /\.fun-list-card\{[^}]*background:var\(--postit-color,#FAFFC7\);color:#381652/);
   assert.match(css, /\.fun-list-card-person\{[^}]*min-height:/);
   assert.match(css, /\.fun-list-card-joy\{[^}]*min-height:/);
   assert.match(css, /\.fun-list-card-song\{[^}]*min-height:/);
