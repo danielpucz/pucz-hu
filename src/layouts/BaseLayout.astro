@@ -26,6 +26,8 @@ const {
 
 const siteOrigin = Astro.site ?? new URL('https://pucz.hu');
 const canonicalUrl = new URL(Astro.url.pathname, siteOrigin).href;
+// Netlify previews should not appear as duplicate URLs in search results.
+const isPreview = ['deploy-preview', 'branch-deploy'].includes(process.env.CONTEXT || '');
 const defaultOgImage = '/images/pucz-hu-og.jpg';
 const chosenOgImage = ogImage?.trim() || defaultOgImage;
 const ogImageUrl = new URL(chosenOgImage, siteOrigin).href;
@@ -66,7 +68,7 @@ const jsonLd = JSON.stringify(structuredData || (
   {jsonLd !== "null" && <script type="application/ld+json" set:html={jsonLd} />}
   <link rel="icon" type="image/png" sizes="120x120" href="/favicon.png" />
   <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
-  {noindex && <meta name="robots" content="noindex" />}
+  {(noindex || isPreview) && <meta name="robots" content="noindex" />}
   <title>{title}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
