@@ -62,6 +62,9 @@
       card.style.setProperty('--postit-y', y + 'px');
     };
     const lift = () => {
+      // A dragged note stays still until the pointer leaves and re-enters.
+      hoverArmed = false;
+      card.classList.remove('postit-wiggle-once');
       card.classList.add('postit-dragging');
       card.style.zIndex = String(++topLayer);
     };
