@@ -24,7 +24,7 @@ const {
 
 const siteOrigin = Astro.site ?? new URL('https://pucz.hu');
 const canonicalUrl = new URL(Astro.url.pathname, siteOrigin).href;
-const defaultOgImage = '/images/pucz-hu-og.webp';
+const defaultOgImage = '/images/pucz-hu-og.jpg';
 const chosenOgImage = ogImage?.trim() || defaultOgImage;
 const ogImageUrl = new URL(chosenOgImage, siteOrigin).href;
 const imageAlt = ogImageAlt?.trim() || 'Pucz Dani’s Little Corner of the Internet, with two overlapping photographs on a pale blue background';
