@@ -3,9 +3,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import intro from '../data/intro.json';
 import gallery from '../data/homepage-gallery.json';
 ---
-<BaseLayout title="Pucz Dani’s Little Corner of the Internet" description="Things for the internet, people, family and a rather busy brain. Welcome to my little corner of the internet.">
+<BaseLayout title="Pucz.hu ~•~ Dani Pucz, internet maker" description="Things for the internet, people, family and a rather busy brain. Welcome to my little corner of the internet.">
   <section class="hero" aria-label="A little about me">
-    <h1 class="intro" id="intro" data-stories={JSON.stringify(intro.stories)} data-ending={intro.ending}></h1>
+    <h1 class="intro" id="intro" data-stories={JSON.stringify(intro.stories)} data-ending={intro.ending}>
+      {intro.stories.map((story, i) => (
+        <Fragment>
+          {i > 0 && ' '}
+          {story.before}
+          <span class="expand-link" role="button" tabindex="0" data-id={story.id} data-level="one" aria-expanded="false">{story.link}</span>
+          {story.after}
+        </Fragment>
+      ))}
+      {' '}{intro.ending}
+    </h1>
     <p class="hint" id="intro-hint">Try clicking the wavy bits.</p>
   </section>
   <section class="collage" id="homepage-collage" aria-label="A movable photo collection" data-photo-pool={JSON.stringify(gallery.images)}>
