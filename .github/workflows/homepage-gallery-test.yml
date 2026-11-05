@@ -21,6 +21,8 @@ on:
       - "src/content.config.ts"
       - "src/components/ArticleDirectory.astro"
       - "tests/fun-lists.test.cjs"
+      - "tests/fun-list-interactions.test.cjs"
+      - "public/fun-list-cards.js"
       - "tests/homepage-gallery.test.cjs"
       - ".github/workflows/homepage-gallery-test.yml"
   push:
@@ -45,6 +47,8 @@ on:
       - "src/content.config.ts"
       - "src/components/ArticleDirectory.astro"
       - "tests/fun-lists.test.cjs"
+      - "tests/fun-list-interactions.test.cjs"
+      - "public/fun-list-cards.js"
       - "tests/homepage-gallery.test.cjs"
 permissions:
   contents: read
@@ -55,6 +59,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check vanilla JavaScript syntax
-        run: node --check public/homepage-gallery.js && node --check public/cursor-drawing.js && node --check public/editorial-dropcaps.js
+        run: node --check public/homepage-gallery.js && node --check public/cursor-drawing.js && node --check public/editorial-dropcaps.js && node --check public/fun-list-cards.js
       - name: Test gallery interactions without external dependencies
-        run: node --test tests/homepage-gallery.test.cjs tests/editorial-decorations.test.cjs tests/fun-lists.test.cjs
+        run: node --test tests/homepage-gallery.test.cjs tests/editorial-decorations.test.cjs tests/fun-lists.test.cjs tests/fun-list-interactions.test.cjs
