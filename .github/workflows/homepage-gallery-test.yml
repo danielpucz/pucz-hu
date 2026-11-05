@@ -16,6 +16,11 @@ on:
       - "src/data/homepage-gallery.json"
       - "src/pages/index.astro"
       - ".pages.yml"
+      - "src/pages/list/[slug].astro"
+      - "src/content/fun-lists/**"
+      - "src/content.config.ts"
+      - "src/components/ArticleDirectory.astro"
+      - "tests/fun-lists.test.cjs"
       - "tests/homepage-gallery.test.cjs"
       - ".github/workflows/homepage-gallery-test.yml"
   push:
@@ -35,6 +40,11 @@ on:
       - "src/data/homepage-gallery.json"
       - "src/pages/index.astro"
       - ".pages.yml"
+      - "src/pages/list/[slug].astro"
+      - "src/content/fun-lists/**"
+      - "src/content.config.ts"
+      - "src/components/ArticleDirectory.astro"
+      - "tests/fun-lists.test.cjs"
       - "tests/homepage-gallery.test.cjs"
 permissions:
   contents: read
@@ -47,4 +57,4 @@ jobs:
       - name: Check vanilla JavaScript syntax
         run: node --check public/homepage-gallery.js && node --check public/cursor-drawing.js && node --check public/editorial-dropcaps.js
       - name: Test gallery interactions without external dependencies
-        run: node --test tests/homepage-gallery.test.cjs tests/editorial-decorations.test.cjs
+        run: node --test tests/homepage-gallery.test.cjs tests/editorial-decorations.test.cjs tests/fun-lists.test.cjs
