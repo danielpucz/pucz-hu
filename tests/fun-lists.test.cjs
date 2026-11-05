@@ -98,3 +98,12 @@ test('list title can be shortened in CMS while archival title remains unchanged'
   assert.match(listSettings, /- name: published/);
   assert.ok(!listSettings.includes('keep off until visual design is approved'));
 });
+
+test('Dinner & Movie Nights is absent from the public writing directory, without deleting its archive', () => {
+  const directory = read('src/data/writing.ts');
+  const originalEvent = read('src/content/event-series/dinner-and-movie-night.md');
+  assert.ok(!directory.includes('Dinner & Movie Nights'));
+  assert.ok(directory.includes("'Incredible People','Things That Spark Joy','Songs that doesn’t End','Every Project Ever'"));
+  assert.ok(originalEvent.includes('navigationTitle: Dinner & Movie Nights'));
+});
+
