@@ -11,6 +11,7 @@ interface Props {
   ogImage?: string;
   ogImageAlt?: string;
   ogType?: 'website' | 'article';
+  structuredData?: Record<string, unknown>;
 }
 const {
   title,
@@ -20,6 +21,7 @@ const {
   ogImage,
   ogImageAlt,
   ogType = 'website',
+  structuredData,
 } = Astro.props;
 
 const siteOrigin = Astro.site ?? new URL('https://pucz.hu');
@@ -28,6 +30,18 @@ const defaultOgImage = '/images/pucz-hu-og.jpg';
 const chosenOgImage = ogImage?.trim() || defaultOgImage;
 const ogImageUrl = new URL(chosenOgImage, siteOrigin).href;
 const imageAlt = ogImageAlt?.trim() || 'Pucz Dani’s Little Corner of the Internet, with two overlapping photographs on a pale blue background';
+const jsonLd = JSON.stringify(structuredData || (
+  Astro.url.pathname === '/' ? {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': 'https://pucz.hu/#website',
+    name: 'Pucz.hu',
+    alternateName: 'Dani Pucz, internet maker',
+    url: 'https://pucz.hu/',
+    description,
+    author: { '@type': 'Person', '@id': 'https://pucz.hu/#person', name: 'Dani Pucz', url: 'https://pucz.hu/' },
+  } : null
+)).replace(/</g, '\\u003c');
 ---
 <!doctype html>
 <html lang="en">
@@ -36,6 +50,7 @@ const imageAlt = ogImageAlt?.trim() || 'Pucz Dani’s Little Corner of the Inter
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalUrl} />
+  <link rel="sitemap" href="/sitemap-index.xml" />
   <meta property="og:type" content={ogType} />
   <meta property="og:site_name" content="Pucz Dani’s Little Corner of the Internet" />
   <meta property="og:title" content={title} />
@@ -48,6 +63,7 @@ const imageAlt = ogImageAlt?.trim() || 'Pucz Dani’s Little Corner of the Inter
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImageUrl} />
   <meta name="twitter:image:alt" content={imageAlt} />
+  {jsonLd !== "null" && <script type="application/ld+json" set:html={jsonLd} />}
   <link rel="icon" type="image/png" sizes="120x120" href="/favicon.png" />
   <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
   {noindex && <meta name="robots" content="noindex" />}
