@@ -84,6 +84,7 @@ test('responsive list pages use content-height paper notes, purple handwriting, 
   assert.match(css, /--postit-ink:#3D0396/);
   assert.match(css, /\.fun-list-card-joy\{[^}]*align-items:center;justify-content:center;[^}]*text-align:center/);
   assert.match(css, /\.fun-list-card-person\{[^}]*align-items:center;text-align:center/);
+  assert.match(css, /\.fun-list-card-song\{[^}]*align-items:center;text-align:center/);
   assert.match(css, /\.fun-list-card \.fun-list-joy-text\{[^}]*var\(--font-hand\);color:var\(--postit-ink\)/);
   assert.match(css, /\.fun-list-card \.fun-list-person-note\{[^}]*var\(--font-hand\);color:var\(--postit-ink\)/);
   assert.ok(!listCss.includes('.fun-list-song-listen'), 'no abandoned Listen link styling');
