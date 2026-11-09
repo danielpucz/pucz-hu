@@ -27,6 +27,12 @@ on:
       - "src/pages/index.astro"
       - ".pages.yml"
       - "src/pages/list/[slug].astro"
+      - "src/pages/work/every-project-ever.astro"
+      - "src/data/writing.ts"
+      - "public/_redirects"
+      - "public/project-archive.js"
+      - "src/content/projects/**"
+      - "src/data/project-archive.md"
       - "src/content/fun-lists/**"
       - "src/content.config.ts"
       - "src/components/ArticleDirectory.astro"
@@ -63,6 +69,12 @@ on:
       - "src/pages/index.astro"
       - ".pages.yml"
       - "src/pages/list/[slug].astro"
+      - "src/pages/work/every-project-ever.astro"
+      - "src/data/writing.ts"
+      - "public/_redirects"
+      - "public/project-archive.js"
+      - "src/content/projects/**"
+      - "src/data/project-archive.md"
       - "src/content/fun-lists/**"
       - "src/content.config.ts"
       - "src/components/ArticleDirectory.astro"
@@ -79,7 +91,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check vanilla JavaScript syntax
-        run: node --check public/homepage.js && node --check public/homepage-gallery.js && node --check public/cursor-drawing.js && node --check public/editorial-dropcaps.js && node --check public/fun-list-cards.js
+        run: node --check public/homepage.js && node --check public/homepage-gallery.js && node --check public/cursor-drawing.js && node --check public/editorial-dropcaps.js && node --check public/fun-list-cards.js && node --check public/project-archive.js
       - name: Test gallery interactions without external dependencies
         run: node --test tests/homepage-intro.test.cjs tests/homepage-gallery.test.cjs tests/editorial-decorations.test.cjs tests/fun-lists.test.cjs tests/fun-list-interactions.test.cjs tests/social-metadata.test.cjs tests/launch-seo.test.cjs
 

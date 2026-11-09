@@ -445,7 +445,7 @@ content:
           - name: category
             type: string
           - name: legacyPath
-            label: Original URL
+            label: Previous URL (redirected to /work/every-project-ever/)
             type: string
             readonly: true
           - name: published
@@ -497,8 +497,29 @@ content:
             label: Original archive position
             type: number
             default: 9999
+          - name: images
+            label: Project images (up to 3)
+            description: "Optional photos for the draggable project collage. Add at most three; dragging will not spawn more."
+            type: object
+            list:
+              max: 3
+              collapsible:
+                collapsed: true
+                summary: "{alt}"
+            fields:
+              - name: src
+                label: Image
+                type: image
+                required: true
+                options:
+                  path: public/images/projects
+                  extensions: [jpg, jpeg, png, webp, avif, gif]
+              - name: alt
+                label: Alternative text
+                type: text
+                required: true
           - name: published
-            label: Published (off until project page design is approved)
+            label: Individual case study published (archive always lists all records)
             type: boolean
             default: false
           - name: body
