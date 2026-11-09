@@ -445,7 +445,7 @@ content:
           - name: category
             type: string
           - name: legacyPath
-            label: Original URL
+            label: Previous URL (redirected to /work/every-project-ever/)
             type: string
             readonly: true
           - name: published
