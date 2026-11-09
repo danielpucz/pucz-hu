@@ -129,12 +129,12 @@ const archiveTitle = archive.frontmatter.title || 'Every Project Ever*';
   .project-list-layout{display:grid;grid-template-columns:37px minmax(0,1fr);gap:13px;align-items:start}
   .project-year-rail{position:sticky;top:12px;align-self:start;display:flex;flex-direction:column;align-items:stretch;z-index:30;max-height:calc(100dvh - 24px);overflow-y:auto;scrollbar-width:none;overscroll-behavior:contain;touch-action:none}
   .project-year-rail::-webkit-scrollbar{display:none}
-  .project-year-link{display:block;text-decoration:none;text-align:center;font:700 9px/1.15 'Courier New',Courier,monospace;padding:4px 1px;color:var(--body-text);opacity:.78;white-space:nowrap;user-select:none;-webkit-user-select:none}
+  .project-year-link{display:block;text-decoration:none;text-align:center;font:700 11px/1.15 'Courier New',Courier,monospace;padding:4px 1px;color:var(--body-text);opacity:.78;white-space:nowrap;user-select:none;-webkit-user-select:none}
   .project-year-link:hover,.project-year-link:focus-visible{opacity:1}
-  .project-year-link.is-active{background:var(--body-text);color:var(--page);opacity:1}
+  .project-year-link.is-active{background:var(--body-text);color:var(--page);opacity:1;border-radius:2px}
   .project-list{min-width:0}
   .project-year-section{scroll-margin-top:18px}
-  .project-row{display:grid;grid-template-columns:minmax(78px,120px) minmax(0,1fr) minmax(90px,125px);gap:12px;align-items:start;padding:16px 0 18px;border-bottom:1px solid color-mix(in srgb,var(--body-text) 13%,transparent);font-size:14px;line-height:1.55}
+  .project-row{display:grid;grid-template-columns:minmax(135px,175px) minmax(0,1fr) minmax(90px,125px);gap:12px;align-items:start;padding:21px 0 24px;border-bottom:1px solid color-mix(in srgb,var(--body-text) 13%,transparent);font-size:14px;line-height:1.55}
   .project-row:first-child{padding-top:0}
   .project-client{font-size:13px}
   .project-info{min-width:0}
@@ -158,11 +158,11 @@ const archiveTitle = archive.frontmatter.title || 'Every Project Ever*';
     .project-intro{margin:0 0 58px}
     .project-intro :global(p:first-child){font-size:19px;line-height:1.58}
     .project-intro :global(p){font-size:13px;text-align:left;margin-bottom:15px}
-    .project-list-layout{grid-template-columns:0 minmax(0,1fr);gap:0}
-    .project-year-rail{top:10px;width:26px;margin-left:-30px;overflow:visible;max-height:none;align-items:stretch}
-    .project-year-link{font:700 8px/1.1 'Courier New',Courier,monospace;padding:3px 0}
-    .project-row{grid-template-columns:minmax(0,1fr);row-gap:4px;padding:15px 0 18px;font-size:12px}
-        .project-client{font-size:11px;grid-column:1}
+    .project-list-layout{grid-template-columns:0 minmax(0,1fr);gap:0;padding-left:12px}
+    .project-year-rail{top:10px;width:28px;margin-left:-42px;overflow:visible;max-height:none;align-items:stretch}
+    .project-year-link{font:700 10px/1.12 'Courier New',Courier,monospace;padding:3px 0}
+    .project-row{grid-template-columns:minmax(0,1fr);row-gap:4px;padding:20px 0 24px;font-size:12px}
+    .project-client{font-size:11px;grid-column:1}
     .project-info{grid-column:1;min-width:0}
     .project-name{font-size:13px}
     .project-summary{margin:9px 0 0}
