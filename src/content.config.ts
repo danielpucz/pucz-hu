@@ -103,6 +103,10 @@ const projects = defineCollection({
     url: z.string().optional(),
     sourceOrder: z.number().int().default(9999),
     published: z.boolean().default(false),
+    images: z.array(z.object({
+      src: z.string().startsWith('/images/'),
+      alt: z.string().min(1),
+    })).max(3).default([]),
   }),
 });
 
