@@ -44,3 +44,7 @@
 /meals/the-perfect-ramen-egg.html /recipes/the-perfect-ramen-egg/ 301
 /meals/everything-i-know-about-risotto.html /meals/everything-i-know-about-risotto/ 301
 /meals/my-falafels.html /meals/my-falafels/ 301
+
+# The project archive moved out of the lists section.
+/list/every-project-ever /work/every-project-ever/ 301
+/list/every-project-ever/ /work/every-project-ever/ 301
