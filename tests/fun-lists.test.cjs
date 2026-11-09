@@ -103,7 +103,9 @@ test('Dinner & Movie Nights is absent from the public writing directory, without
   const directory = read('src/data/writing.ts');
   const originalEvent = read('src/content/event-series/dinner-and-movie-night.md');
   assert.ok(!directory.includes('Dinner & Movie Nights'));
-  assert.ok(directory.includes("'Incredible People','Things That Spark Joy','Songs that doesn’t End','Every Project Ever'"));
+  assert.ok(directory.includes("'Incredible People','Things That Spark Joy','Songs that doesn’t End'"));
+  assert.ok(directory.includes("{ heading:'Work',posts:['Every Project Ever']}"));
+  assert.ok(directory.includes("'Every Project Ever':'/work/every-project-ever/'"));
   assert.ok(originalEvent.includes('navigationTitle: Dinner & Movie Nights'));
 });
 
