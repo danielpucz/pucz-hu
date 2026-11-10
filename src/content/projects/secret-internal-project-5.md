@@ -1,5 +1,5 @@
 ---
-title: Secret internal project
+title: "🔒 Secret internal project {Design System}"
 summary: Mysterious and important project for ALFA Insourance
 year: '2024'
 type: Contract with Zwoelf
