@@ -4,7 +4,7 @@ summary: Visual fundamentals of a CEE venture fund, website design and developme
 year: '2017'
 type: Freelancer
 client: Crossagora group
-work: Graphic design
+work: "Full-service"
 sourceOrder: 171
 published: false
 ---
