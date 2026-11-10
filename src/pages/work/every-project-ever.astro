@@ -32,7 +32,10 @@ const archiveTitle = archive.frontmatter.title || 'Every Project Ever*';
       <div class="project-symbol" aria-hidden="true">💾</div>
       <p class="project-kicker">-:~ PROFESSIONAL THINGS ~:-</p>
       <h1>{archiveTitle}</h1>
-      <div class="project-intro"><archive.Content /></div>
+      <div class="project-intro">
+        <p class="project-intro-lead">{archive.frontmatter.description}</p>
+        <archive.Content />
+      </div>
     </header>
 
     <div class="project-list-layout">

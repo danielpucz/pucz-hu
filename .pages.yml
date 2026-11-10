@@ -321,6 +321,7 @@ content:
             label: Footer label
             type: string
           - name: description
+            label: Introduction (visible lead paragraph + SEO description)
             type: text
           - name: category
             type: string
@@ -453,7 +454,7 @@ content:
             type: boolean
             default: false
           - name: body
-            label: Original archive introduction
+            label: Extra introduction text (below the lead paragraph)
             type: rich-text
             options:
               format: markdown
