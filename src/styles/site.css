@@ -309,26 +309,26 @@ ion-icon:defined svg.ion-fallback{display:none}
    Assets and GPL-3.0 attribution: /cursors/bibata-modern-ice-right/README.txt */
 @media (min-width:701px) and (hover:hover) and (pointer:fine) {
   html,body,body * {
-    cursor:url('/cursors/bibata-modern-ice-right/left_ptr.svg') 32 4, auto !important;
+    cursor:url('/cursors/bibata-modern-ice-right/left_ptr.svg') 29 4, auto !important;
   }
   /* Ordinary actionable elements retain the distinct pointing gesture. */
   a[href],a[href] *,button,button *,[role="button"],[role="button"] *,
   summary,summary *,select,label[for] {
-    cursor:url('/cursors/bibata-modern-ice-right/hand2.svg') 22 2, pointer !important;
+    cursor:url('/cursors/bibata-modern-ice-right/hand2.svg') 20 2, pointer !important;
   }
   /* A photo or post-it should show an open hand, including over its text. */
   :is(.polaroid,.fun-list-card,.project-photo),
   :is(.polaroid,.fun-list-card,.project-photo) * {
-    cursor:url('/cursors/bibata-modern-ice-right/hand1.svg') 19 4, grab !important;
+    cursor:url('/cursors/bibata-modern-ice-right/hand1.svg') 17 4, grab !important;
   }
   /* Links inside movable cards still behave as links. */
   .fun-list-card a,.fun-list-card a * {
-    cursor:url('/cursors/bibata-modern-ice-right/hand2.svg') 22 2, pointer !important;
+    cursor:url('/cursors/bibata-modern-ice-right/hand2.svg') 20 2, pointer !important;
   }
   /* Pointer capture keeps the grabbing hand while a card is moving. */
   :is(.polaroid.dragging,.fun-list-card.postit-dragging,.project-photo.is-dragging),
   :is(.polaroid.dragging,.fun-list-card.postit-dragging,.project-photo.is-dragging) * {
-    cursor:url('/cursors/bibata-modern-ice-right/grabbing.svg') 20 8, grabbing !important;
+    cursor:url('/cursors/bibata-modern-ice-right/grabbing.svg') 18 7, grabbing !important;
   }
   input,textarea,[contenteditable="true"] {
     cursor:text !important;
