@@ -65,7 +65,7 @@ for (const heading of extraCategories) {
       <span class="group-name">-:~ {group.heading} ~:-</span>
       {group.posts.map(({ title, href, actualTitle }) =>
         href
-          ? <a href={href} class:list={['post-chip', { active: title === activeTitle || actualTitle === activeTitle }]} aria-current={title === activeTitle || actualTitle === activeTitle ? 'page' : undefined}>{title}</a>
+          ? <a href={href} class:list={['post-chip', { active: title !== 'Every Project Ever' && (title === activeTitle || actualTitle === activeTitle) }]} aria-current={title !== 'Every Project Ever' && (title === activeTitle || actualTitle === activeTitle) ? 'page' : undefined}>{title}</a>
           : <span class="post-chip inactive">{title}</span>
       )}
     </span>
