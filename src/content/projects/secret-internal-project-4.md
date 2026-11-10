@@ -1,5 +1,5 @@
 ---
-title: Secret internal project (4)
+title: "🔒 Secret internal project (4)"
 summary: Mysterious and important project for Lufthansa Systems
 year: '2025'
 type: Contract with Melkweg Digital
