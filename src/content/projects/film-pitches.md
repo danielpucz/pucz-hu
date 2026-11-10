@@ -1,6 +1,6 @@
 ---
 title: Film Pitches
-summary: Film pitch presentations for a film production company
+summary: "Pitch presentations for a film production company"
 year: '2013'
 type: Freelancer
 client: Green Pictures
