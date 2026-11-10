@@ -9,5 +9,4 @@ category: Work
 legacyPath: /list/every-project-ever/
 published: false
 ---
-
-This used to be an excel, now it's a list. Actually some early projects are missing.
+*This used to be an excel, now it's a list. Actually some early projects are missing.
