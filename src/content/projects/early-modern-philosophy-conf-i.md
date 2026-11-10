@@ -1,5 +1,5 @@
 ---
-title: Early Modern Philosophy Conf. I.
+title: "Early Modern Philosophy Conference I."
 summary: Event collaterals and creative design
 year: '2016'
 type: Freelancer
