@@ -125,8 +125,8 @@ test('keyboard activation supports Enter and Space like a native button', () => 
   assert.equal(other.defaultPrevented, undefined);
 });
 
-test('intro hint has no decorative arrow', () => {
+test('homepage no longer renders the removed wavy-bits hint', () => {
   const page = fs.readFileSync('src/pages/index.astro', 'utf8');
-  assert.match(page, /id="intro-hint">Try clicking the wavy bits\.<\/p>/);
-  assert.ok(!page.includes('↗ Try clicking the wavy bits.'));
+  assert.ok(!page.includes('id="intro-hint"'));
+  assert.ok(!page.includes('Try clicking the wavy bits.'));
 });
