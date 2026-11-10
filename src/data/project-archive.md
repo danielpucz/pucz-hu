@@ -1,6 +1,6 @@
 ---
-title: Every Project Ever*
-navigationTitle: Every Project Ever
+title: List of Every Project Ever*
+navigationTitle: List of Every Project Ever*
 description: For the past ten years, I’ve been making internet like a
   caffeinated spider, site after site, app after app, sometimes even on purpose.
   What follows is a list of 250+ projects I’ve worked on, touched, broken, or
