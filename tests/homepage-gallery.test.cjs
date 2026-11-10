@@ -532,7 +532,7 @@ test('Bibata Ice desktop cursors cover arrow, link, drag and grabbing states', (
   const root = 'public/cursors/bibata-modern-ice-right/';
   for (const filename of ['left_ptr.svg', 'hand1.svg', 'hand2.svg', 'grabbing.svg']) {
     const svg = fs.readFileSync(root + filename, 'utf8');
-    assert.match(svg, /<svg[^>]*width="40" height="40"/);
+    assert.match(svg, /<svg[^>]*width="36" height="36"/);
     assert.match(svg, /#FFFFFF/);
     assert.match(svg, /#000000/);
     assert.match(css, new RegExp(filename.replace('.', '\\.'), 'i'));
