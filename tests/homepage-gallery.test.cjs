@@ -525,3 +525,21 @@ test('mobile editorial titles are 40–48px and lead descriptions are 22px', () 
   assert.match(mobile, /\.story-content\{font-size:18px;/);
   assert.match(css, /\.story-content p\.lead,\.story-content \.cms-content > p:first-child\{font-size:21px;/);
 });
+
+
+test('Bibata Ice desktop cursors cover arrow, link, drag and grabbing states', () => {
+  const css = fs.readFileSync('src/styles/site.css', 'utf8');
+  const root = 'public/cursors/bibata-modern-ice-right/';
+  for (const filename of ['left_ptr.svg', 'hand1.svg', 'hand2.svg', 'grabbing.svg']) {
+    const svg = fs.readFileSync(root + filename, 'utf8');
+    assert.match(svg, /<svg[^>]*width="36" height="36"/);
+    assert.match(svg, /#FFFFFF/);
+    assert.match(svg, /#000000/);
+    assert.match(css, new RegExp(filename.replace('.', '\\.'), 'i'));
+  }
+  assert.ok(fs.existsSync(root + 'LICENSE'));
+  assert.ok(fs.existsSync(root + 'README.txt'));
+  assert.match(css, /@media \(min-width:701px\) and \(hover:hover\) and \(pointer:fine\)/);
+  assert.match(css, /\.polaroid\.dragging,\.fun-list-card\.postit-dragging,\.project-photo\.is-dragging/);
+  assert.match(css, /grabbing\.svg/);
+});

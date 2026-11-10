@@ -16,7 +16,6 @@ import gallery from '../data/homepage-gallery.json';
       ))}
       {' '}{intro.ending}
     </h1>
-    <p class="hint" id="intro-hint">Try clicking the wavy bits.</p>
   </section>
   <section class="collage" id="homepage-collage" aria-label="A movable photo collection" data-photo-pool={JSON.stringify(gallery.images)}>
     <div class="polaroid draggable-photo photo-tree" style="--rot:-7deg"><img draggable="false" src="/images/homepage/photo-001.jpg" alt="A smiling outdoor selfie with friends near a small cottage" loading="lazy" /></div>
