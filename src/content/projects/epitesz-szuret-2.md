@@ -1,6 +1,6 @@
 ---
 title: Építész Szüret 2
-summary: Exhibition and communication design for Budaörs's annual architect event
+summary: "Exhibition and communication design for an annual architect event"
 year: '2015'
 type: Freelancer
 client: HÚSZNEGYVEN
