@@ -1,6 +1,6 @@
 ---
 title: 2014 Municipal Election Campaign
-summary: Design support for BFE's campaign
+summary: "Design support for political campaign"
 year: '2014'
 type: Freelancer
 client: Budaörs Fejlődéséért Egyesület
