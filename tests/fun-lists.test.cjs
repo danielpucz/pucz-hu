@@ -125,3 +125,10 @@ test('project archive reads its CMS description as visible lead and never marks 
   assert.ok(directory.includes('isActivePost(title, actualTitle)'));
   assert.ok(cms.includes('Introduction (visible lead paragraph + SEO description)'));
 });
+
+test('Every Project Ever footer label comes from CMS title, not the navigation label', () => {
+  const directory = read('src/components/ArticleDirectory.astro');
+  assert.ok(directory.includes("import * as projectArchive from '../data/project-archive.md'"));
+  assert.ok(directory.includes("href === knownPostRoutes['Every Project Ever'] ? projectArchive.frontmatter.title : title"));
+  assert.ok(directory.includes('isActivePost(title, actualTitle)'));
+});

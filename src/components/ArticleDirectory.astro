@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { writingGroups, knownPostRoutes } from '../data/writing';
+import * as projectArchive from '../data/project-archive.md';
 interface Props { activeTitle?: string }
 const { activeTitle } = Astro.props;
 // The work archive has one canonical route. Its chip is selected only there.
@@ -71,7 +72,7 @@ for (const heading of extraCategories) {
       <span class="group-name">-:~ {group.heading} ~:-</span>
       {group.posts.map(({ title, href, actualTitle }) =>
         href
-          ? <a href={href} class:list={['post-chip', { active: isActivePost(title, actualTitle) }]} aria-current={isActivePost(title, actualTitle) ? 'page' : undefined}>{title}</a>
+          ? <a href={href} class:list={['post-chip', { active: isActivePost(title, actualTitle) }]} aria-current={isActivePost(title, actualTitle) ? 'page' : undefined}>{href === knownPostRoutes['Every Project Ever'] ? projectArchive.frontmatter.title : title}</a>
           : <span class="post-chip inactive">{title}</span>
       )}
     </span>
