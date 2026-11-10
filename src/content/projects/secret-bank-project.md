@@ -1,5 +1,5 @@
 ---
-title: Secret bank project
+title: "🔒 Secret bank project"
 summary: Misterious and imortand project with NDA for a hungarian bank
 year: '2025'
 type: Freelancer

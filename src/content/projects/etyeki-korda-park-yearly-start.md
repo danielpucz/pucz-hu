@@ -2,7 +2,7 @@
 title: Etyeki Korda Park, yearly start
 summary: Collaterals for a HR event
 year: '2015'
-type: Freelancer
+type: "Contract with Uniomédia"
 client: Uniomédia
 work: Graphic design
 sourceOrder: 205

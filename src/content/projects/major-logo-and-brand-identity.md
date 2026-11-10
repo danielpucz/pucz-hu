@@ -1,6 +1,6 @@
 ---
 title: Major logo and brand identity
-summary: Logo for my favorit coffee shop
+summary: "Logo for my favorite coffee shop"
 year: '2018'
 type: Freelancer
 client: Major kávézó

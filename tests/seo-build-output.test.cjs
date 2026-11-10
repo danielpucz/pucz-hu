@@ -30,7 +30,7 @@ test('real homepage HTML includes title, text, canonical, schema and meta descri
   assert.ok(home.includes('I like making'));
   assert.ok(home.includes('things for the internet'));
   assert.ok(home.includes('Welcome to my little corner of the internet.'));
-  assert.ok(home.includes('Try clicking the wavy bits.'));
+  assert.ok(!home.includes('Try clicking the wavy bits.'));
   assert.ok(home.includes('<link rel="canonical" href="https://pucz.hu/"'));
   assert.ok(home.includes('name="description"'));
   assert.ok(home.includes('property="og:image"'));

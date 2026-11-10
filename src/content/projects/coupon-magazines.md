@@ -1,6 +1,6 @@
 ---
 title: Coupon magazines
-summary: Retuching, photoshopping, DTP
+summary: "Retuching, photoshopping, DTP work"
 year: '2009'
 type: Freelancer
 client: Bauhaus

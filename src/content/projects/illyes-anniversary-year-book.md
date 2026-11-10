@@ -1,6 +1,6 @@
 ---
-title: Illyés Anniversary year book
-summary: Year book cover design for my high school's 50th anniversary
+title: "Illyés Anniversary book"
+summary: "Book cover design for my high school's 50th anniversary"
 year: '2014'
 type: Freelancer
 client: Illyés Gimnázium

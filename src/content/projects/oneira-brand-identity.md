@@ -1,6 +1,6 @@
 ---
 title: Oneira brand identity
-summary: Logo for a book publisher group
+summary: "Logo and visuals for a book publisher"
 year: '2015'
 type: Freelancer
 client: Oneira

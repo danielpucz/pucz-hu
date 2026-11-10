@@ -1,6 +1,6 @@
 ---
 title: Dynamic content marketing project
-summary: Helping espell to make their content marketing dreams a reality
+summary: "Helping espell to make their content marketing strategy feasable in webflow"
 year: '2025'
 type: Freelancer
 client: Espell

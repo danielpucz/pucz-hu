@@ -1,6 +1,6 @@
 ---
 title: Photoshoot and promotional videos
-summary: Lots of creative communication materials for a voluntary hospital
+summary: "Lots of creative communication materials for a hospital"
 year: '2014'
 type: Freelancer
 client: Panorama Medical Center

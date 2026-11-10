@@ -1,5 +1,5 @@
 ---
-title: Secret internal project (2)
+title: "🔒 Secret internal project (2) {Internal tool}"
 summary: Mysterious and important project for Lufthansa Systems (2 months)
 year: '2024'
 type: Contract with Melkweg Digital
