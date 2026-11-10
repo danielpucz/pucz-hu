@@ -1,5 +1,5 @@
 ---
-title: Secret internal project
+title: "🔒 Secret internal project {Internal tool}"
 summary: Mysterious and important project for OBA
 year: '2024'
 type: Contract with Zwoelf
