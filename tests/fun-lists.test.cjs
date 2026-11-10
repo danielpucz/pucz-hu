@@ -119,6 +119,9 @@ test('project archive reads its CMS description as visible lead and never marks 
   const cms = read('.pages.yml');
   assert.ok(archive.includes('<p class="project-intro-lead">{archive.frontmatter.description}</p>'));
   assert.ok(archive.includes('<archive.Content />'));
-  assert.ok(directory.includes("title !== 'Every Project Ever' && (title === activeTitle || actualTitle === activeTitle)"));
+  assert.ok(directory.includes("Astro.url.pathname.replace(/\\/+$/, '') === '/work/every-project-ever'"));
+  assert.ok(directory.includes("title === 'Every Project Ever'"));
+  assert.ok(directory.includes("Boolean(activeTitle && (title === activeTitle || actualTitle === activeTitle))"));
+  assert.ok(directory.includes('isActivePost(title, actualTitle)'));
   assert.ok(cms.includes('Introduction (visible lead paragraph + SEO description)'));
 });
