@@ -3,6 +3,12 @@ import { getCollection } from 'astro:content';
 import { writingGroups, knownPostRoutes } from '../data/writing';
 interface Props { activeTitle?: string }
 const { activeTitle } = Astro.props;
+// The work archive has one canonical route. Its chip is selected only there.
+const isProjectArchivePage = Astro.url.pathname.replace(/\/+$/, '') === '/work/every-project-ever';
+const isActivePost = (title: string, actualTitle?: string) =>
+  title === 'Every Project Ever'
+    ? isProjectArchivePage
+    : Boolean(activeTitle && (title === activeTitle || actualTitle === activeTitle));
 type DirectoryPost = { title: string; href?: string; actualTitle?: string };
 type CmsPost = { title: string; actualTitle: string; category: string; href: string };
 const [articles, recipes, funLists] = await Promise.all([
@@ -65,7 +71,7 @@ for (const heading of extraCategories) {
       <span class="group-name">-:~ {group.heading} ~:-</span>
       {group.posts.map(({ title, href, actualTitle }) =>
         href
-          ? <a href={href} class:list={['post-chip', { active: title !== 'Every Project Ever' && (title === activeTitle || actualTitle === activeTitle) }]} aria-current={title !== 'Every Project Ever' && (title === activeTitle || actualTitle === activeTitle) ? 'page' : undefined}>{title}</a>
+          ? <a href={href} class:list={['post-chip', { active: isActivePost(title, actualTitle) }]} aria-current={isActivePost(title, actualTitle) ? 'page' : undefined}>{title}</a>
           : <span class="post-chip inactive">{title}</span>
       )}
     </span>
