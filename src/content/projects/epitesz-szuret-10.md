@@ -1,7 +1,7 @@
 ---
 title: Építész Szüret 12.
 summary: Exhibition and communication design for Budaörs's annual architect event
-year: "2023"
+year: "2025"
 type: Freelancer
 client: HÚSZNEGYVEN
 work: Graphic design
