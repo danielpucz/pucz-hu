@@ -10,5 +10,9 @@ sourceOrder: 144
 images:
   - src: /images/projects/original-8fe7b1f7c59297272fea911bc6c2ce07.gif
     alt: 444 search in app
+  - src: /images/projects/444-ader-feliratkozas.png
+    alt: 444 app hírlevél feliratkozás UI
+  - src: /images/projects/444beallitasok.png
+    alt: 444 app beállítások UI
 published: false
 ---
