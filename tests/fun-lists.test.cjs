@@ -132,3 +132,19 @@ test('Every Project Ever footer label comes from CMS title, not the navigation l
   assert.ok(directory.includes("href === knownPostRoutes['Every Project Ever'] ? projectArchive.frontmatter.title : title"));
   assert.ok(directory.includes('isActivePost(title, actualTitle)'));
 });
+
+
+test('project images keep their own natural-height rows and homepage-style wiggle', () => {
+  const page = read('src/pages/work/every-project-ever.astro');
+  const behavior = read('public/project-archive.js');
+  assert.match(page, /\.project-photo-stage\{display:grid;grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
+  assert.match(page, /\.project-photo-stage\{[^}]*overflow:hidden/);
+  assert.doesNotMatch(page, /\.project-photo-stage\{height:(205|120)px/);
+  assert.match(page, /\.project-photo\{position:relative;/);
+  assert.match(page, /\.project-photo\.wiggle-once:not\(\.is-dragging\)\{animation:photo-wiggle \.46s/);
+  assert.match(behavior, /card\.addEventListener\('pointerenter'/);
+  assert.match(behavior, /card\.addEventListener\('pointerleave'/);
+  assert.match(behavior, /stage\.getBoundingClientRect\(\)/);
+  assert.match(behavior, /card\.getBoundingClientRect\(\)/);
+  assert.match(page, /@media\(prefers-reduced-motion:reduce\).*\.project-photo\.wiggle-once\{animation:none\}/);
+});

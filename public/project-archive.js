@@ -106,7 +106,7 @@
     clone.removeAttribute('role');
     clone.removeAttribute('tabindex');
     clone.setAttribute('aria-hidden', 'true');
-    clone.classList.remove('is-dragging');
+    clone.classList.remove('is-dragging', 'wiggle-once');
     clone.classList.add('project-photo-peek');
     clone.style.left = (cx - width / 2) + 'px';
     clone.style.top = (cy - height / 2) + 'px';
@@ -138,13 +138,34 @@
     const moveTo = () => {
       card.style.setProperty('--move-x', x + 'px');
       card.style.setProperty('--move-y', y + 'px');
+      // Photos may move within their own project, never into the next row.
+      const stage = card.closest('.project-photo-stage');
+      if (!stage) return;
+      const bounds = stage.getBoundingClientRect();
+      const rect = card.getBoundingClientRect();
+      const inset = 2;
+      if (rect.left < bounds.left + inset) x += bounds.left + inset - rect.left;
+      else if (rect.right > bounds.right - inset) x -= rect.right - (bounds.right - inset);
+      if (rect.top < bounds.top + inset) y += bounds.top + inset - rect.top;
+      else if (rect.bottom > bounds.bottom - inset) y -= rect.bottom - (bounds.bottom - inset);
+      card.style.setProperty('--move-x', x + 'px');
+      card.style.setProperty('--move-y', y + 'px');
     };
+    card.addEventListener('pointerenter', event => {
+      if (event.pointerType !== 'mouse' && event.pointerType !== 'pen') return;
+      if (!matchMedia('(hover: hover) and (pointer: fine)').matches || pointerId !== null) return;
+      card.classList.add('wiggle-once');
+    });
+    card.addEventListener('pointerleave', () => {
+      if (pointerId === null) card.classList.remove('wiggle-once');
+    });
     card.addEventListener('pointerdown', event => {
       if (activePeek?.card === card || pointerId !== null ||
           (event.pointerType === 'mouse' && event.button !== 0)) return;
       pointerId = event.pointerId;
       start = { pointerX: event.clientX, pointerY: event.clientY, x, y };
       dragged = false;
+      card.classList.remove('wiggle-once');
       card.setPointerCapture(pointerId);
       event.preventDefault();
     });

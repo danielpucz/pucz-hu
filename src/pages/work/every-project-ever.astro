@@ -71,7 +71,7 @@ const archiveTitle = archive.frontmatter.title || 'Every Project Ever*';
                           role="button"
                           tabindex="0"
                           aria-label={`${photo.alt || project.data.title} — drag to move, double-click or double-tap to enlarge, arrow keys to reposition`}
-                          style={`--photo-index:${imageIndex};--angle:${[-9, -3, 9][imageIndex]}deg;--start-x:${[8, 33, 59][imageIndex]}%;--start-y:${[12, 20, 10][imageIndex]}px`}
+                          style={`--photo-index:${imageIndex};--angle:${[-9, -3, 9][imageIndex]}deg`}
                         >
                           <img src={photo.src} alt="" loading="lazy" draggable="false" />
                         </div>
@@ -96,7 +96,7 @@ const archiveTitle = archive.frontmatter.title || 'Every Project Ever*';
                   {project.data.images?.length > 0 && (
                     <div class="project-photo-stage" aria-label={`Images of ${project.data.title}`}>
                       {project.data.images.slice(0, 3).map((photo, imageIndex) => (
-                        <div class="project-photo" role="button" tabindex="0" aria-label={`${photo.alt || project.data.title} — drag to move, double-click or double-tap to enlarge`} style={`--photo-index:${imageIndex};--angle:${[-9,-3,9][imageIndex]}deg;--start-x:${[8,33,59][imageIndex]}%;--start-y:${[12,20,10][imageIndex]}px`}>
+                        <div class="project-photo" role="button" tabindex="0" aria-label={`${photo.alt || project.data.title} — drag to move, double-click or double-tap to enlarge`} style={`--photo-index:${imageIndex};--angle:${[-9,-3,9][imageIndex]}deg`}>
                           <img src={photo.src} alt="" loading="lazy" draggable="false" />
                         </div>
                       ))}
@@ -145,10 +145,13 @@ const archiveTitle = archive.frontmatter.title || 'Every Project Ever*';
   .project-summary{margin:2px 0 0}
   .project-engagement{margin:17px 0 0}
   .project-work{text-align:right;font-size:12px;font-weight:700;opacity:.52}
-  .project-photo-stage{height:205px;position:relative;margin:28px 0 9px;isolation:isolate}
-  .project-photo{position:absolute;left:var(--start-x);top:var(--start-y);width:30%;min-width:90px;max-width:190px;padding:4px;background:white;box-shadow:0 5px 13px var(--shadow);transform:translate(var(--move-x,0px),var(--move-y,0px)) rotate(var(--angle));cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;z-index:calc(var(--photo-index) + 1)}
+  .project-photo-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,2vw,20px);align-items:start;position:relative;margin:28px 0 9px;padding:24px 16px 28px;min-width:0;overflow:hidden;isolation:isolate}
+  .project-photo{position:relative;width:100%;min-width:0;max-width:190px;padding:4px;background:white;box-shadow:0 5px 13px var(--shadow);transform:translate(var(--move-x,0px),var(--move-y,0px)) rotate(var(--angle));cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;z-index:calc(var(--photo-index) + 1)}
   .project-photo img{width:100%;height:auto;display:block;pointer-events:none;-webkit-user-drag:none}
-  .project-photo.is-dragging{cursor:grabbing;z-index:20!important;box-shadow:0 12px 26px var(--shadow)}
+  .project-photo.is-dragging{cursor:grabbing;z-index:20!important;animation:none;box-shadow:0 12px 26px var(--shadow)}
+  @media(hover:hover) and (pointer:fine){
+    .project-photo.wiggle-once:not(.is-dragging){animation:photo-wiggle .46s ease-in-out 1;box-shadow:0 9px 18px var(--shadow)}
+  }
   .project-photo.is-peeking{visibility:hidden}
   .project-photo-peek{position:fixed;z-index:10000;pointer-events:none;transition:transform .42s cubic-bezier(.2,.72,.22,1);will-change:transform;box-shadow:0 16px 44px var(--shadow)}
   .project-back{margin:75px 0 115px}
@@ -170,9 +173,9 @@ const archiveTitle = archive.frontmatter.title || 'Every Project Ever*';
     .project-summary{margin:9px 0 0}
     .project-engagement{margin-top:17px}
     .project-work{grid-column:1;text-align:left;font-size:11px;margin-top:0}
-    .project-photo-stage{height:120px;margin:18px 0 8px;max-width:100%}
-    .project-photo{min-width:55px;width:40%;padding:3px}
+    .project-photo-stage{gap:8px;margin:18px 0 8px;padding:16px 9px 20px;max-width:100%}
+    .project-photo{min-width:0;width:100%;padding:3px}
     .project-back{margin:90px 0 100px}
   }
-  @media(prefers-reduced-motion:reduce){.project-photo-peek{transition:none}}
+  @media(prefers-reduced-motion:reduce){.project-photo-peek{transition:none}.project-photo.wiggle-once{animation:none}}
 </style>
