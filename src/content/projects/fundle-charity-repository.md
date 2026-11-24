@@ -6,8 +6,6 @@ type: Funded startup
 client: Fundle, Inc.
 work: CPO, Acting CEO at Fundle
 sourceOrder: 107
-images:
-  - {}
-  - {}
+images: []
 published: false
 ---
