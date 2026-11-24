@@ -1,5 +1,5 @@
 ---
-title: Fake it til You Make it Up
+title: Fake It Til You Make It Up
 description: Perhaps being a professional used to mean knowing things. Lots of
   things. Preferably things other people didn't know, explained confidently
   while standing next to a very large screen. Add some numbers, a diagram with
