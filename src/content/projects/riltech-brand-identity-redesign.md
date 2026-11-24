@@ -7,7 +7,6 @@ client: Riltech
 work: Graphic design
 sourceOrder: 136
 images:
-  - {}
   - src: /images/projects/riltech-branding-large-1.jpeg
     alt: riltech office branding
   - src: /images/projects/riltech-2.webp
